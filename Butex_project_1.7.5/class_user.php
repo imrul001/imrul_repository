@@ -197,8 +197,8 @@ class user {
   </body>
 </html>
 EOF;
-            $to = "admin@localhost";
-//            $to = $user_email;
+//            $to = "admin@localhost";
+            $to = $user_email;
             $subject = "Account Activation, Bangladeh University of Textiles";
             $headers = "From:butex.edu.bd \n";
             $headers .= "Content-type: text/html\n";
