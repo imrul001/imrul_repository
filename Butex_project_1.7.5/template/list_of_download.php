@@ -17,7 +17,8 @@
 
     while ($row = mysql_fetch_array($result)) {
         $file = $row['file_name'];
-        $link = "<a href='./template/download.php?f=".$file."'</a>";
+        $download_id = $row['download_id'];
+        $link = "<a href='./template/download.php?f=$file&downlod_id=$download_id'>";
 
         echo "<tr>";
         echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['title'] . "</td>";

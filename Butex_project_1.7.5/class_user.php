@@ -157,10 +157,12 @@ class user {
             /* Hash the password */
             $mail_pass = $user_pass;
             $user_pass = md5($user_pass);
+            $random_id = $this->createRandom_number();
+            $random_id = md5($random_id);
             $user_status = "Inactive";
             $user_approval = "pending";
 
-            $sql = "INSERT INTO `butex_table` (`user_name`, `password`, `full_name`, `position`, `email`, `contact_no`, `status`, `admin_approval`) VALUES('$user_name', '$user_pass', '$user_fullname', '$user_position', '$user_email', '$user_contact', '$user_status', '$user_approval')";
+            $sql = "INSERT INTO `butex_table` (`user_name`, `password`, `full_name`, `rand_id`, `position`, `email`, `contact_no`, `status`, `admin_approval`) VALUES('$user_name', '$user_pass', '$user_fullname', '$random_id', '$user_position', '$user_email', '$user_contact', '$user_status', '$user_approval')";
             @mysql_query($sql);
 
 //            $_SESSION['reg_complete']['user_name'] = $user_name;
@@ -189,14 +191,14 @@ class user {
         <P>Hello</p>
         <b>"$user_fullname"</b> <br>
         <font color="red">For account activation please click the following link</font> <br>
-        <a href="http://$href/imrul/Butex_project_1.7.5/index.php?p=active&m=ac_activation&u=$user_name">click here</a>
+        <a href="http://$href/imrul/Butex_project_1.7.5/index.php?p=active&m=ac_activation&u=$user_name&rand_id=$random_id">click here</a>
       <br><br>***  This was a randomly generated message, please do not respond to this e-mail. <br> Regards<br>
     </center>
   </body>
 </html>
 EOF;
-//            $to = "admin@localhost";
-            $to = $user_email;
+            $to = "admin@localhost";
+//            $to = $user_email;
             $subject = "Account Activation, Bangladeh University of Textiles";
             $headers = "From:butex.edu.bd \n";
             $headers .= "Content-type: text/html\n";
@@ -218,17 +220,25 @@ EOF;
 
     /**
      * 
-     * account activation
+     * Account Activation
      * * */
-    function account_activation($user_name, $method) {
-        if ($method == "ac_activation") {
-            $sql = "UPDATE butex_table SET status='Active' WHERE user_name='" . $user_name . "'";
-            @mysql_query($sql);
+    function account_activation($user_name, $method, $random_id) {
+        $sql = "SELECT rand_id FROM butex_table WHERE user_name='" . $user_name . "' LIMIT 1";
+        $result = mysql_query($sql);
+        $row = mysql_fetch_array($result);
+        if ($row['rand_id'] == $random_id) {
+            if ($method == "ac_activation") {
+                $sql = "UPDATE butex_table SET status='Active' WHERE user_name='" . $user_name . "'";
+                @mysql_query($sql);
+            }
+            if ($method == "new_password_activation") {
+                $sql = "UPDATE butex_table SET status='Active' WHERE user_name='" . $user_name . "'";
+                @mysql_query($sql);
+            }
+        } else {
+            header("Location: ./index.php");
         }
-        if ($method == "new_password_activation") {
-            $sql = "UPDATE butex_table SET status='Active' WHERE user_name='" . $user_name . "'";
-            @mysql_query($sql);
-        }
+        return;
     }
 
     /**
@@ -310,6 +320,20 @@ EOF;
         }
 
         return;
+    }
+
+    function createRandom_number() {
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        srand((double) microtime() * 1000000);
+        $i = 0;
+        $pass = '';
+        while ($i <= 10) {
+            $num = rand() % 33;
+            $tmp = substr($chars, $num, 1);
+            $pass = $pass . $tmp;
+            $i++;
+        }
+        return $pass;
     }
 
 }

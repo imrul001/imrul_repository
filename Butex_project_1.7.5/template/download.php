@@ -1,19 +1,12 @@
 <?php
 
-###############################################################
-# File Download 1.31
-###############################################################
-# Visit http://www.zubrag.com/scripts/ for updates
-###############################################################
-# Sample call:
-#    download.php?f=phptutorial.zip
-#
-# Sample call (browser will try to save with new file name):
-#    download.php?f=phptutorial.zip&fc=php123tutorial.zip
-###############################################################
-// Allow direct file download (hotlinking)?
-// Empty - allow hotlinking
-// If set to nonempty value (Example: example.com) will only allow downloads when referrer contains this text
+$download_id = $_GET['download_id'];
+$f = $_GET['file'];
+$sql = "SELECT download_id FROM download_manager WHERE file_name='" . $f . "'";
+$result = mysql_query($sql);
+$row = mysql_fetch_array($result);
+if($row['download_id'] == $download_id){
+
 define('ALLOWED_REFERRER', '');
 
 // Download folder, i.e. folder where you keep all files for download.
@@ -189,5 +182,9 @@ $f = @fopen(LOG_FILE, 'a+');
 if ($f) {
     @fputs($f, date("m.d.Y g:ia") . "  " . $_SERVER['REMOTE_ADDR'] . "  " . $fname . "\n");
     @fclose($f);
+}
+}
+else{
+    header("Location: ../index.php");
 }
 ?>

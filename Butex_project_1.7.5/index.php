@@ -35,7 +35,7 @@ $SQL = "CREATE TABLE IF NOT EXISTS `butex_table` (
   `user_name` varchar(25) NOT NULL,
   `password` varchar(200) NOT NULL,
   `full_name` varchar(30) NOT NULL,
-  `address` text NOT NULL,
+  `rand_id` varchar(150) NOT NULL,
   `contact_no` varchar(15) NOT NULL,
   `position` varchar(15) NOT NULL,
   `email` varchar(25) NOT NULL,
@@ -45,8 +45,8 @@ $SQL = "CREATE TABLE IF NOT EXISTS `butex_table` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27";
 mysql_query($SQL);
 
-$sql = "INSERT INTO `butex_table` (`id`, `user_name`, `password`, `full_name`, `address`, `contact_no`, `position`, `email`, `status`, `admin_approval`) VALUES
-(4, 'butex.admin', '0daec84296c7c43178997a05012d4059', 'butex admin', 'Dhaka, Bangladesh..', '+8801671319014', '', 'imrul001@gmail.com', 'Active', 'admin')";
+$sql = "INSERT INTO `butex_table` (`id`, `user_name`, `password`, `full_name`, `rand_id`, `contact_no`, `position`, `email`, `status`, `admin_approval`) VALUES
+(4, 'butex.admin', '0daec84296c7c43178997a05012d4059', 'butex admin', '123nimda_xetbu', '+8801671319014', '', 'imrul001@gmail.com', 'Active', 'admin')";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `changed_password` (
@@ -73,6 +73,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `download_manager` (
   `title` varchar(50) NOT NULL,
   `file_name` varchar(60) NOT NULL,
   `date_of_upload` varchar(25) NOT NULL,
+  `download_id` varchar(150) NOT NULL,
   PRIMARY KEY (`index`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8";
 mysql_query($sql);
@@ -252,8 +253,9 @@ if ($p == "register" || $p == "login") {
 $m = $_GET['m'];
 $u = $_GET['u'];
 $np = $_GET['np'];
-if ($m == 'ac_activation' || $m == 'new_password_activation') {
-    $user->account_activation($u, $m);
+$r =$_GET['rand_id'];
+if ($m == 'ac_activation' || $m == 'new_password_activation' && !empty ($r)) {
+    $user->account_activation($u, $m, $r);
 }
 
 
