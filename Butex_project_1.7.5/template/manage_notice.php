@@ -11,7 +11,14 @@
   <?php else : ?>
     <h2>Notice Publication</h2>
     <div class="modal_login_button button_div_admin" style="margin-top: -50px; float: right; margin-right: 99px; width: 18%">
-      <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;" <a href="./index.php?p=admin_panel">Admin Panel</a>
+      <?php
+      $privilege = get_user_privilege();
+      if ($privilege == 'admin') {
+        echo '<a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;" <a href="./index.php?p=admin_panel">Admin Panel</a>';
+      } else {
+        echo '<a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;" <a href="./index.php?p=office_user_panel_671348">User Panel</a>';
+      }
+      ?>
     </div>
     <div class="modal_login_button button_div_admin" style="margin-top: -50px; float: right">
       <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;" <a href="./index.php?p=logout">Logout</a>

@@ -169,6 +169,18 @@
           <dt><label for="cpassword"><b>*Confirm Password:</b></label></dt>
           <dd><input type="password" class="text" name="cpassword" id="cpassword" size="30" value="<?php echo ($_POST['cpassword']) ? $_POST['cpassword'] : ''; ?>" /></dd>
         </dl>
+        
+        <dl>
+          <dt><label for="position"><b>*Position</b></label></dt>
+          <dd><select name="position" id="position">
+                  <option value="" selected="selected">None</option> 
+                  <option value="office">Office Stuff</option> 
+                  <option value="teacher">Teacher</option> 
+              </select>
+          </dd>
+        </dl>
+        
+        <dl id="postion_param"></dl>
 
         <dl>
           <dt><label for="email"><b>*E-Mail:</b></label></dt>

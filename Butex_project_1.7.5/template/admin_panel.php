@@ -46,7 +46,9 @@
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>User Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Full Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact Name</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Employee</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Permission</th>
+                
             </tr>";
           $i = 1;
           while ($row = mysql_fetch_array($result)) {
@@ -55,10 +57,11 @@
             echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['user_name'] . "</td>";
             echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['full_name'] . "</td>";
             echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['contact_no'] . "</td>";
+            echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['designation'] . "</td>";
             echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>
             <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
             <input type='hidden' name='user_name' value='" . $uname[$i] . "'/>
-            <input type='submit' id='approval_" . $i . "' class='appClass' name='approval' value='Approve' disabled='disabled'/>
+            <input type='submit' id='approval_" . $i . "' class='appClass' name='approval' value='Approve'/>
             <input type='submit' id='cancel_" . $i . "' class='cancelClass' name='cancel' value='Cancel' />
             </form>
             </td>";
@@ -151,6 +154,7 @@
           <p style="text-align: center;">Please Click Outside of the Box to Cancel </p>
         </div>
       </form>
+      disabled='disabled'
     </div>-->
 
 <?php endif; ?>

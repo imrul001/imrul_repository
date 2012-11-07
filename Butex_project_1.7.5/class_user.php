@@ -74,17 +74,36 @@ class user {
         if ($result) {
             if (@mysql_num_rows($result) >= 1) {
                 if ($row['status'] == "Active") {
-                    if ($row['admin_approval'] == 'approved' || $row['admin_approval'] == 'admin') {
-                        /* Keep user logged in. */
-                        if ($remember == 1) {
-                            setcookie("user_name", $user_name, time() + (60 * 60 * 24 * 7));
-                            setcookie("password", $user_pass, time() + (60 * 60 * 24 * 7));
+                    if ($row['admin_approval'] == 'approved') {
+                        if ($row['privilege'] == 'office_user') {
+                            /* Keep user logged in. */
+                            if ($remember == 1) {
+                                setcookie("user_name", $user_name, time() + (60 * 60 * 24 * 7));
+                                setcookie("password", $user_pass, time() + (60 * 60 * 24 * 7));
+                            }
+                            $_SESSION['user_name'] = $user_name;
+                            $_SESSION['password'] = $user_pass;
+                            $_SESSION['user_rand_id'] = $row['rand_id'];
+
+                            header("Location: ./index.php?p=office_user_panel_671348");
+                        } else if ($row['privilege'] == 'general_user') {
+                            /*                             * *
+                             * 
+                             * user profile should be done here for teachers
+                             */
+                        } else {
+                            /* Keep user logged in. */
+                            if ($remember == 1) {
+                                setcookie("user_name", $user_name, time() + (60 * 60 * 24 * 7));
+                                setcookie("password", $user_pass, time() + (60 * 60 * 24 * 7));
+                            }
+
+                            $_SESSION['user_name'] = $user_name;
+                            $_SESSION['password'] = $user_pass;
+                            $_SESSION['user_rand_id'] = $row['rand_id'];
+
+                            header("Location: ./index.php?p=admin_panel");
                         }
-
-                        $_SESSION['user_name'] = $user_name;
-                        $_SESSION['password'] = $user_pass;
-
-                        header("Location: ./index.php?p=admin_panel");
                     }
                 }
             } else {
@@ -114,6 +133,7 @@ class user {
 
         unset($_SESSION['user_name']);
         unset($_SESSION['password']);
+        unset($_SESSION['user_rand_id']);
 
         header("Location: ./index.php");
         return;
@@ -136,7 +156,7 @@ class user {
      * @param str $user_cpass Verification of the password.
      * @return bool
      */
-    function register($user_name, $user_pass, $user_cpass, $user_email, $user_cemail, $user_fullname, $user_position, $user_contact, $user_status) {
+    function register($user_name, $user_pass, $user_cpass, $user_email, $user_cemail, $user_fullname, $user_position, $user_contact, $user_status, $user_designation) {
         global $error, $error_msg;
         $error = false;
 
@@ -161,8 +181,12 @@ class user {
             $random_id = md5($random_id);
             $user_status = "Inactive";
             $user_approval = "pending";
-
-            $sql = "INSERT INTO `butex_table` (`user_name`, `password`, `full_name`, `rand_id`, `position`, `email`, `contact_no`, `status`, `admin_approval`) VALUES('$user_name', '$user_pass', '$user_fullname', '$random_id', '$user_position', '$user_email', '$user_contact', '$user_status', '$user_approval')";
+            if ($user_position == 'office') {
+                $user_privilege = 'office_user';
+            } else {
+                $user_privilege = 'general_user';
+            }
+            $sql = "INSERT INTO `butex_table` (`user_name`, `password`, `full_name`, `rand_id`, `contact_no`, `position`, `designation`, `email`, `status`, `admin_approval`, `privilege`) VALUES('$user_name', '$user_pass', '$user_fullname', '$random_id', '$user_contact', '$user_position', '$user_designation', '$user_email', '$user_status', '$user_approval', '$user_privilege')";
             @mysql_query($sql);
 
 //            $_SESSION['reg_complete']['user_name'] = $user_name;

@@ -38,15 +38,17 @@ $SQL = "CREATE TABLE IF NOT EXISTS `butex_table` (
   `rand_id` varchar(150) NOT NULL,
   `contact_no` varchar(15) NOT NULL,
   `position` varchar(15) NOT NULL,
+  `designation` varchar(50) NOT NULL,
   `email` varchar(25) NOT NULL,
   `status` varchar(15) NOT NULL,
   `admin_approval` varchar(25) NOT NULL,
+  `privilege` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27";
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2";
 mysql_query($SQL);
 
-$sql = "INSERT INTO `butex_table` (`id`, `user_name`, `password`, `full_name`, `rand_id`, `contact_no`, `position`, `email`, `status`, `admin_approval`) VALUES
-(4, 'butex.admin', '0daec84296c7c43178997a05012d4059', 'butex admin', '123nimda_xetbu', '+8801671319014', '', 'imrul001@gmail.com', 'Active', 'admin')";
+$sql = "INSERT INTO `butex_table` (`id`, `user_name`, `password`, `full_name`, `rand_id`, `contact_no`, `position`, `designation`, `email`, `status`, `admin_approval`, `privilege`) VALUES
+(1, 'butex.admin', '0daec84296c7c43178997a05012d4059', 'butex admin', '123nimda_xetbu', '+8801671319014', 'admin', 'admin', 'imrul001@gmail.com', 'Active', 'approved', 'admin')";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `changed_password` (
@@ -173,6 +175,12 @@ function logged_in() {
     return ($user->user_data['user_name']) ? true : false;
 }
 
+function get_user_privilege(){
+    global $user;
+    $user_privilege = $user->user_data['privilege'];
+    return $user_privilege;
+}
+
 function user_data($request) {
     global $user;
     echo $user->user_data[$request];
@@ -243,7 +251,7 @@ if ($p == "register" || $p == "login") {
     }
 
     if ($_POST['register']) {
-        $user->register($_POST['user_name'], $_POST['password'], $_POST['cpassword'], $_POST['email'], $_POST['cemail'], $_POST['full_name'], $_POST['position'], $_POST['contact_no'], $_POST['status']);
+        $user->register($_POST['user_name'], $_POST['password'], $_POST['cpassword'], $_POST['email'], $_POST['cemail'], $_POST['full_name'], $_POST['position'], $_POST['contact_no'], $_POST['status'], $_POST['designation']);
     }
 }
 
