@@ -6,7 +6,6 @@
 <!--    <p>This Page is Under Construction</p>-->
 
     <?php if (!logged_in()) : ?>
-        <?php header("Location: ./index.php?p=login"); ?>
         <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=index" title="Login">Login</a></p><!--
         <p>Welcome, <strong>Guest</strong>! <a href="./index.php?p=register" title="Register">Register</a> - <a href="./index.php?p=login" title="Login">Login</a></p>-->
     <?php else : ?>
