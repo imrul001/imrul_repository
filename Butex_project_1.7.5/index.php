@@ -55,6 +55,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `changed_password` (
   `index` int(100) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) NOT NULL,
   `new_password` varchar(200) NOT NULL,
+  `old_password` varchar(200) NOT NULL,
   PRIMARY KEY (`index`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 
@@ -66,8 +67,9 @@ $sql = "CREATE TABLE IF NOT EXISTS `confidential_notice` (
   `related_employees` varchar(500) NOT NULL,
   `file_name` varchar(150) NOT NULL,
   `date_of_publication` text NOT NULL,
+  `notice_id` varchar(200) NOT NULL,
   PRIMARY KEY (`index`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2";
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `download_manager` (
@@ -77,7 +79,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `download_manager` (
   `date_of_upload` varchar(25) NOT NULL,
   `download_id` varchar(150) NOT NULL,
   PRIMARY KEY (`index`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8";
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `notice_manager` (
@@ -86,8 +88,9 @@ $sql = "CREATE TABLE IF NOT EXISTS `notice_manager` (
   `related_employees` varchar(300) NOT NULL,
   `file_name` varchar(100) NOT NULL,
   `date_of_publication` varchar(40) NOT NULL,
+  `notice_id` varchar(200) NOT NULL,
   PRIMARY KEY (`index`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8";
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `search_table` (

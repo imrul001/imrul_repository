@@ -5,7 +5,7 @@
     <h2>Notice Board</h2>
     <?php
     /* $data1=user_data('user_id'); */
-    $sql = "SELECT * FROM notice_manager";
+    $sql = "SELECT * FROM notice_manager ORDER BY date_of_publication DESC";
     $result = mysql_query($sql);
 
     echo "<table class='notice_board_table' border='1 px solid black;' cellpadding=4 cellspacing=5>
@@ -18,7 +18,8 @@
 
     while ($row = mysql_fetch_array($result)) {
         $file = $row['file_name'];
-        $link = "<a href='./template/download_notice.php?f=".$file."'</a>";
+        $notice_id = $row['notice_id'];
+        $link = "<a href='./template/download_notice.php?f=$file&notice_id=$notice_id'>";
 
         echo "<tr>";
         echo "<td class='table_data' style='padding-left: 20px; padding-bottom: 10px;'>" . $row['notice_title'] . "</td>";

@@ -1,12 +1,6 @@
 <?php 
 
-$conn = @mysql_connect("localhost", "root", "12345678");
-$db = @mysql_select_db("butex_database");
-
-if (!$conn || !$db) {
-  printf("<br />Connection to database <b>" . DB_NAME . "</b> has failed! Please check your configuration settings in the <b>config.php</b>.", mysql_error());
-  exit();
-}
+include '../connection.php';
 $search_key = $_POST['searchText'];
 
 if (!$search_key)

@@ -20,7 +20,7 @@
     <script type="text/javascript" src="./template/js/jquery.coda-slider-3.0.js"></script>
     <script type="text/javascript" src="/min/?f=Butex_project_1.7.4/template/js/jquery.orbit-1.2.3.min.js"></script>
     <script type="text/javascript">
-      $(window).load(function(){
+      /*$(window).load(function(){
         $('#featured').orbit({
           bullets:true,
           animation:'fade',
@@ -31,7 +31,7 @@
         },function(){
           $(".slider-nav span").css("display", "none");
         });
-      });
+      });*/
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -43,10 +43,11 @@
         var scntDiv = $('#p_scents');
         var i = $('#p_scents p').size() + 1;
 
+
         
         $('#addScnt').live('click', function() {
 
-          $('<dl><dt><label for="Related Employee"><b>Related Employee:</b></lable></dt><dd><input type="text" id="p_scnt_'+ i +'" size="30" name="p_scnt_' + i +'" value=""/> <a href="#" id="remScnt">Remove</a></dd></dl>').appendTo(scntDiv);
+          $('<dl><dt><label for="Related Employee"><b>Related Employee:</b></lable></dt><dd><input type="text" id="p_scnt_'+ i +'" size="30" name="p_scnt_' + i +'" value=""/> <a href="#" id="remScnt"><img style="margin-bottom:-5px;" height="20px" width="20px" src="./template/img/cross.png"/></a></dd></dl>').appendTo(scntDiv);
           autoComplete($('#p_scnt_'+i))
           i++;
           return false;
@@ -269,7 +270,7 @@
       <div id="header">
         <div id="welcome">
           <div id="logo">
-            <img src="./template/images/logo_transparent_back/logo2_resized.png" height="108px" width="86px"></img>
+            <img src="./template/images/logo_transparent_back/logo2_resized.gif" height="108px" width="86px"/>
           </div>
           <div id="University_name">
             <h1 id="bangla_name"> &#2476;&#2494;&#2434;&#2482;&#2494;&#2470;&#2503;&#2486; &#2463;&#2503;&#2453;&#2509;&#2488;&#2463;&#2494;&#2439;&#2482; &#2476;&#2495;&#2486;&#2509;&#2476;&#2476;&#2495;&#2470;&#2509;&#2479;&#2494;&#2482;&#2527;</h1>

@@ -19,7 +19,7 @@
       <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;" <a href="./index.php?p=logout">Logout</a>
     </div>
     <?php
-    $sql = "SELECT * FROM `butex_table` WHERE status='Active' AND admin_approval='pending'";
+    $sql = "SELECT * FROM `butex_table` WHERE status='Active' AND admin_approval='pending' ORDER BY id DESC";
     $result = mysql_query($sql);
     $num = mysql_num_rows($result);
     ?>

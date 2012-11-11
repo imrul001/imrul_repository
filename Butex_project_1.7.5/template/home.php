@@ -19,7 +19,7 @@
   <div id="new_events">
     <div class="coda-slider"  id="slider-id">
       <div>
-
+        <h3>BUTex Admission Announcement 2012-2013</h3>
         <p>B.Sc. in Textile Engineering, Session: 2012-2013.
           Registration open from 01/10/2012 to 05/11/2012. Admission date: 16/11/2012.
           Click here for Admission Announcement Detail <a href="./index.php?p=notice_board">Download Admission Announcement</a></p>
@@ -28,12 +28,15 @@
       </div>
 
       <div>
+        <h3>Here goes the Heading</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Sed volutpat ante id mauris laoreet vestibulum. Nam blandit felis non neque cursus aliquet. Morbi vel enim dignissim massa dignissim commodo vitae quis tellus. Nunc non mollis nulla. Sed consectetur elit id mi consectetur bibendum. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis. Aliquam sit amet purus lectus. Maecenas tempor ornare sollicitudin.</p>
       </div>
       <div>
+        <h3>Here goes the Heading</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Sed volutpat ante id mauris laoreet vestibulum. Nam blandit felis non neque cursus aliquet. Morbi vel enim dignissim massa dignissim commodo vitae quis tellus. Nunc non mollis nulla. Sed consectetur elit id mi consectetur bibendum. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis. Aliquam sit amet purus lectus. Maecenas tempor ornare sollicitudin.</p>
       </div>
       <div>
+        <h3>Here goes the Heading</h3>
         <p>Proin nec turpis eget dolor dictum lacinia. Nullam nunc magna, tincidunt eu porta in, faucibus sed magna. Suspendisse laoreet ornare ullamcorper. Nulla in tortor nibh. Pellentesque sed est vitae odio vestibulum aliquet in nec leo.</p>
       </div>
 
@@ -98,9 +101,9 @@
         </dl>
 
         <input type="submit" class="submit" name="login" value="Login" />
-        <p style="text-align: center;">Forgot your Password ? <a href="./index.php?p=forgotPassword">Click Here</a>
+        <p style="text-align: center;">Forgot your Password ? <a href="#change_password_box" class="login-window uniqueLogin">Click Here</a>
         </p>
-        <p style="text-align: center;">Don't have an Account ? <a href="#register-box" class="login-window">Register</a>
+        <p style="text-align: center;">Don't have an Account ? <a href="#register-box" class="login-window uniqueLogin">Register</a>
         </p>
         <p style="text-align: center;">Please Click Outside of the Box to Cancel </p>
       </div>
@@ -108,10 +111,10 @@
   </div>
   <div id="buttons">
     <div class="modal_login_button button_div">
-      <a style="text-decoration: none; font-weight: bold; color: #444; width: 20%;"  href="#login-box" class="login-window">Log In</a>
+      <a style="text-decoration: none; font-weight: bold; color: #444; width: 20%;"  href="#login-box" class="login-window passwordChangeLink">Log In</a>
     </div>
     <div class="modal_login_button button_div">
-      <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;"  href="#register-box" class="login-window">Register</a>
+      <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;"  href="#register-box" class="login-window registerLink">Register</a>
     </div>
     <div class="modal_login_button button_div">
       <a style="text-decoration: none; font-weight: bold; color: #444; width: 25%;"  href="http://www.butex.edu.bd/webmail" class="login-window">Web Mail</a>
@@ -169,22 +172,26 @@
           <dt><label for="cpassword"><b>*Confirm Password:</b></label></dt>
           <dd><input type="password" class="text" name="cpassword" id="cpassword" size="30" value="<?php echo ($_POST['cpassword']) ? $_POST['cpassword'] : ''; ?>" /></dd>
         </dl>
-        
+
         <dl>
           <dt><label for="position"><b>*Position</b></label></dt>
           <dd><select name="position" id="position">
-                  <option value="" selected="selected">None</option> 
-                  <option value="office">Office Stuff</option> 
-                  <option value="teacher">Teacher</option> 
-              </select>
+              <option value="" selected="selected">None</option> 
+              <option value="office">Office Stuff</option> 
+              <option value="teacher">Teacher</option> 
+            </select>
           </dd>
         </dl>
-        
+
         <dl id="postion_param"></dl>
+
+        <div id="registration_error_box1" style="display: none; text-align: center; font-weight: bold; color: red;">
+          <div id="registration_error_msg1" style="text-align: center; margin-bottom: -19px; margin-top: -13px;"></div>
+        </div>
 
         <dl>
           <dt><label for="email"><b>*E-Mail:</b></label></dt>
-          <dd><input type="text" class="text" name="email" id="email" size="30" value="<?php echo ($_POST['email']) ? $_POST['email'] : ''; ?>" /></dd>
+          <dd><input type="text" class="text" name="email" id="email" size="30" value="<?php echo ($_POST['email']) ? $_POST['email'] : ''; ?>" /><div id="response1" style="width: 25px; height: 25px; margin-left: 390px; margin-top: -24px;"></div><div id="busyImage1" style="width: 25px; height: 25px; margin-left: 390px; margin-top: -25px;"></div></dd>
         </dl>
 
         <dl>
@@ -199,6 +206,29 @@
       </div>
     </form>
 
+  </div>
+  <div id="password_change_modal">
+    <form id="formToChangePassword" action="#" method="POST" enctype="multipart/form-data" onsubmit="">
+    <!--            <h2>User Login<span class="arrow"></span></h2>-->
+      <div id="change_password_box" class="login-popup loginContainer">
+        <h3>Change Password</h3>
+        <div id="error_box">
+          <a name="errr_login"></a>
+          <fieldset id="ersb_password_change" style="padding: 2;display: none;font-size: 13px">
+            <legend><b style="font-size: 14px">Validation Errors</b></legend>
+            <span id="ers_password_change"></span>
+          </fieldset>
+        </div>
+        <dl>
+          <dt><label for="user_id"><b>Email Address:</b></label></dt>
+          <dd><input type="text" class="text" name="email" id="registered_email" size="30" value="<?php echo ($_POST['email']) ? $_POST['email'] : ''; ?>" /></dd>
+        </dl>
+        <input type="Submit" class="submit" id="change_password_button_id" name="change_password" value="Change" />
+        <div id="progress" style="height: 40px; width: 40px; margin-top: -35px; margin-left: 254px;"></div>
+
+        <p style="text-align: center;">Please Click Outside of the Box to Cancel </p>
+      </div>
+    </form>
   </div>
 </div>
 <!-- END Content -->
