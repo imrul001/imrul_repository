@@ -1,0 +1,207 @@
+/**
+ * General Settings
+*/
+/*input, textarea { border: 0 }
+input.text { padding: 5px }
+        
+.submit {
+        background: #c4c620;
+        padding: 3px 6px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #000
+}*/
+.submit {
+    background:#87cefa;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 457px;
+    height: 45px;
+    width: 90px;
+    font-size: 16px;
+}
+
+dt {
+    float: left;
+    width: 122px;
+    font-size: 14px;
+}
+/*
+login form css*/
+
+#loginContainer{
+    margin: auto;
+    padding: 0 0 0px 20px;
+    border: #999 1px solid;
+    margin-top: 16px;
+    width: 500px;
+    margin-left: 108px;
+}
+#loginContainer dt{
+    width: 161px;   
+}
+#loginContainer h3{
+    text-align: center;
+    color: #39F;
+    margin-top: 5px;
+}
+#loginContainer .submit{
+    font-size: 14px;
+    margin-left: 158px;
+    height: 35px;
+    font-family: times new roman;
+}
+#loginContainer a{
+    color: blue;
+}
+#loginContainer p{
+    text-align: center;
+    font-size: 12px;
+}
+#loginContainer #errorContainer{
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/***css for loginContainer of login modal***/
+.modal_login_button {
+    background-image: linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -o-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -moz-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -webkit-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -ms-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.04, rgb(59,173,236)),
+        color-stop(0.52, rgb(89,208,255))
+        );
+    padding:5px 5px;
+    margin-top:28px;
+    margin-left: 12px;
+    position:relative;
+    width:11%;
+    font-size:14px;
+    text-align: center;
+    -moz-box-shadow:1px 1px 3px #292929;
+    -webkit-box-shadow:1px 1px 3px #292929;
+    color: #444444;
+    text-shadow:0 1px 0 white;
+    margin-bottom: 10px;
+    float: left;
+
+}
+button_div_admin{
+    float: right;
+    margin-top: -85px;
+}
+
+.register_modal{
+    margin-top: -38px;
+    margin-left: 120px;
+    margin-bottom: 16px;
+}
+#error_box{
+    font-size: 13px;
+
+}
+.loginContainer{
+    background-image: linear-gradient(bottom, rgb(164,189,242) 0%, rgb(197,227,255) 50%, rgb(237,255,255) 75%);
+    background-image: -o-linear-gradient(bottom, rgb(164,189,242) 0%, rgb(197,227,255) 50%, rgb(237,255,255) 75%);
+    background-image: -moz-linear-gradient(bottom, rgb(164,189,242) 0%, rgb(197,227,255) 50%, rgb(237,255,255) 75%);
+    background-image: -webkit-linear-gradient(bottom, rgb(164,189,242) 0%, rgb(197,227,255) 50%, rgb(237,255,255) 75%);
+    background-image: -ms-linear-gradient(bottom, rgb(164,189,242) 0%, rgb(197,227,255) 50%, rgb(237,255,255) 75%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(164,189,242)),
+        color-stop(0.5, rgb(197,227,255)),
+        color-stop(0.75, rgb(237,255,255))
+        );
+    margin: auto;
+    padding: 0 0 0px 20px;
+    border: #999 1px solid;
+    margin-top: 16px;
+    width: 500px;
+    margin-left: 108px;
+}
+.loginContainer dt{
+    width: 161px;   
+}
+.loginContainer h3{
+    text-align: center;
+    color: blue;
+    margin-top: 5px;
+
+}
+.loginContainer .submit{
+    font-size: 19px;
+    margin-left: 162px;
+    height: 35px;
+    font-family: times new roman;
+    font-weight: bold;
+    background-image: linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -o-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -moz-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -webkit-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+    background-image: -ms-linear-gradient(bottom, rgb(59,173,236) 4%, rgb(89,208,255) 52%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.04, rgb(59,173,236)),
+        color-stop(0.52, rgb(89,208,255))
+        );
+}
+.loginContainer a{
+    color: blue;
+}
+.loginContainer p{
+    text-align: center;
+    font-size: 12px;
+}
+.loginContainer #errorContainer{
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+}
+.awaiting_users_table{
+  overflow-y: scroll;
+}
+.awaiting_users_table h3{
+  text-align: center;
+  color: blue; 
+}
+.awaiting_users_table p{
+  font-size: 12px;
+}
+.awaiting_users_table{
+  font-size: 14px; 
+}
+.awaiting_users_table table{
+  font-size:14px;
+  width: 100%;
+}
+
+
+
+
+
+/**
+ * Newsletter
+*/
+/* 
+input.subscribe {
+        background: url('../images/forms/subscribe.gif');
+        width: 73px;
+        height: 23px;
+        cursor: pointer
+}
+
+#sidebar input.subscribe { margin-left: 103px }*/
