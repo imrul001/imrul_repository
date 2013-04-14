@@ -32,6 +32,7 @@ class VerifyLogin extends CI_Controller {
     $username = $this->input->post('username');
 
     //query the database
+    $password = md5($password);
     $result = $this->user->login($username, $password);
     if ($result) {
       $sess_array = array();
