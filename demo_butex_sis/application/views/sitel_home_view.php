@@ -46,6 +46,5 @@
   <div id="Footer">
     <?php include 'footer.php'; ?>
   </div>
-
 </div>
 

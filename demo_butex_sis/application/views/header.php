@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/demo_butex_sis/css/style.css" />
 <style>
   .login-popup {
+    margin-bottom: 45px;
     top: 35px;
     position: relative;
     left: 250px;

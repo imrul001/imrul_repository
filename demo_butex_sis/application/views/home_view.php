@@ -61,6 +61,25 @@
     position: relative;
     width: 185px;
   }
+  .registerPopup{
+    margin-bottom: 45px;
+    top: 35px;
+    position: relative;
+    left: 153px;
+    font-family: sans-serif, times new roman;
+    padding: 10px;
+    border: 1px solid #DDD;
+    font-size: 1.2em;
+    width: 580px;
+    height: auto;
+    z-index: 99999;
+    box-shadow: 0px 0px 20px #999;
+    -moz-box-shadow: 0px 0px 20px #999;
+    -webkit-box-shadow: 0px 0px 20px #999;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+  }
 
 </style>
 <div id="container">
@@ -74,8 +93,7 @@
         <li><a href="#tabs-2">Add Student</a></li>
         <li><a href="#tabs-3">Summery</a></li>
       </ul>
-      <div id="tabs-1">
-        <p>
+      <div id="tabs-1" style="padding-bottom: 165px; padding-top: 132px;">
         <h3 class="studentIdLabel" style="float:left;">Stundent Id:</h3>
         <fieldset id="searchBox">
           <input type="text" autocomplete="off" id="fieldSearch" value="" class="" />
@@ -83,10 +101,11 @@
             <input type="hidden" value="Search" class="btnSearch" />
           </a> 
         </fieldset>
-        </p>
       </div>
       <div id="tabs-2">
-        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+        <p>
+          <?php include 'registration_form.php'; ?>
+        </p>
       </div>
       <div id="tabs-3">
         <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
