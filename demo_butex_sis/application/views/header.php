@@ -34,7 +34,7 @@
   dt {
     float: left;
     width: 161px;
-    font-size: 14px;
+    font-size: 13px;
   }
 </style>
 <div id="mainDiv">

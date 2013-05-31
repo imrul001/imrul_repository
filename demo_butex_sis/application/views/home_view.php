@@ -6,7 +6,97 @@
   $(function() {
     $( "#tabs" ).tabs();
   });
+  
+  $(document).ready(function(){
+    $("#submitButtonId").click(function() {
+      
+      var url = "/demo_butex_sis/index.php/verifyInsertion"; // the script where you handle the form input.
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#idForm").serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          alert(data); // show response from the php script.
+        },
+        //        error: function(){
+        error: function(){
+          alert("got an error");
+        }
+      });
+      return false; // avoid to execute the actual submit of the form.
+    });
+
+  });
 </script>
+<!--<script language="javascript">
+  function UserValidate(){
+    var error="";
+    if((document.getElementById("full_name").value=="") || (document.getElementById("position").value=="")){
+      error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+    }
+        
+    else if(document.getElementById("contactno").value==""){
+      error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                    
+    }
+    else if(document.getElementById("user_name").value==""){
+      error+="<li><lable for='user_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                    
+    }
+    else if(document.getElementById("pw").value==""){
+                    
+      error+="<li><lable for='pass' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                    
+    }
+    else if(document.getElementById("cpassword").value==""){
+      error+="<li><lable for='cpassword' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                    
+    }
+    else if(document.getElementById("email").value==""){
+      error+="<li><lable for='email' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                    
+    }
+    else if(document.getElementById("cemail").value==""){
+      error+="<li><lable for='cemail' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+    }
+     
+    if(length(document.getElementById("pw").value)<6)
+    {
+      error+="<li><lable for='password' style='cursor:hand;cursor:pointer'>Password too Small(Should be more then 5 chars).</label></li>\n";
+    }
+    else if(document.getElementById("pw").value!=document.getElementById("cpassword").value){
+      error+="<li><lable for='cpassword' style='cursor:hand;cursor:pointer'>Password Not Matched.</label></li>\n";
+    }
+                
+    if(!isValidEmail(document.getElementById("email").value)){
+      error+="<li><lable for='email' style='cursor:hand;cursor:pointer'>Invalid Email Address.</label></li>\n";
+    }
+    else if(document.getElementById("cemail").value != document.getElementById("email").value){
+      error+="<li><lable for='cemail' style='cursor:hand;cursor:pointer'>Email Address is not Matched.</label></li>\n";
+    }
+    error = error? "<ul style='color:#f00;font-weight:bold'>" + error +"</ul>":'';
+    if(error!=''){
+      document.getElementById("ersb").style.display="block";
+      document.getElementById("ers").innerHTML=error;
+      location.href="#errr_registration";
+      return false;
+    }
+    else
+      document.getElementById("ersb").display="none";
+  }
+  function isValidEmail(email) 
+  { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+                
+  function length(v)
+  {
+    return v.length;
+  }    
+</script>-->
 
 <style>
   #logoutButton{
@@ -35,7 +125,7 @@
   }
   .globalsprite {
     position: relative;
-    top: -34px;
+    top: -33px;
     left: 196px;
     background: url(/demo_butex_sis/img/bhSprite.png);
     font-weight: bold;
