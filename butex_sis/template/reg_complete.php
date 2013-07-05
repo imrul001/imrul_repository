@@ -1,0 +1,38 @@
+<?php get_header(); ?>
+
+<div id="container">
+  <?php if (!logged_in()) : ?>
+    <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=login" title="Login">Login</a></p>
+  <?php else : ?>
+    <div class="logOutButton">
+      <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
+    </div>
+    <h2 style="width: 31%; text-align: center;">Registration Continues<span class="arrow"></span></h2>
+<!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
+    <div id="login_modal_body">
+      <form id="formToUpload" action="./index.php?p=upload_image_file" method="POST" enctype="multipart/form-data">
+        <div id="manage_download_box" class="registerPopup">
+          <h3 style="text-align: center;">Photo Upload</h3>
+          <div id="current_time">
+            <?php echo "<p style='font-family:times new roman';><b>Current date:</b> " . date("jS-F-Y h:i:s a", time()) . "</p>"; ?>
+          </div>
+
+          <dl>
+            <dt><label for="student Id"><b>Student ID:</b></label></dt>
+            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" /></dd>
+          </dl>
+          <dl>
+            <dt><label for="Photo"><b>Image:</b></label></dt>
+            <dd><input type="file" name="file" id="file1" /></dd>
+          </dl>
+
+          <input type="submit" class="submitLogIn" id="upload_file_submit_id" value="Upload" />
+          <div id="uploader" style="height: 40px; width: 40px; margin-top: -35px; margin-left: 254px;"></div>
+        </div>
+      </form>
+    </div>
+  <?php endif; ?>
+</div>
+<!-- END Content -->
+
+<?php get_footer(); ?>

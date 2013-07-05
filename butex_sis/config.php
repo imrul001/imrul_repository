@@ -22,20 +22,20 @@ $cfg['admin_email'] = "admin@localhost.com";
  * Database Username
  * ----
  */
-$dbcfg['db_user'] = "root";
+$dbcfg['db_user'] = "butexedu_db";
 
 /**
  * Database Password
  * ----
 
  */
-$dbcfg['db_pass'] = "123imrul";
+$dbcfg['db_pass'] = "mahmud06";
 
 /**
  * Database Name
  * ----
  */
-$dbcfg['db_name'] = "codeig_database";
+$dbcfg['db_name'] = "butexedu_database";
 
 /**
  * Database Host

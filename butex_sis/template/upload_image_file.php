@@ -1,0 +1,47 @@
+<?php
+$allowedExts = array("jpg", "jpeg", "gif", "png");
+
+$extension = end(explode(".", $_FILES["file"]["name"]));
+
+$std_id = $_POST['student_id'];
+$file_name = $_FILES["file"]["name"];
+
+$sql = "SELECT link FROM input WHERE std_id=$std_id";
+$result = mysql_query($sql);
+while ($row = mysql_fetch_array($result)) {
+  $link = $row['link'];
+}
+if ($link !='no') {
+  echo "This Student has photo already";
+} else {
+  if (!empty($std_id) && !empty($_FILES['file']['name'])) {
+    if ((($_FILES["file"]["type"] == "image/gif")
+            || ($_FILES["file"]["type"] == "image/jpeg")
+            || ($_FILES["file"]["type"] == "image/pjpeg")
+            || ($_FILES["file"]["type"] == "application/pdf"))
+            && ($_FILES["file"]["size"] < 70000000000000)
+            && in_array($extension, $allowedExts)) {
+      if ($_FILES["file"]["error"] > 0) {
+        echo "Return Code: " . $_FILES["file"]["error"] . ".";
+      } else {
+        if (file_exists("./template/uploaded_student_images/" . $_FILES["file"]["name"])) {
+          echo $_FILES["file"]["name"] . " already exists. ";
+        } else {
+          $sql = "UPDATE input SET link='$file_name' WHERE std_id=$std_id";
+          if (!mysql_query($sql)) {
+            die(mysql_error());
+          } else {
+            move_uploaded_file($_FILES["file"]["tmp_name"], "./template/uploaded_student_images/" . $_FILES["file"]["name"]);
+            echo 'The photo is Successfully ..' . $_FILES['file']['name'];
+          }
+        }
+      }
+    } else {
+      echo "Invalid file";
+    }
+  } else {
+    echo 'All Fields are Required';
+  }
+}
+?>
+<a href="./index.php?p=office_user_panel_com_butex_sis_017734">Back to Admin</a>

@@ -21,19 +21,19 @@
 
         <dl>
           <dt><label for="user_id">User ID:</label></dt>
-          <dd><input type="text" class="text" name="use_rname" id="user_name" size="30" value="<?php echo ($_POST['user_name']) ? $_POST['user_name'] : ''; ?>" /></dd>
+          <dd><input type="text" class="text" name="user_name" id="user" size="30" value="<?php echo ($_POST['user_name']) ? $_POST['user_name'] : ''; ?>" /></dd>
         </dl>
 
         <dl>
           <dt><label for="password">Password:</label></dt>
-          <dd><input type="password" class="text" name="password" id="password" size="30" value="<?php echo ($_POST['password']) ? $_POST['password'] : ''; ?>" /></dd>
+          <dd><input type="password" class="text" name="password" id="p" size="30" value="<?php echo ($_POST['password']) ? $_POST['password'] : ''; ?>" /></dd>
         </dl>
 
         <dl>
           <dt><label for="remember">Remember Me:</label></dt>
           <dd><input type="checkbox" name="remember" id="remember" value="1" /></dd>
         </dl>
-        <input type="submit" class="submitLogIn" name="login" value="Login"/>
+        <input type="submit" class="submitlogin" name="login" value="Login" />
         <p style="text-align: center; display: none;">Forgot your Password ? <a href="#change_password_box" class="login-window uniqueLogin">Click Here</a>
         </p>
         <p style="text-align: center; display: none;">Don't have an Account ? <a href="#register-box" class="login-window uniqueLogin">Register</a>

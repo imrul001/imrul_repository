@@ -19,18 +19,18 @@ class user
 	 */
 	function user()
 	{
-		if($_COOKIE['user_name'] && $_COOKIE['user_pass'])
+		if($_COOKIE['user_name'] && $_COOKIE['password'])
 		{
 			setcookie("user_name", $_COOKIE['user_name'], time()+(60*60*24*7));
-			setcookie("user_pass", $_COOKIE['user_pass'], time()+(60*60*24*7));
+			setcookie("password", $_COOKIE['userword'], time()+(60*60*24*7));
 			
 			$_SESSION['user_name'] = $_COOKIE['user_name'];
-			$_SESSION['user_pass'] = $_COOKIE['user_pass'];
+			$_SESSION['password'] = $_COOKIE['password'];
 		}
 		
-		if(isset($_SESSION['user_name']) && isset($_SESSION['user_pass']))
+		if(isset($_SESSION['user_name']) && isset($_SESSION['password']))
 		{
-			$sql = "SELECT user_id, user_name, user_email FROM users WHERE user_name='".$_SESSION['user_name']."' AND user_pass='".$_SESSION['user_pass']."' LIMIT 1";
+			$sql = "SELECT * FROM codeIg_table WHERE user_name='".$_SESSION['user_name']."' AND password='".$_SESSION['password']."' LIMIT 1";
 			$result = @mysql_query($sql);
 			if($result)
 			{
@@ -77,7 +77,7 @@ class user
 		/* Hash the password. */
 		$user_pass = md5($user_pass);
 		
-		$sql = "SELECT user_id FROM users WHERE user_name='$user_name' AND user_pass='$user_pass' LIMIT 1";
+		$sql = "SELECT * FROM codeIg_table WHERE user_name='$user_name' AND password='$user_pass' LIMIT 1";
 		$result = @mysql_query($sql);
 		
 		if($result)
@@ -88,13 +88,13 @@ class user
 				if($remember == 1)
 				{
 					setcookie("user_name", $user_name, time()+(60*60*24*7));
-					setcookie("user_pass", $user_pass, time()+(60*60*24*7));
+					setcookie("password", $user_pass, time()+(60*60*24*7));
 				}
 
 				$_SESSION['user_name'] = $user_name;
-				$_SESSION['user_pass'] = $user_pass;
+				$_SESSION['password'] = $user_pass;
 				
-				header("Location: ./index.php");
+				header("Location: ./index.php?p=office_user_panel_com_butex_sis_017734");
 			}
 			else
 			{
@@ -116,14 +116,14 @@ class user
 	 */
 	function logout()
 	{
-		if($_COOKIE['user_name'] && $_COOKIE['user_pass'])
+		if($_COOKIE['user_name'] && $_COOKIE['password'])
 		{
 			setcookie("user_name", "");
-			setcookie("user_pass", "");
+			setcookie("password", "");
 		}
 		
 		unset($_SESSION['user_name']);
-		unset($_SESSION['user_pass']);
+		unset($_SESSION['password']);
 		
 		header("Location: ./index.php");
 		return;
@@ -138,46 +138,48 @@ class user
 	 * @param str $user_cpass Verification of the password.
 	 * @return bool
 	 */
-	function register($user_name, $user_pass, $user_cpass, $user_email, $user_cemail)
+	function register($student_id, $ad_roll, $merit_position, $dept, $stud_name, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular, $image)
 	{
 		global $error, $error_msg;
 		$error = false;
 				
 		// All fields filled in?
-		if(empty($user_name) || empty($user_pass) || empty($user_cpass) || empty($user_email) || empty($user_cemail))
-		{
-			$error = true;
-			$error_msg[0] = "All fields are required.";
-		}
-		
-		/* Validate the information */
-		$this->validate_username($user_name);
-		$this->validate_password($user_pass, $user_cpass);
-		$this->validate_email($user_email, $user_cemail);
+//		if(empty($student_id) || empty($ad_roll) || empty($merit_position) || empty($dept) || empty($stud_name) || empty($father_name) || empty($mother_name) || empty($dob) || empty($p_address) || empty($c_address) || empty($stud_contact_no) || empty($grd_contact_no) || empty($nationality) || empty($emergency_contact_no) || empty($emergency_contact_address) || empty($blood_grp) || empty($ssc_board) || empty($ssc_ac) || empty($ssc_year) || empty($ssc_roll) || empty($ssc_gpa))
+//		{
+//			$error = true;
+//			$error_msg[0] = "All fields are required.";
+//		}
+//		
+//		/* Validate the information */
+//		$this->validate_username($student_id);
 		
 		/* Everything checks out, so register the new user. */
 		if(!$error)
 		{
+      $image = 'no';
 			/* Hash the password */
-			$mail_pass = $user_pass;
-			$user_pass = md5($user_pass);
+//			$mail_pass = $user_pass;
+//			$user_pass = md5($user_pass);
 			
-			$sql = "INSERT INTO `users` (`user_name`, `user_pass`, `user_email`) VALUES('$user_name', '$user_pass', '$user_email')";
-			@mysql_query($sql);
+			$sql = "INSERT INTO `input` (`std_id`, `admission_test_roll_no`, `merit_position`, `dept`, `stud_name`, `father_name`, `mother_name`, `dob`, `p_address`, `c_address`, `stud_contact_no`, `grd_contact_no`, `nationality`, `emergency_contact_no`, `emergency_contact_address`, `blood_grp`, `ssc_board`, `ssc_academic_institute`, `ssc_year`, `ssc_roll`, `ssc_gpa`, `hsc_board`, `hsc_academic_institute`, `hsc_year`, `hsc_roll`, `hsc_gpa`, `grd_income`, `extra_curricular`, `link`) VALUES('$student_id', '$ad_roll', '$merit_position', '$dept', '$stud_name', '$father_name', '$mother_name', '$dob', '$p_address', '$c_address', '$stud_contact_no', '$grd_contact_no', '$nationality', '$emergency_contact_no', '$emergency_contact_address', '$blood_grp', '$ssc_board', '$ssc_ac', '$ssc_year', '$ssc_roll', '$ssc_gpa', '$hsc_board', '$hsc_ac', '$hsc_year', '$hsc_roll', '$hsc_gpa', '$grd_income', '$extraCurricular', '$image')";
+			if(!@mysql_query($sql)){
+        die(mysql_error());
+      }
+      
 			
-			$_SESSION['reg_complete']['user_name'] = $user_name;
+			$_SESSION['reg_complete']['student_id'] = $student_id;
 			
 			/* Build E-Mail Output */
-			$msg = "Dear ".$user_name.",\n\n";
-			$msg .= "Thank you for registering at XHTML/CSS! Below is your login information:\n\n";
-			$msg .= "Username: ".$user_name."\n";
-			$msg .= "Password: ".$mail_pass."\n\n";
-			$msg .= "Best regards,\n";
-			$msg .= "XHTML/CSS Staff\n\n";
-			$msg .= "PS: This was a randomly generated message, please do not respond to this e-mail.";
-			
-			/* E-Mail Confirmation Letter */
-			mail($user_email, "XHTML/CSS Website - Registration Complete!", $msg, "From: admin@dreamlinestudio.com");
+//			$msg = "Dear ".$user_name.",\n\n";
+//			$msg .= "Thank you for registering at XHTML/CSS! Below is your login information:\n\n";
+//			$msg .= "Username: ".$user_name."\n";
+//			$msg .= "Password: ".$mail_pass."\n\n";
+//			$msg .= "Best regards,\n";
+//			$msg .= "XHTML/CSS Staff\n\n";
+//			$msg .= "PS: This was a randomly generated message, please do not respond to this e-mail.";
+//			
+//			/* E-Mail Confirmation Letter */
+//			mail($user_email, "XHTML/CSS Website - Registration Complete!", $msg, "From: admin@dreamlinestudio.com");
 			
 			header("Location: ./index.php?p=reg_complete");
 		}
