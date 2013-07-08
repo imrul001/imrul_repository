@@ -1,9 +1,8 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
-<!--    <script type="text/javascript" src="/butex_sis/template/js/jquery-1.9.1.js"></script>-->
-    <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
-    <link rel="icon" type="image/png" href="/template/images/favicon.ico" />
+    <script type="text/javascript" src="/template/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/template/js/jquery.form.js"></script>
 <!--    <script type="text/javascript">
       function isLogInValid(){
         var error="";
@@ -68,8 +67,8 @@
       .registerPopup{
         bottom: 45px;
         top: 35px;
-        position: relative;
-        /*        left: 153px;*/
+        position:relative;
+        clear: both;
         margin: 0 auto 45px;
         font-family: sans-serif, times new roman;
         padding: 10px;
@@ -86,6 +85,30 @@
         -moz-border-radius: 3px;
         -webkit-border-radius: 3px;
       }
+      .myOverlay{
+        background-color: #33404D;
+        position: absolute;
+        top: -286px;
+        left: 0;
+        width: 100%;
+        opacity: 0.6;
+        z-index: 2000;
+      }
+      .imageForLoading
+      {
+        width: 70px;
+        margin: 0 auto;
+        z-index: 3000;
+        position: relative;
+      }
+      .myLoadingImage{
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 285px;
+        display: none;
+        z-index: 900000;
+      }
     </style>
     <style>
       .footerContent p{
@@ -96,57 +119,94 @@
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
-        
-        
-//        $('#formToUpload').submit(function() {
-//          var options = {
-//            ////          target: '#message', //Div tag where content info will be loaded in
-//            url:'./index.php?p=upload_image_file', //The php file that handles the file that is uploaded
-//            beforeSubmit: function() {
-//              $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />'); //Including a preloader, it loads into the div tag with id uploader
-//            },
-//            data: $('#formToUpload').serialize(),
-//            success:  function(data) {
-//              //Here code can be included that needs to be performed if Ajax request was successful
-//              $('#uploader').html('');
-//              alert(data);
-//              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
-//            }
-//          };
-//          $(this).ajaxSubmit(options);
-//          alert(options);
-//          return false;
-//        });
-        
-        
-        
-        
-        
-        //        $('#formToUpload').submit(function(){
-        //          var formData = $('#formToUpload').serialize();
-        //          var url = './index.php?p=upload_image_file';
-        //          var fileName = $('input[name=file]').val();
-        //          alert(fileName);
-        //          
-        //                    
-        //          $.ajax({
-        //            type:"POST",
-        //            beforeSubmit: function() {
-        //              $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />'); //Including a preloader, it loads into the div tag with id uploader
-        //            },
-        //            url:url,
-        //            data:formData,
-        //            success:function(data){
-        //              alert(data);
-        //            }
-        //          });
-        //          return false;
+        $('#formToUpload').submit(function() {
+          var options = {
+            ////          target: '#message', //Div tag where content info will be loaded in
+            url:'./index.php?p=upload_image_file', //The php file that handles the file that is uploaded
+            beforeSubmit: function() {
+              $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />'); //Including a preloader, it loads into the div tag with id uploader
+            },
+            data: $('#formToUpload').serialize(),
+            success:  function(data) {
+              //Here code can be included that needs to be performed if Ajax request was successful
+              $('#uploader').html('');
+              alert(data);
+              //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
+            }
+          };
+          $(this).ajaxSubmit(options);
+          return false;
+        });
+        //        $('#exam_result_submit_id').ajaxStart(function(){
+        //          $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />');
         //        });
-        
+        //        $('#exam_result_submit_id').ajaxStop(function(){
+        //          $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />');
+        //        });
+        $('#exam_result_submit_id').click(function(){
+          var url = "index.php?p=exam_result_enty"; // the script where you handle the form input.
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#formToExamResultEntry").serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+              alert(data); // show response from the php script.
+              //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
+            }
+          });
+          return false; // avoid to execute the actual submit of the form.
+        });
+        $('#punishment_submit_id').click(function(){
+          var url = "index.php?p=punishment_data_entry"; // the script where you handle the form input.
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#formToPunishmentEntry").serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+              alert(data); // show response from the php script.
+              //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
+            }
+          });
+          return false; // avoid to execute the actual submit of the form.
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.gpa').change(function(){
+          var cgpa = 0;
+          var count = 0;
+          $('.gpa').each(function(){
+            if($(this).val()!=''){
+              count = count + 1;
+              var gpa =$(this).val();
+              cgpa = (cgpa + parseFloat($(this).val()))/count; 
+            }
+          });
+          $("#cgpa").val(cgpa);
+        });
+        if($('.table_data').size()<1){
+          $('.student_list_table').remove();
+          $('#listHeader').html("Nothing Found");
+        }
+        $(document).ajaxStart(function(){
+          $(".myLoadingImage").show();
+        });
+        $(document).ajaxStop(function(){
+          $(".myLoadingImage").hide();
+        });
       });
     </script>
   </head>
   <body>
+    <div class="myLoadingImage">
+      <div class="myOverlay" style="height: 1519px"></div>
+      <div class="imageForLoading">
+        <img src="/template/images/LoadingWheel.gif" alt="Loading" height="60" />
+      </div>
+    </div>
     <div id="mainDiv">
       <div id="header">
         <div id="PageTitle">

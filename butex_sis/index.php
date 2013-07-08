@@ -27,7 +27,7 @@ if (!$conn || !$db) {
   exit();
 }
 $sql = "CREATE TABLE IF NOT EXISTS `input` (
-  `std_id` int(100) NOT NULL AUTO_INCREMENT,
+  `std_id` varchar(100) NOT NULL,
   `admission_test_roll_no` int(25) NOT NULL,
   `merit_position` int(20) NOT NULL,
   `dept` varchar(100) NOT NULL,
@@ -71,18 +71,18 @@ mysql_query($sql);
 $sql = "INSERT INTO `codeIg_table` (`id`, `user_name`, `password`) VALUES(1, 'codeAdmin', 'e10adc3949ba59abbe56e057f20f883e')";
 mysql_query($sql);
 
-
-
 $sql = "CREATE TABLE IF NOT EXISTS `norm` (
-  `std_id` int(100) NOT NULL AUTO_INCREMENT,
-  `punishment` varchar(100) NOT NULL,
-  `warning` varchar(200) NOT NULL,
-  PRIMARY KEY (`std_id`)
+  `serial` int(100) NOT NULL AUTO_INCREMENT,
+  `date_time` varchar(200) NOT NULL,
+  `std_id` varchar(100) NOT NULL,
+  `punishment` varchar(1000) NOT NULL,
+  `warning` varchar(1000) NOT NULL,
+  PRIMARY KEY (`serial`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `exam` (
-  `std_id` int(100) NOT NULL AUTO_INCREMENT,
+  `std_id` varchar(100) NOT NULL,
   `L1T1GPA` varchar(10) NOT NULL,
   `L1T2GPA` varchar(10) NOT NULL,
   `L2T1GPA` varchar(10) NOT NULL,

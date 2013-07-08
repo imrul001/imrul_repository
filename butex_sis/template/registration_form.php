@@ -13,7 +13,7 @@
 </script>
 
 
-<form method="POST" action="./index.php?p=register#register-box" enctype="multipart/form-data" onsubmit="return UserValidate()">
+<form method="POST" action="./index.php?p=register#register-box" enctype="multipart/form-data">
   <div id="register-box" class="registerPopup loginContainer">
     <h3>User Registration</h3>
     <div id="error_box">

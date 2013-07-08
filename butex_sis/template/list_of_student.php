@@ -1,5 +1,20 @@
+<style>
+  .table_data{
+    padding-left: 2px;
+    padding-bottom: 2px;
+    padding-right: 2px;
+    text-align: center;
+  }
+  .student_list_table{
+    width: 800px;
+  }
+  .profile_link{
+    text-decoration: none;
+    color: green;
+  }
+</style>
 <div id="content">
-  <h2>List of Students</h2>
+  <h2 id="listHeader">List of Students</h2>
   <?php
   /* $data1=user_data('user_id'); */
   $sql = "SELECT * FROM input";
@@ -16,17 +31,16 @@
             </tr>";
 
   while ($row = mysql_fetch_array($result)) {
-    $file = $row['file_name'];
-    $download_id = $row['download_id'];
-    $link = "<a href='./template/download.php?f=$file&downlod_id=$download_id'>";
+    $student_id = $row['std_id'];
+    $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
 
     echo "<tr>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['std_id'] . "</td>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['stud_name'] . "</td>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['dept'] . "</td>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['stud_contact_no'] . "</td>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'>" . $row['hsc_year'] . "</td>";
-    echo "<td class='table_data' style='padding-left: 30px; padding-bottom: 10px; padding-right: 30px;'><img width='100' src='/template/uploaded_student_images/".$row['link']."'</td>";
+    echo "<td class='table_data'>" . $link_to_profile . "</td>";
+    echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
+    echo "<td class='table_data'>" . $row['dept'] . "</td>";
+    echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
+    echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+    echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
     echo "</tr>";
   }
   echo "</table>";

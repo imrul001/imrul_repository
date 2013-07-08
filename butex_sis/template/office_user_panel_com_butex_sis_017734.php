@@ -6,12 +6,19 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $( "#tabs" ).tabs();
+    
+    $('.subButton').hover(function(){
+      $(this).addClass("hoverButtonClass")
+    },function(){
+      $(this).removeClass("hoverButtonClass")
+    });
   });
 </script>
 <script language="javascript">
   function UserValidate(){
     var error="";
     if(document.getElementById("student_id").value==""){
+      alert(0);
       error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
     }
     else if(document.getElementById("ad_test_roll_no").value==""){
@@ -159,13 +166,40 @@
   .studentIdLabel{
     font-weight: normal;
     line-height: 8px;
-    margin-left: 180px;
+    margin-left: 210px;
     float: left;
   }
   #fieldsearch {
     left: 0px;
     position: relative;
     width: 185px;
+    margin-left: 10px;
+    top: 10px;
+  }
+  .searchButton{
+    position: relative;
+    top: 10px;
+    margin-left: 10px
+  }
+  .subButton{
+    border: 1px solid #DDD;
+    background-color: #F2F2F2;
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 4px;
+    margin-right: 5px;
+  }
+  .hoverButtonClass{
+    border: 1px solid blue;
+  }
+  .searchFormClass{
+    border: 1px solid #DDD;
+    width: 900px;
+    height: auto;
+    overflow: hidden;
+    clear: both;
+    padding: 10px
   }
 </style>
 <div id="container">
@@ -183,18 +217,22 @@
           <li><a href="#tabs-2">Add Student</a></li>
           <li><a href="#tabs-3">Summery</a></li>
         </ul>
-        <div id="tabs-1" style="padding-bottom: 165px; padding-top: 132px;">
-          <h3 class="studentIdLabel" style="float:left;">Stundent Id:</h3>
-          <fieldset id="searchBox">
-            <input type="text" autocomplete="off" id="fieldSearch" value="" class="" />
-            <a id="searchForm" href="" class="globalSprite">
-              <input type="hidden" value="Search" class="btnSearch" />
-            </a> 
-          </fieldset>
+        <div id="tabs-1" style="padding-bottom: 165px; padding-top: 30px;">
+          <form id="searchForm" class="searchFormClass" method="POST" action="./index.php?p=search_result" enctype="multipart/form-data">
+            <h3 class="studentIdLabel" style="float:left;">Stundent Id:</h3>
+            <input type="text" name="student_id" id="fieldSearch" value="" class="" />
+            <input type="submit" id="searchSubmitButton" class="searchButton" value="Search" />
+          </form>
+<!--          <div id="searchResult">
+            <?php //include 'search_result.php'; ?>
+          </div>-->
         </div>
+
         <div id="tabs-2">
           <p id="reg_form">
-            <a href="./index.php?p=reg_complete">Photo Upload</a>
+            <a class="subButton" href="./index.php?p=reg_complete">photo upload</a>
+            <a class="subButton" href="./index.php?p=exam_statistics">result entry</a>
+            <a class="subButton" href="./index.php?p=norm_entry">punishment record</a>
             <?php include 'registration_form.php'; ?>
           </p>
         </div>

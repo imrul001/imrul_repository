@@ -1,4 +1,5 @@
 <?php
+
 $allowedExts = array("jpg", "jpeg", "gif", "png");
 
 $extension = end(explode(".", $_FILES["file"]["name"]));
@@ -6,13 +7,20 @@ $extension = end(explode(".", $_FILES["file"]["name"]));
 $std_id = $_POST['student_id'];
 $file_name = $_FILES["file"]["name"];
 
-$sql = "SELECT link FROM input WHERE std_id=$std_id";
+$sql = "SELECT link FROM input WHERE std_id=$std_id AND link=no";
 $result = mysql_query($sql);
-while ($row = mysql_fetch_array($result)) {
-  $link = $row['link'];
+if(!empty($result)){
+  $num_link= mysql_num_rows($result);
 }
-if ($link !='no') {
-  echo "This Student has photo already";
+else{
+  $num_link = 0;
+}
+//while ($row = mysql_fetch_array($result)) {
+//  $link = $row['link'];
+//}
+//$link = 'no';
+if ($num_link < 1) {
+  echo "This Student has photo already or is not registered";
 } else {
   if (!empty($std_id) && !empty($_FILES['file']['name'])) {
     if ((($_FILES["file"]["type"] == "image/gif")
@@ -44,4 +52,3 @@ if ($link !='no') {
   }
 }
 ?>
-<a href="./index.php?p=office_user_panel_com_butex_sis_017734">Back to Admin</a>
