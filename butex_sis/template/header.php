@@ -1,8 +1,8 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
-    <script type="text/javascript" src="/template/js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="/template/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/butex_sis/template/js/jquery.form.js"></script>
 <!--    <script type="text/javascript">
       function isLogInValid(){
         var error="";
@@ -119,6 +119,68 @@
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
+        
+        $('#method').attr("value", $('#paramSelector').val());
+        $('#paramSelector').change(function(){
+          var val = $(this).val().trim();
+          if(val !='blood_grp'){
+            $("#paramField").show();
+            $("#submitDiv").show();
+            $("#blood_grp_list").hide();
+            //        $("#inputField").html('<input type="text" id="paramField" name="" value="" />');
+            //        $("#submitDiv").html('<input type="submit" value="submit" />');
+            $('#method').attr("value", val);
+            $('#paramField').attr("name", val)
+            $(this).children('option').each(function(){
+              if($(this).val() == val){
+                $('#searchParamLabel').html($(this).attr('nameVal'));
+              }
+            });
+          }
+          else{
+            $("#blood_grp_list").show();
+            $("#paramField").hide();
+            $('#method').attr("value", $('#paramSelector').val());
+            $("#submitDiv").hide()
+            $(this).children('option').each(function(){
+              if($(this).val() == val){
+                $('#searchParamLabel').html($(this).attr('nameVal'));
+                $('method').attr("value", val);
+              }
+            });
+          }
+        });
+        $('#submitBTn').live("click",(function(){
+          var value = $('#paramField').val();
+          $('#method_value').attr("value", value);
+          var url ="index.php?p=list_of_student";
+          $.ajax({
+            type: "POST",
+            url: url,            
+            data: $('#summeryForm').serialize(),
+            success:function(data){
+              //              $("#content").html(data);
+              $('#listOfStudent', 'body').html(data);
+            }
+          });
+          return false;
+        }));
+        $('#blood_grp_list').live("change",(function(){
+          $('#method_value').val($(this).val());
+          var url ="index.php?p=list_of_student";
+          $.ajax({
+            type: "POST",
+            url: url,            
+            data: $('#summeryForm').serialize(),
+            success:function(data){
+              //              $("#content").html(data);
+              $('#listOfStudent', 'body').html(data);
+            }
+          });
+          return false;
+        })
+      );
+        
         $('#formToUpload').submit(function() {
           var options = {
             ////          target: '#message', //Div tag where content info will be loaded in
@@ -157,6 +219,8 @@
           });
           return false; // avoid to execute the actual submit of the form.
         });
+              
+        
         $('#punishment_submit_id').click(function(){
           var url = "index.php?p=punishment_data_entry"; // the script where you handle the form input.
           $.ajax({

@@ -109,7 +109,20 @@
 
     <dl>
       <dt><label for="Blood Group"><b>*Blood Group:</b></label></dt>
-      <dd><input type="text" class="text" name="blood_grp" id="blood_grp" size="30" value="" /></dd>                                                                         
+      <dd>
+        <select name="blood_grp" id="blood_grp">
+          <option value="0+">0+</option>
+          <option value="0-">0-</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="NONE">NONE</option>
+        </select>
+<!--        <input type="text" class="text" name="blood_grp" id="blood_grp" size="30" value="" />-->
+      </dd>                                                                         
     </dl>
     <dl>
       <dt><label for="ssc board"><b>*SSC Board</b></label></dt>

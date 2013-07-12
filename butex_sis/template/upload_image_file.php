@@ -6,13 +6,15 @@ $extension = end(explode(".", $_FILES["file"]["name"]));
 
 $std_id = $_POST['student_id'];
 $file_name = $_FILES["file"]["name"];
+$new_name = $std_id.".jpg";
 
-$sql = "SELECT link FROM input WHERE std_id=$std_id AND link=no";
+$sql = "SELECT link FROM input WHERE std_id='".$std_id."' AND link='no'";
 $result = mysql_query($sql);
 if(!empty($result)){
   $num_link= mysql_num_rows($result);
 }
 else{
+  die(mysql_error());	
   $num_link = 0;
 }
 //while ($row = mysql_fetch_array($result)) {
@@ -35,12 +37,12 @@ if ($num_link < 1) {
         if (file_exists("./template/uploaded_student_images/" . $_FILES["file"]["name"])) {
           echo $_FILES["file"]["name"] . " already exists. ";
         } else {
-          $sql = "UPDATE input SET link='$file_name' WHERE std_id=$std_id";
+          $sql = "UPDATE input SET link='$new_name' WHERE std_id=$std_id";
           if (!mysql_query($sql)) {
             die(mysql_error());
           } else {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "./template/uploaded_student_images/" . $_FILES["file"]["name"]);
-            echo 'The photo is Successfully ..' . $_FILES['file']['name'];
+            move_uploaded_file($_FILES["file"]["tmp_name"], "./template/uploaded_student_images/" . $std_id .".jpg");
+            echo 'The photo is Successfully ..' . $new_name;
           }
         }
       }

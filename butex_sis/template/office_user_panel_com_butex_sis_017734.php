@@ -223,9 +223,9 @@
             <input type="text" name="student_id" id="fieldSearch" value="" class="" />
             <input type="submit" id="searchSubmitButton" class="searchButton" value="Search" />
           </form>
-<!--          <div id="searchResult">
-            <?php //include 'search_result.php'; ?>
-          </div>-->
+          <!--          <div id="searchResult">
+          <?php //include 'search_result.php'; ?>
+                    </div>-->
         </div>
 
         <div id="tabs-2">
@@ -238,7 +238,45 @@
         </div>
         <div id="tabs-3">
           <p id="student_summary">
-            <?php include 'list_of_student.php'; ?>
+          <div>
+            <div class="filteringParamSelection">
+              <span id="searchParamLabel" style="float: left;">Student ID</span>
+              <div id="inputField" style="float: left;">
+                <input style="float: left;" type="text" id="paramField" name="" value="" />
+                <select id="blood_grp_list" style="display:none">
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+              </div>
+
+              <div id="submitDiv" style="float:left;">
+                <input type="submit" id="submitBTn" value="submit" />
+              </div>
+            </div>
+            <div class="filteringParamSelection">
+              <select id="paramSelector">
+                <option value="std_id" nameVal="Student ID">Student ID</option>
+                <option value="stud_contact_no" nameVal="Contact Number">Contact Number</option>
+                <option value="blood_grp" nameVal="Blood Group">Blood Group</option>
+                <option value="dept" nameVal="Department">Department</option>
+                <option value="grd_contact_no" nameVal="Guardian Number">Guardian Number</option>
+              </select>
+            </div>
+            <form id="summeryForm" method="POST" action="#">
+
+              <input type="hidden" class="hiddenFld" name="method" id="method" value="" />
+              <input type="hidden" class="hiddenFld" name="methodValue" id="method_value" value="" />
+              <input type="hidden" class="hiddenFld" name="type" id="type" value="dynamic_search" />
+            </form>
+          </div>
+          <h2 id="listHeader">List of Students</h2>
+          <?php include 'list_of_student.php'; ?>
           </p>
         </div>
       </div>
