@@ -2,7 +2,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
     <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="/butex_sis/template/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/template/js/jquery.form.js"></script>
 <!--    <script type="text/javascript">
       function isLogInValid(){
         var error="";

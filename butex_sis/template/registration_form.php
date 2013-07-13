@@ -127,8 +127,8 @@
       <dt><label for="Blood Group"><b>*Blood Group:</b></label></dt>
       <dd>
         <select name="blood_grp" id="blood_grp">
-          <option value="0+">0+</option>
-          <option value="0-">0-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
           <option value="A+">A+</option>
           <option value="A-">A-</option>
           <option value="B+">B+</option>
