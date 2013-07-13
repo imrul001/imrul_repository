@@ -138,7 +138,7 @@ class user
 	 * @param str $user_cpass Verification of the password.
 	 * @return bool
 	 */
-	function register($student_id, $ad_roll, $merit_position, $dept, $stud_name, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular, $image)
+	function register($student_id, $ad_roll, $merit_position, $dept, $stud_name, $gender, $religion, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular, $image)
 	{
 		global $error, $error_msg;
 		$error = false;
@@ -161,7 +161,7 @@ class user
 //			$mail_pass = $user_pass;
 //			$user_pass = md5($user_pass);
 			
-			$sql = "INSERT INTO `input` (`std_id`, `admission_test_roll_no`, `merit_position`, `dept`, `stud_name`, `father_name`, `mother_name`, `dob`, `p_address`, `c_address`, `stud_contact_no`, `grd_contact_no`, `nationality`, `emergency_contact_no`, `emergency_contact_address`, `blood_grp`, `ssc_board`, `ssc_academic_institute`, `ssc_year`, `ssc_roll`, `ssc_gpa`, `hsc_board`, `hsc_academic_institute`, `hsc_year`, `hsc_roll`, `hsc_gpa`, `grd_income`, `extra_curricular`, `link`) VALUES('$student_id', '$ad_roll', '$merit_position', '$dept', '$stud_name', '$father_name', '$mother_name', '$dob', '$p_address', '$c_address', '$stud_contact_no', '$grd_contact_no', '$nationality', '$emergency_contact_no', '$emergency_contact_address', '$blood_grp', '$ssc_board', '$ssc_ac', '$ssc_year', '$ssc_roll', '$ssc_gpa', '$hsc_board', '$hsc_ac', '$hsc_year', '$hsc_roll', '$hsc_gpa', '$grd_income', '$extraCurricular', '$image')";
+			$sql = "INSERT INTO `input` (`std_id`, `admission_test_roll_no`, `merit_position`, `dept`, `stud_name`, `gender`, `religion`, `father_name`, `mother_name`, `dob`, `p_address`, `c_address`, `stud_contact_no`, `grd_contact_no`, `nationality`, `emergency_contact_no`, `emergency_contact_address`, `blood_grp`, `ssc_board`, `ssc_academic_institute`, `ssc_year`, `ssc_roll`, `ssc_gpa`, `hsc_board`, `hsc_academic_institute`, `hsc_year`, `hsc_roll`, `hsc_gpa`, `grd_income`, `extra_curricular`, `link`) VALUES('$student_id', '$ad_roll', '$merit_position', '$dept', '$stud_name', '$gender', '$religion', '$father_name', '$mother_name', '$dob', '$p_address', '$c_address', '$stud_contact_no', '$grd_contact_no', '$nationality', '$emergency_contact_no', '$emergency_contact_address', '$blood_grp', '$ssc_board', '$ssc_ac', '$ssc_year', '$ssc_roll', '$ssc_gpa', '$hsc_board', '$hsc_ac', '$hsc_year', '$hsc_roll', '$hsc_gpa', '$grd_income', '$extraCurricular', '$image')";
 			if(!@mysql_query($sql)){
         die(mysql_error());
       }

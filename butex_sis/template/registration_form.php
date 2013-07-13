@@ -13,7 +13,7 @@
 </script>
 
 
-<form method="POST" action="./index.php?p=register#register-box" enctype="multipart/form-data">
+<form method="POST" action="./index.php?p=register#register-box" enctype="multipart/form-data" onsubmit="return UserValidate()">
   <div id="register-box" class="registerPopup loginContainer">
     <h3>User Registration</h3>
     <div id="error_box">
@@ -55,6 +55,22 @@
     <dl>
       <dt><label for="student name"><b>*Student Name:</b></label></dt>
       <dd><input type="text" class="text" name="stud_name" id="stud_name" size="30" value="" /></dd>                                                                         
+    </dl>
+    
+    <dl>
+      <dt><label for="Gender"><b>*Gender</b></label></dt>
+      <dd>
+        <select name="gender" id="gender">
+          <option value="" selected="selected">None</option> 
+          <option value="Male">Male</option> 
+          <option value="Female">Female</option>
+        </select>
+      </dd>                                                                         
+    </dl>
+    
+    <dl>
+      <dt><label for="religion"><b>*Religion:</b></label></dt>
+      <dd><input type="text" class="text" name="religion" id="religion" size="30" value="" /></dd>                                                                         
     </dl>
 
     <dl>

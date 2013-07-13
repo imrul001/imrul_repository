@@ -18,7 +18,6 @@
   function UserValidate(){
     var error="";
     if(document.getElementById("student_id").value==""){
-      alert(0);
       error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
     }
     else if(document.getElementById("ad_test_roll_no").value==""){
@@ -201,6 +200,11 @@
     clear: both;
     padding: 10px
   }
+  #dynamic_filtering_tab{
+    right: 60px;
+    overflow: hidden;
+    position: relative;
+  }
 </style>
 <div id="container">
   <?php if (!logged_in()) : ?>
@@ -238,7 +242,7 @@
         </div>
         <div id="tabs-3">
           <p id="student_summary">
-          <div>
+          <div id="dynamic_filtering_tab">
             <div class="filteringParamSelection">
               <span id="searchParamLabel" style="float: left;">Student ID</span>
               <div id="inputField" style="float: left;">
