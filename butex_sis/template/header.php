@@ -1,7 +1,9 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/template/css/msgBoxLight.css" />
     <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/template/js/jquery.msgBox.js"></script>
     <script type="text/javascript" src="/template/js/jquery.form.js"></script>
 <!--    <script type="text/javascript">
       function isLogInValid(){
@@ -21,7 +23,154 @@
         }
       }
     </script>-->
+<!--    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#dob_1').calendar();
+        for (i = new Date().getFullYear(); i > 1900; i--)
+        {
+          $('#sscYear').append($('<option />').val(i).html(i));
+        }
+        for (i = new Date().getFullYear(); i > 1900; i--)
+        {
+          $('#hscYear').append($('<option />').val(i).html(i));
+        }
+      });
+    </script>-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#photoDeleter").click(function(){
+          var url = "./index.php?p=photo_delete";
+          var std_id= $('input[name=std_id]').val();
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $('#photoDeleterForm').serialize(),
+            success:function(data){
+              alert("Photo of "+data+" is successfully deleted");
+              window.location.href="./index.php?p=update_photo&std="+std_id;
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+    <script language="javascript">
+      function UserValidate(){
+        var error="";
+        if(document.getElementById("student_id").value==""){
+          error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("ad_test_roll_no").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("merit_pos").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("dept").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("stud_name").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("gender").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("religion").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>2All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("father_name").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("mother_name").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("dob_1").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("p_address").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("c_address").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("stud_contact_no").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("grd_contact_address").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("nationality").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("emergency_contact_no").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("emergency_address").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("blood_grp").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("sscBoard").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("ssc_ac").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("sscYear").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("ssc_roll").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("ssc_gpa").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("hscBoard").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("hsc_ac").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("hscYear").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("hsc_roll").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("hsc_gpa").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("grd_income").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        error = error? "<ul style='color:#f00;font-weight:bold'>" + error +"</ul>":'';
+        if(error!=''){
+          document.getElementById("ersb").style.display="block";
+          document.getElementById("ers").innerHTML=error;
+          location.href="#errr_registration";
+          return false;
+        }
+        else
+          document.getElementById("ersb").display="none";
+      }
+      function isValidEmail(email) 
+      { 
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
+                
+      function length(v)
+      {
+        return v.length;
+      }    
+    </script>
     <style>
+      .logoutlink {
+        text-decoration: none;
+        color: white;
+        width: 25%;
+      }
       .login-popup {
         margin-bottom: 45px;
         top: 35px;
@@ -109,6 +258,10 @@
         display: none;
         z-index: 900000;
       }
+      h3{
+        text-align: center;
+        text-transform: uppercase; 
+      }
     </style>
     <style>
       .footerContent p{
@@ -118,8 +271,7 @@
       }
     </style>
     <script type="text/javascript">
-      $(document).ready(function(){
-        
+      $(document).ready(function(){       
         $('#method').attr("value", $('#paramSelector').val());
         $('#paramSelector').change(function(){
           var val = $(this).val().trim();
@@ -182,9 +334,11 @@
       );
         
         $('#formToUpload').submit(function() {
+          var type = $('input[name=queryType]').val();
+          var std_id =$('input[name=student_id]').val().trim();
           var options = {
             ////          target: '#message', //Div tag where content info will be loaded in
-            url:'./index.php?p=upload_image_file', //The php file that handles the file that is uploaded
+            url:'./index.php?p=upload_image_file&type='+type, //The php file that handles the file that is uploaded
             beforeSubmit: function() {
               $('#uploader').html('<img src="./template/images/LoadingWheel.gif" border="0" height="35" width="35" />'); //Including a preloader, it loads into the div tag with id uploader
             },
@@ -193,7 +347,9 @@
               //Here code can be included that needs to be performed if Ajax request was successful
               $('#uploader').html('');
               alert(data);
-              //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
+              if(type=='update'){
+                window.location.href="./index.php?p=update_photo&std="+std_id;
+              }
             }
           };
           $(this).ajaxSubmit(options);
@@ -235,6 +391,78 @@
           });
           return false; // avoid to execute the actual submit of the form.
         });
+        
+        $('.editClass').live("click",(function(){
+          var idvalue=$(this).attr("id");
+          var idIndex=idvalue.split("_");
+          var std_id = $('input[name=std_'+idIndex[1]+']').val();
+          var url = "index.php?p=update_form";
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+            success:function(){
+              window.location.href="./index.php?p=update_form&std="+std_id;
+              
+            }
+          });
+          return false;
+        })
+      );
+      
+        $('#continueButton').click(function(){
+          window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";
+        });  
+        
+        $('.deleteClass').live("click",(function(){
+          var idvalue=$(this).attr("id");
+          var idIndex=idvalue.split("_");
+          var std_id = $('input[name=std_'+idIndex[1]+']').val();
+          var url = "./index.php?p=delete_student&std_id="+std_id; // the script where you handle the form input.
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+              alert("The Student information of "+ data +" is deleted successfully");
+              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
+              // show response from the php script.
+            }
+          });
+          //          $.msgBox({
+          //            title: "Are You Sure",
+          //            content: "Would you like to Delete this Student Information?",
+          //            type: "alert",
+          //            buttons: [{ value: "Yes" }, { value: "Continue" }, { value: "Cancel"}],
+          //            success: function (result) {
+          //              if (result == "Yes") {
+          //                $.ajax({
+          //                  type: "POST",
+          //                  url: url,
+          //                  data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+          //                  success: function(data)
+          //                  {
+          //                    $.msgBox({
+          //                      title: "Confirmation",
+          //                      content: "The Student information"+ data +" is deleted successfully",
+          //                      type: "info",
+          //                      buttons: [{ value: "OK"}],
+          //                      success: function (result) {
+          //                        if (result == "OK") {
+          //                          window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
+          //                        }
+          //                      }
+          //                    });
+          //                    // show response from the php script.
+          //                  }
+          //                });
+          //              }
+          //            }
+          //          });
+          return false;
+        })
+      );
       });
     </script>
     <script type="text/javascript">
@@ -263,6 +491,7 @@
         });
       });
     </script>
+
   </head>
   <body>
     <div class="myLoadingImage">

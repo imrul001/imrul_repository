@@ -24,7 +24,6 @@
 </style>
 <script type="text/javascript">
   $(document).ready(function(){
-    
   });
 </script>
 <?php
@@ -47,10 +46,12 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
-
+      $i = 1;
       while ($row = mysql_fetch_array($result)) {
         $student_id = $row['std_id'];
+        $std_id[$i] = $row['std_id'];
         $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
 
         echo "<tr>";
@@ -60,7 +61,15 @@ $type = $_POST['type'];
         echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
         echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
         echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
+        echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
+            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
+            <input type='hidden' name='std_".$i."' id='std_".$i."' value='" . $std_id[$i] . "'/>
+            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
+            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
+            </form>
+            </td>";
         echo "</tr>";
+        $i = $i + 1;
       }
       echo "</table>";
     }
@@ -82,10 +91,12 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
-
+          $i = 1;
           while ($row = mysql_fetch_array($result)) {
             $student_id = $row['std_id'];
+            $std_id[$i] = $row['std_id'];
             $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
 
             echo "<tr>";
@@ -95,7 +106,15 @@ $type = $_POST['type'];
             echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
             echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
             echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
+            echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
+            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
+            <input type='hidden' name='std_".$i."' id='std_".$i."' value='" . $std_id[$i] . "'/>
+            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
+            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
+            </form>
+            </td>";
             echo "</tr>";
+            $i = $i + 1;
           }
           echo "</table>";
         } else {

@@ -42,7 +42,7 @@ if ($num_link < 1) {
             die(mysql_error());
           } else {
             move_uploaded_file($_FILES["file"]["tmp_name"], "./template/uploaded_student_images/" . $std_id .".jpg");
-            echo 'The photo is Successfully ..' . $new_name;
+            echo 'The photo is Successfully Uploaded ..';
           }
         }
       }

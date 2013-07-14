@@ -202,7 +202,7 @@ $tpl = (file_exists("template/" . $p . ".php")) ? $p : "index";
 define('TPL_NAME', "template/" . $tpl . ".php");
 
 /* Registration/Login */
-if ($p == "register" || $p == "login") {
+if ($p == "register" || $p == "login" || $p="update") {
 //  if ($user->logged_in()) {
 //    header("Location: ./index.php");
 //  }
@@ -216,6 +216,9 @@ if ($p == "register" || $p == "login") {
     $user->register($_POST['student_id'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $image);
 //    $user->register($_POST['student_id']);
 //    header("Location: ./index.php?p=office_user_panel_com_butex_sis_017734");
+  }
+  if($_POST['update']){
+    $user->update($_POST['student_id'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular']);
   }
 }
 

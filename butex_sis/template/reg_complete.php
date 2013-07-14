@@ -11,6 +11,7 @@
     padding: 4px;
   }
 </style>
+<?php $std_id=$_GET['std_id']; ?>
 <?php get_header(); ?>
 <div id="container">
   <?php if (!logged_in()) : ?>
@@ -32,7 +33,7 @@
 
           <dl>
             <dt><label for="student Id"><b>Student ID:</b></label></dt>
-            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" /></dd>
+            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="<?php echo $std_id; ?>" readonly /></dd>
           </dl>
           <dl>
             <dt><label for="Photo"><b>Image:</b></label></dt>

@@ -234,7 +234,7 @@
 
         <div id="tabs-2">
           <p id="reg_form">
-            <a class="subButton" href="./index.php?p=reg_complete">photo upload</a>
+<!--            <a class="subButton" href="./index.php?p=reg_complete">photo upload</a>-->
             <a class="subButton" href="./index.php?p=exam_statistics">result entry</a>
             <a class="subButton" href="./index.php?p=norm_entry">punishment record</a>
             <?php include 'registration_form.php'; ?>
