@@ -99,6 +99,9 @@
           </div>
         </div>
       </form>
+      <form id="examDataForm" method="POST" action="" enctype="multipart/form-data">
+        <input type="hidden" class="text" name="stdent_id" id="stud_id" size="30" value="" /></dd>
+      </form>
     </div>
   <?php endif; ?>
 </div>

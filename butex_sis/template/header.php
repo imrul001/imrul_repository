@@ -370,7 +370,7 @@
             success: function(data)
             {
               alert(data); // show response from the php script.
-              //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
+              window.location.href="./index.php?p=exam_statistics";
             }
           });
           return false; // avoid to execute the actual submit of the form.
@@ -491,7 +491,36 @@
         });
       });
     </script>
-
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#student_id").change(function(){
+          var std_id=$(this).val().trim();
+          var url = "index.php?p=fetch_results&std_id="+std_id;
+          $.ajax({
+            type: "POST",
+            url: url,
+            data : $("#examDataForm").serialize(),
+            dataType: 'json',
+            success:function(result)
+            {
+              $('#gpaL1T1').val(result[0]);
+              $('#gpaL1T2').val(result[1]);
+              $('#gpaL2T1').val(result[2]);
+              $('#gpaL2T2').val(result[3]);
+              $('#gpaL3T1').val(result[4]);
+              $('#gpaL3T2').val(result[5])
+              $('#gpaL4T1').val(result[6]);
+              $('#gpa42T2').val(result[7]);
+              $('#cgpa').val(result[8]);
+              $('#record').val(result[9]);
+              $('#note').val(result[10]);
+              $('.gpa').change();
+            }
+          });
+          return false;
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="myLoadingImage">
