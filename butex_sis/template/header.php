@@ -468,13 +468,15 @@
     <script type="text/javascript">
       $(document).ready(function(){
         $('.gpa').change(function(){
-          var cgpa = 0;
+          var gradeTotal = 0;
           var count = 0;
+          var cgpa = 0;
           $('.gpa').each(function(){
-            if($(this).val()!=''){
-              count = count + 1;
-              var gpa =$(this).val();
-              cgpa = (cgpa + parseFloat($(this).val()))/count; 
+            if($(this).val()!=""){
+              var gpa =Number($(this).val());
+              gradeTotal = Number(gradeTotal + Number(gpa));
+              count = count + 1; 
+              cgpa =  Number(gradeTotal/count);
             }
           });
           $("#cgpa").val(cgpa);
