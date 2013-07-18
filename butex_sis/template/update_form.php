@@ -1,4 +1,3 @@
-<!--<script type="text/javascript" src="/butex_sis/template/js/jquery-1.8.0.min.js"></script>-->
 <style>
   .current_time{
     text-align: center;
@@ -13,6 +12,23 @@
   }
 </style>
 <?php get_header(); ?>
+<link rel="stylesheet" href="/template/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/template/css/jquery.calendar.css"/>
+<script type="text/javascript" src="/template/js/jquery-ui.js" ></script>
+<script type="text/javascript" src="/template/js/jquery.calendar.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#dob_1').calendar();
+    for (i = new Date().getFullYear(); i > 1900; i--)
+    {
+      $('#sscYear').append($('<option />').val(i).html(i));
+    }
+    for (i = new Date().getFullYear(); i > 1900; i--)
+    {
+      $('#hscYear').append($('<option />').val(i).html(i));
+    }
+  });
+</script>
 <div id="container">
   <?php if (!logged_in()) : ?>
     <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=login" title="Login">Login</a></p>

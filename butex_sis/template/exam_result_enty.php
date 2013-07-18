@@ -1,5 +1,4 @@
 <?php
-
 $std_id = $_POST['student_id'];
 $l1t1 = $_POST['gpaL1T1'];
 $l1t2 = $_POST['gpaL1T2'];
@@ -12,7 +11,7 @@ $l4t2 = $_POST['gpaL4T2'];
 $cgpa = $_POST['cgpa'];
 $record = $_POST['record'];
 $note = $_POST['note'];
-if (!empty($std_id) && !empty($cgpa)) {
+if (!empty($std_id)) {
   $sql = "SELECT std_id FROM input WHERE std_id=$std_id";
   $result = mysql_query($sql);
   if (!empty($result)) {
@@ -47,6 +46,6 @@ if (!empty($std_id) && !empty($cgpa)) {
     echo 'The Student is not registered';
   }
 } else {
-  echo "All Fields are Required";
+  echo "Student Id Field Can not be blank.";
 }
 ?>

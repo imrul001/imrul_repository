@@ -274,8 +274,22 @@
       $(document).ready(function(){       
         $('#method').attr("value", $('#paramSelector').val());
         $('#paramSelector').change(function(){
+          $("#paramField").val("");
           var val = $(this).val().trim();
           if(val !='blood_grp'){
+            if(val == 'stud_contact_no'){
+              $('#type').val("");
+              var url ="index.php?p=list_of_student&searchParam=contact";
+              $.ajax({
+                type: "POST",
+                url: url,            
+                data: $('#summeryForm').serialize(),
+                success:function(data){
+                  //              $("#content").html(data);
+                  $('#listOfStudent', 'body').html(data);
+                }
+              });
+            }
             $("#paramField").show();
             $("#submitDiv").show();
             $("#blood_grp_list").hide();
@@ -301,6 +315,7 @@
               }
             });
           }
+          $('#type').val("dynamic_search");
         });
         $('#submitBTn').live("click",(function(){
           var value = $('#paramField').val();
@@ -495,7 +510,7 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $("#student_id").change(function(){
+        $("#std_id").change(function(){
           var std_id=$(this).val().trim();
           var url = "index.php?p=fetch_results&std_id="+std_id;
           $.ajax({
@@ -512,7 +527,7 @@
               $('#gpaL3T1').val(result[4]);
               $('#gpaL3T2').val(result[5])
               $('#gpaL4T1').val(result[6]);
-              $('#gpa42T2').val(result[7]);
+              $('#gpaL4T2').val(result[7]);
               $('#cgpa').val(result[8]);
               $('#record').val(result[9]);
               $('#note').val(result[10]);

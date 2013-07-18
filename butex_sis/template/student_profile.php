@@ -26,13 +26,13 @@
   }
   .Container2{
     float: left;
-    width: 340px;
-    font-size: 18px;
+    width: 320px;
+    font-size: 14px;
     height: auto;
     overflow: hidden;
   }
   .labels{
-    margin-left: 60px;
+    margin-left: 90px;
     padding-left: 20px;
   }
   .h2header{
@@ -217,7 +217,7 @@
           <p>Department:</p>
           <p>Student ID:</p>
           <p>Admission Test Roll:</p>
-          <p>Merit Postion:</p>
+          <p>Merit Position:</p>
         </div>
         <div class="Container2">
           <p><?php echo $dept; ?></p>
@@ -230,11 +230,11 @@
       $sql = "SELECT * FROM exam WHERE std_id=$m";
       $result = mysql_query($sql);
       while ($row_exam = mysql_fetch_array($result)) {
-        $std_id = $row_exam['student_id'];
+        $std_id = $row_exam['std_id'];
         $l1t1 = $row_exam['L1T1GPA'];
         $l1t2 = $row_exam['L1T2GPA'];
         $l2t1 = $row_exam['L2T1GPA'];
-        $l2t2 = $row_exam['L2T2GPA	'];
+        $l2t2 = $row_exam['L2T2GPA'];
         $l3t1 = $row_exam['L3T1GPA'];
         $l3t2 = $row_exam['L3T2GPA'];
         $l4t1 = $row_exam['L4T1GPA'];

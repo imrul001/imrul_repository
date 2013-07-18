@@ -269,11 +269,11 @@
                 <option value="stud_contact_no" nameVal="Contact Number">Contact Number</option>
                 <option value="blood_grp" nameVal="Blood Group">Blood Group</option>
                 <option value="dept" nameVal="Department">Department</option>
+                <option value="batch" nameVal="Batch">Batch</option>
                 <option value="grd_contact_no" nameVal="Guardian Number">Guardian Number</option>
               </select>
             </div>
             <form id="summeryForm" method="POST" action="#">
-
               <input type="hidden" class="hiddenFld" name="method" id="method" value="" />
               <input type="hidden" class="hiddenFld" name="methodValue" id="method_value" value="" />
               <input type="hidden" class="hiddenFld" name="type" id="type" value="dynamic_search" />

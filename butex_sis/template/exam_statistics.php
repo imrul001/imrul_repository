@@ -47,7 +47,7 @@
 
           <dl>
             <dt><label for="student Id"><b>Student ID:</b></label></dt>
-            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" /></dd>
+            <dd><input type="text" class="text" name="student_id" id="std_id" size="30" value="" /></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L1 T1:</b></label></dt>
@@ -71,7 +71,7 @@
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L3 T2:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL3T1" id="gpaL3T2" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL3T2" id="gpaL3T2" size="30" value="" /></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L4 T1:</b></label></dt>
