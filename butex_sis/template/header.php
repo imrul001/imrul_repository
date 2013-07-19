@@ -434,17 +434,17 @@
           var idIndex=idvalue.split("_");
           var std_id = $('input[name=std_'+idIndex[1]+']').val();
           var url = "./index.php?p=delete_student&std_id="+std_id; // the script where you handle the form input.
-          $.ajax({
-            type: "POST",
-            url: url,
-            data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
-            success: function(data)
-            {
+                $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+                  success: function(data)
+                  {
               alert("The Student information of "+ data +" is deleted successfully");
-              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
-              // show response from the php script.
-            }
-          });
+                          window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
+                    // show response from the php script.
+                  }
+                });
           //          $.msgBox({
           //            title: "Are You Sure",
           //            content: "Would you like to Delete this Student Information?",
