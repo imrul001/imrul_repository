@@ -39,7 +39,7 @@ $type = $_POST['type'];
     <?php
     /* $data1=user_data('user_id'); */
     if (empty($type)) {
-      $sql = "SELECT * FROM input";
+      $sql = "SELECT * FROM input LIMIT 10";
       $result = mysql_query($sql);
       $search = $_GET['searchParam'];
 

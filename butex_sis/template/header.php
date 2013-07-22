@@ -1,41 +1,45 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/template/css/msgBoxLight.css" />
+    <!--    <link rel="stylesheet" type="text/css" href="/template/css/msgBoxLight.css" />-->
     <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="/template/js/jquery.msgBox.js"></script>
+<!--    <script type="text/javascript" src="/template/js/jquery.msgBox.js"></script>-->
     <script type="text/javascript" src="/template/js/jquery.form.js"></script>
-<!--    <script type="text/javascript">
-      function isLogInValid(){
-        var error="";
-        if(document.getElementById("user").value=="" || document.getElementById("p").value==""){
-          error+="<li><lable for='fullname' style='cursor:hand;cursor:pointer'>Wrong User ID Or Password.</label></li>\n";
-        }
-        error = error? "<ul style='color:#f00;font-weight:bold'>" + error +"</ul>":'';
-        if(error!=''){
-          document.getElementById("ersb_login").style.display="block";
-          document.getElementById("ers_login").innerHTML=error;
-          location.href="#errr_login";
-          return false;
-        }
-        else{
-          document.getElementById("ersb_login").display="none";
-        }
-      }
-    </script>-->
-<!--    <script type="text/javascript">
-      $(document).ready(function(){
-        $('#dob_1').calendar();
-        for (i = new Date().getFullYear(); i > 1900; i--)
-        {
-          $('#sscYear').append($('<option />').val(i).html(i));
-        }
-        for (i = new Date().getFullYear(); i > 1900; i--)
-        {
-          $('#hscYear').append($('<option />').val(i).html(i));
-        }
-      });
-    </script>-->
+    <link rel="stylesheet" href="/template/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/template/css/jquery.calendar.css"/>
+    <script type="text/javascript" src="/template/js/jquery-ui.js" ></script>
+    <script type="text/javascript" src="/template/js/jquery.calendar.js"></script>
+    <!--    <script type="text/javascript">
+          function isLogInValid(){
+            var error="";
+            if(document.getElementById("user").value=="" || document.getElementById("p").value==""){
+              error+="<li><lable for='fullname' style='cursor:hand;cursor:pointer'>Wrong User ID Or Password.</label></li>\n";
+            }
+            error = error? "<ul style='color:#f00;font-weight:bold'>" + error +"</ul>":'';
+            if(error!=''){
+              document.getElementById("ersb_login").style.display="block";
+              document.getElementById("ers_login").innerHTML=error;
+              location.href="#errr_login";
+              return false;
+            }
+            else{
+              document.getElementById("ersb_login").display="none";
+            }
+          }
+        </script>-->
+    <!--    <script type="text/javascript">
+          $(document).ready(function(){
+            $('#dob_1').calendar();
+            for (i = new Date().getFullYear(); i > 1900; i--)
+            {
+              $('#sscYear').append($('<option />').val(i).html(i));
+            }
+            for (i = new Date().getFullYear(); i > 1900; i--)
+            {
+              $('#hscYear').append($('<option />').val(i).html(i));
+            }
+          });
+        </script>-->
     <script type="text/javascript">
       $(document).ready(function(){
         $("#photoDeleter").click(function(){
@@ -434,47 +438,38 @@
           var idIndex=idvalue.split("_");
           var std_id = $('input[name=std_'+idIndex[1]+']').val();
           var url = "./index.php?p=delete_student&std_id="+std_id; // the script where you handle the form input.
+          $('#dialog-confirm').attr('title',"Delete "+std_id+" permanently");
+          $('#dialog-confirm').css("display","block");
+          $('.ui-dialog-title').html("Delete "+std_id+" permanently");
+          //          $('#dialog-confirm').dialog('option', 'position', 'center');
+          $( "#dialog-confirm" ).dialog({
+            resizable: true,
+            height:220,
+            width: 420,
+            modal: true,
+            buttons: {
+              "Delete": function() {
                 $.ajax({
                   type: "POST",
                   url: url,
                   data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
                   success: function(data)
                   {
-              alert("The Student information of "+ data +" is deleted successfully");
-                          window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
+                    $('.ui-dialog-title').html('');
+                    $( this ).dialog( "close" );
+                    alert("The Student information of "+ data +" is deleted successfully");
+                    window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
                     // show response from the php script.
                   }
                 });
-          //          $.msgBox({
-          //            title: "Are You Sure",
-          //            content: "Would you like to Delete this Student Information?",
-          //            type: "alert",
-          //            buttons: [{ value: "Yes" }, { value: "Continue" }, { value: "Cancel"}],
-          //            success: function (result) {
-          //              if (result == "Yes") {
-          //                $.ajax({
-          //                  type: "POST",
-          //                  url: url,
-          //                  data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
-          //                  success: function(data)
-          //                  {
-          //                    $.msgBox({
-          //                      title: "Confirmation",
-          //                      content: "The Student information"+ data +" is deleted successfully",
-          //                      type: "info",
-          //                      buttons: [{ value: "OK"}],
-          //                      success: function (result) {
-          //                        if (result == "OK") {
-          //                          window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
-          //                        }
-          //                      }
-          //                    });
-          //                    // show response from the php script.
-          //                  }
-          //                });
-          //              }
-          //            }
-          //          });
+              },
+              Cancel: function() {
+                $('.ui-dialog-title').html('');
+                //                $('#dialog-confirm').attr('title','');
+                $( this ).dialog( "close" );
+              }
+            }
+          });
           return false;
         })
       );
@@ -555,5 +550,9 @@
           <h1>Bangladesh University of Textiles</h1>
           <h2>Student Information System</h2>
         </div>
+      </div>
+      <div id="dialog-confirm" title="Delete This Student Information." style="display:none;">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+          Information will be permanently deleted and cannot be recovered. Are you sure?</p>
       </div>
 

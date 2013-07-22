@@ -1,8 +1,8 @@
 <?php get_header(); ?>
-<link rel="stylesheet" href="/template/css/jquery-ui.css" />
+<!--<link rel="stylesheet" href="/template/css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="/template/css/jquery.calendar.css"/>
 <script type="text/javascript" src="/template/js/jquery-ui.js" ></script>
-<script type="text/javascript" src="/template/js/jquery.calendar.js"></script>
+<script type="text/javascript" src="/template/js/jquery.calendar.js"></script>-->
 <script type="text/javascript">
   $(document).ready(function(){
     $( "#tabs" ).tabs();
