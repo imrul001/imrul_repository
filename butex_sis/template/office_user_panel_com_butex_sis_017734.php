@@ -234,7 +234,7 @@
 
         <div id="tabs-2">
           <p id="reg_form">
-<!--            <a class="subButton" href="./index.php?p=reg_complete">photo upload</a>-->
+            <!--            <a class="subButton" href="./index.php?p=reg_complete">photo upload</a>-->
             <a class="subButton" href="./index.php?p=exam_statistics">result entry</a>
             <a class="subButton" href="./index.php?p=norm_entry">punishment record</a>
             <?php include 'registration_form.php'; ?>
@@ -257,7 +257,18 @@
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
                 </select>
+                <select id="dept_list" style="display: none;">
+                  <option value="" selected="selected">None</option> 
+                  <option value="AME">AME</option> 
+                  <option value="FME">FME</option>
+                  <option value="YME">YME</option> 
+                  <option value="WPE">WPE</option> 
+                  <option value="TM">TM</option> 
+                  <option value="FD">FD</option> 
+                </select>
               </div>
+
+              
 
               <div id="submitDiv" style="float:left;">
                 <input type="submit" id="submitBTn" value="submit" />

@@ -1,14 +1,13 @@
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="/template/css/style.css" />
-    <!--    <link rel="stylesheet" type="text/css" href="/template/css/msgBoxLight.css" />-->
-    <script type="text/javascript" src="/template/js/jquery-1.8.0.min.js"></script>
-<!--    <script type="text/javascript" src="/template/js/jquery.msgBox.js"></script>-->
-    <script type="text/javascript" src="/template/js/jquery.form.js"></script>
-    <link rel="stylesheet" href="/template/css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="/template/css/jquery.calendar.css"/>
-    <script type="text/javascript" src="/template/js/jquery-ui.js" ></script>
-    <script type="text/javascript" src="/template/js/jquery.calendar.js"></script>
+    <link rel="stylesheet" type="text/css" href="/min/?f=template/css/style.css" />
+    <script type="text/javascript" src="/min/?f=template/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/min/?f=template/js/jquery.form.js"></script>
+    <link rel="stylesheet" href="/min/?f=template/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/min/?f=template/css/jquery.calendar.css"/>
+    <script type="text/javascript" src="/min/?f=template/js/jquery-ui.js" ></script>
+    <script type="text/javascript" src="/min/?f=template/js/jquery.calendar.js"></script>
+    <link rel="icon" type="image/png" href="/template/images/favicon.ico" />
     <!--    <script type="text/javascript">
           function isLogInValid(){
             var error="";
@@ -280,7 +279,7 @@
         $('#paramSelector').change(function(){
           $("#paramField").val("");
           var val = $(this).val().trim();
-          if(val !='blood_grp'){
+          if(val !='blood_grp' && val != 'dept'){
             if(val == 'stud_contact_no'){
               $('#type').val("");
               var url ="index.php?p=list_of_student&searchParam=contact";
@@ -297,6 +296,7 @@
             $("#paramField").show();
             $("#submitDiv").show();
             $("#blood_grp_list").hide();
+            $("#dept_list").hide();
             //        $("#inputField").html('<input type="text" id="paramField" name="" value="" />');
             //        $("#submitDiv").html('<input type="submit" value="submit" />');
             $('#method').attr("value", val);
@@ -308,16 +308,31 @@
             });
           }
           else{
-            $("#blood_grp_list").show();
-            $("#paramField").hide();
-            $('#method').attr("value", $('#paramSelector').val());
-            $("#submitDiv").hide()
-            $(this).children('option').each(function(){
-              if($(this).val() == val){
-                $('#searchParamLabel').html($(this).attr('nameVal'));
-                $('method').attr("value", val);
-              }
-            });
+            if(val == 'dept'){
+              $("#blood_grp_list").hide();
+              $("#dept_list").show();
+              $("#paramField").hide();
+              $('#method').attr("value", $('#paramSelector').val());
+              $("#submitDiv").hide()
+              $(this).children('option').each(function(){
+                if($(this).val() == val){
+                  $('#searchParamLabel').html($(this).attr('nameVal'));
+                  $('method').attr("value", val);
+                }
+              });
+            }else{
+              $("#dept_list").hide();
+              $("#blood_grp_list").show();
+              $("#paramField").hide();
+              $('#method').attr("value", $('#paramSelector').val());
+              $("#submitDiv").hide()
+              $(this).children('option').each(function(){
+                if($(this).val() == val){
+                  $('#searchParamLabel').html($(this).attr('nameVal'));
+                  $('method').attr("value", val);
+                }
+              });
+            }
           }
           $('#type').val("dynamic_search");
         });
@@ -337,6 +352,22 @@
           return false;
         }));
         $('#blood_grp_list').live("change",(function(){
+          $('#method_value').val($(this).val());
+          var url ="index.php?p=list_of_student";
+          $.ajax({
+            type: "POST",
+            url: url,            
+            data: $('#summeryForm').serialize(),
+            success:function(data){
+              //              $("#content").html(data);
+              $('#listOfStudent', 'body').html(data);
+            }
+          });
+          return false;
+        })
+      );
+        
+        $('#dept_list').live("change",(function(){
           $('#method_value').val($(this).val());
           var url ="index.php?p=list_of_student";
           $.ajax({
@@ -411,33 +442,33 @@
           return false; // avoid to execute the actual submit of the form.
         });
         
-        $('.editClass').live("click",(function(){
-          var idvalue=$(this).attr("id");
-          var idIndex=idvalue.split("_");
-          var std_id = $('input[name=std_'+idIndex[1]+']').val();
-          var url = "index.php?p=update_form";
-          $.ajax({
-            type: "POST",
-            url: url,
-            data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
-            success:function(){
-              window.location.href="./index.php?p=update_form&std="+std_id;
-              
-            }
-          });
-          return false;
-        })
-      );
+        //        $('.editClass').live("click",(function(){
+        //          var idvalue=$(this).attr("id");
+        //          var idIndex=idvalue.split("_");
+        //          var std_id = $('input[name=std_'+idIndex[1]+']').val();
+        //          var url = "index.php?p=update_form";
+        //          $.ajax({
+        //            type: "POST",
+        //            url: url,
+        //            data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+        //            success:function(){
+        //              window.location.href="./index.php?p=update_form&std="+std_id;
+        //              
+        //            }
+        //          });
+        //          return false;
+        //        })
+        //      );
       
         $('#continueButton').click(function(){
           window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";
         });  
         
         $('.deleteClass').live("click",(function(){
-          var idvalue=$(this).attr("id");
-          var idIndex=idvalue.split("_");
-          var std_id = $('input[name=std_'+idIndex[1]+']').val();
-          var url = "./index.php?p=delete_student&std_id="+std_id; // the script where you handle the form input.
+          var std_id = $( this ).attr("student_ID");
+          var url = "./index.php?p=delete_student&std_id="+std_id;
+          // the script where you handle the form input.
+          //
           $('#dialog-confirm').attr('title',"Delete "+std_id+" permanently");
           $('#dialog-confirm').css("display","block");
           $('.ui-dialog-title').html("Delete "+std_id+" permanently");
@@ -452,20 +483,19 @@
                 $.ajax({
                   type: "POST",
                   url: url,
-                  data: $("#approval_form_"+idIndex[1]).serialize(), // serializes the form's elements.
+                  data: $("#approval_form").serialize(), // serializes the form's elements.
                   success: function(data)
                   {
-                    $('.ui-dialog-title').html('');
-                    $( this ).dialog( "close" );
                     alert("The Student information of "+ data +" is deleted successfully");
                     window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
                     // show response from the php script.
                   }
                 });
+                $('.ui-dialog-title').html('');
+                $( this ).dialog( "close" );
               },
               Cancel: function() {
                 $('.ui-dialog-title').html('');
-                //                $('#dialog-confirm').attr('title','');
                 $( this ).dialog( "close" );
               }
             }

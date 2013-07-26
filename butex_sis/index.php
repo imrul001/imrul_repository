@@ -74,12 +74,12 @@ $sql = "INSERT INTO `codeIg_table` (`id`, `user_name`, `password`) VALUES(1, 'co
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `norm` (
-  `serial` int(100) NOT NULL AUTO_INCREMENT,
+  `id` varchar(200) NOT NULL,
   `date_time` varchar(200) NOT NULL,
   `std_id` varchar(100) NOT NULL,
   `punishment` varchar(1000) NOT NULL,
   `warning` varchar(1000) NOT NULL,
-  PRIMARY KEY (`serial`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 

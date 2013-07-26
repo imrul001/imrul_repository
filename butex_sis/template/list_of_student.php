@@ -39,7 +39,7 @@ $type = $_POST['type'];
     <?php
     /* $data1=user_data('user_id'); */
     if (empty($type)) {
-      $sql = "SELECT * FROM input LIMIT 10";
+      $sql = "SELECT * FROM input";
       $result = mysql_query($sql);
       $search = $_GET['searchParam'];
 
@@ -49,7 +49,6 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Studnet ID</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Student Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
         $i = 1;
         while ($row = mysql_fetch_array($result)) {
@@ -61,13 +60,6 @@ $type = $_POST['type'];
           echo "<td class='table_data'>" . $link_to_profile . "</td>";
           echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
           echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
-          echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
-            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
-            <input type='hidden' name='std_" . $i . "' id='std_" . $i . "' value='" . $std_id[$i] . "'/>
-            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
-            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
-            </form>
-            </td>";
           echo "</tr>";
           $i = $i + 1;
         }
@@ -80,8 +72,8 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Department</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Blood Group</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
         $i = 1;
         while ($row = mysql_fetch_array($result)) {
@@ -95,14 +87,8 @@ $type = $_POST['type'];
           echo "<td class='table_data'>" . $row['dept'] . "</td>";
           echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
           echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+          echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
           echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
-          echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
-            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
-            <input type='hidden' name='std_" . $i . "' id='std_" . $i . "' value='" . $std_id[$i] . "'/>
-            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
-            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
-            </form>
-            </td>";
           echo "</tr>";
           $i = $i + 1;
         }
@@ -130,8 +116,8 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Department</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Blood Group</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
           $i = 1;
           while ($row = mysql_fetch_array($result)) {
@@ -144,14 +130,8 @@ $type = $_POST['type'];
             echo "<td class='table_data'>" . $row['dept'] . "</td>";
             echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
             echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+            echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
             echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
-            echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
-            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
-            <input type='hidden' name='std_" . $i . "' id='std_" . $i . "' value='" . $std_id[$i] . "'/>
-            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
-            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
-            </form>
-            </td>";
             echo "</tr>";
             $i = $i + 1;
           }
@@ -165,7 +145,6 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Privilege</th>
             </tr>";
           $i = 1;
           while ($row = mysql_fetch_array($result)) {
@@ -180,13 +159,6 @@ $type = $_POST['type'];
               echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
               echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
               echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
-              echo "<td class='table_data' style='padding-left: 0px; padding-bottom: 0px; padding-right: 0px;'>
-            <form id='approval_form_" . $i . "' class='formApp' method='POST' action='' enctype='multipart/form-data'> 
-            <input type='hidden' name='std_" . $i . "' id='std_" . $i . "' value='" . $std_id[$i] . "'/>
-            <input type='submit' id='edit_" . $i . "' class='editClass' name='edit' value='Edit'/>
-            <input type='submit' id='delete_" . $i . "' class='deleteClass' name='delete' value='Delete' />
-            </form>
-            </td>";
               echo "</tr>";
               $i = $i + 1;
             }

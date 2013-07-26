@@ -102,10 +102,15 @@
     <div class="logOutButton">
       <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
     </div>
+    <?php $m = $_GET['std']; ?>
+    <form id="approval_form" class='formApp' method='POST' action='' enctype='multipart/form-data'>
+      <input type='hidden' name='std_id'  value='<?php echo $m; ?>'/>
+    </form>
   <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
     <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
+    <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile</a>
+    <a class="subButton deleteClass" href="" student_ID="<?php echo $m; ?>">Delete Profile</a>
     <?php
-    $m = $_GET['std'];
     $sql = "SELECT * FROM input WHERE std_id=$m";
     $result = mysql_query($sql);
     while ($row = mysql_fetch_array($result)) {
