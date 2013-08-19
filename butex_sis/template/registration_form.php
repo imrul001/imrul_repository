@@ -27,6 +27,11 @@
       <dt><label for="student_id"><b>*Student ID:</b></label></dt>
       <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" /></dd>                                                                         
     </dl>
+    
+    <dl>
+      <dt><label for="session"><b>*Session:</b></label></dt>
+      <dd><input type="text" class="text" name="session" id="session" size="30" value="" /></dd>                                                                         
+    </dl>
 
     <dl>
       <dt><label for="full_name"><b>*Admission Test Roll No.:</b></label></dt>
@@ -39,6 +44,35 @@
     </dl>
 
     <dl>
+      <dt><label for="department"><b>*Alloted Department:</b></label></dt>
+      <dd><select name="al_dept" id="al_dept">
+          <option value="" selected="selected">None</option> 
+          <option value="AME">AME</option> 
+          <option value="FME">FME</option>
+          <option value="YME">YME</option> 
+          <option value="WPE">WPE</option> 
+          <option value="TM">TM</option> 
+          <option value="FD">FD</option> 
+        </select>
+      </dd>
+    </dl>
+    
+    
+    <dl>
+      <dt><label for="migrated department"><b>Migrated Department:</b></label></dt>
+      <dd><select name="mi_dept" id="mi_dept">
+          <option value="" selected="selected">None</option> 
+          <option value="AME">AME</option> 
+          <option value="FME">FME</option>
+          <option value="YME">YME</option> 
+          <option value="WPE">WPE</option> 
+          <option value="TM">TM</option> 
+          <option value="FD">FD</option> 
+        </select>
+      </dd>
+    </dl>
+    
+    <dl>
       <dt><label for="department"><b>*Department:</b></label></dt>
       <dd><select name="dept" id="dept">
           <option value="" selected="selected">None</option> 
@@ -48,6 +82,17 @@
           <option value="WPE">WPE</option> 
           <option value="TM">TM</option> 
           <option value="FD">FD</option> 
+        </select>
+      </dd>
+    </dl>
+    
+    <dl>
+      <dt><label for="scholarship"><b>Scholarship:</b></label></dt>
+      <dd><select name="s_ship" id="s_ship">
+          <option value="" selected="selected">None</option> 
+          <option value="Board">Board</option> 
+          <option value="BUTex">BUTex</option>
+          <option value="Others">Others</option> 
         </select>
       </dd>
     </dl>

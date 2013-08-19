@@ -46,6 +46,10 @@
       $result = mysql_query($sql);
       while ($row = mysql_fetch_array($result)) {
         $student_name = $row['stud_name'];
+        $al_dept = $row['al_dept'];
+        $mi_dept = $row['mi_dept'];
+        $s_ship = $row['s_ship'];
+        $session = $row['session'];
         $admission_roll = $row['admission_test_roll_no'];
         $merit_position = $row['merit_position'];
         $dept = $row['dept'];
@@ -93,6 +97,11 @@
           </dl>
 
           <dl>
+            <dt><label for="session"><b>*Session:</b></label></dt>
+            <dd><input type="text" class="text" name="session" id="session" size="30" value="<?php echo $session; ?>"  /></dd>                                                                         
+          </dl>
+
+          <dl>
             <dt><label for="full_name"><b>*Admission Test Roll No.:</b></label></dt>
             <dd><input type="text" class="text" name="ad_test_roll_no" id="ad_test_roll_no" size="30" value="<?php echo $admission_roll; ?>" /></dd>                                                                         
           </dl>
@@ -100,6 +109,34 @@
           <dl>
             <dt><label for="full_name"><b>*Merit Position:</b></label></dt>
             <dd><input type="text" class="text" name="merit_pos" id="merit_pos" size="30" value="<?php echo $merit_position; ?>" /></dd>                                                                         
+          </dl>
+
+          <dl>
+            <dt><label for="department"><b>*Alloted Department:</b></label></dt>
+            <dd><select name="al_dept" id="al_dept">
+                <option value="<?php echo $al_dept; ?>" selected="selected"><?php echo $al_dept; ?></option> 
+                <option value="AME">AME</option> 
+                <option value="FME">FME</option>
+                <option value="YME">YME</option> 
+                <option value="WPE">WPE</option> 
+                <option value="TM">TM</option> 
+                <option value="FD">FD</option> 
+              </select>
+            </dd>
+          </dl>
+
+          <dl>
+            <dt><label for="department"><b>Migrated Department:</b></label></dt>
+            <dd><select name="mi_dept" id="mi_dept">
+                <option value="<?php echo $mi_dept; ?>" selected="selected"><?php echo $mi_dept; ?></option> 
+                <option value="AME">AME</option> 
+                <option value="FME">FME</option>
+                <option value="YME">YME</option> 
+                <option value="WPE">WPE</option> 
+                <option value="TM">TM</option> 
+                <option value="FD">FD</option> 
+              </select>
+            </dd>
           </dl>
 
           <dl>
@@ -112,6 +149,17 @@
                 <option value="WPE">WPE</option> 
                 <option value="TM">TM</option> 
                 <option value="FD">FD</option> 
+              </select>
+            </dd>
+          </dl>
+
+          <dl>
+            <dt><label for="scholarship"><b>Scholarship:</b></label></dt>
+            <dd><select name="s_ship" id="s_ship">
+                <option value="<?php echo $s_ship; ?>" selected="selected"><?php echo $s_ship; ?></option> 
+                <option value="Board">Board</option> 
+                <option value="BUTex">BUTex</option>
+                <option value="Others">Others</option> 
               </select>
             </dd>
           </dl>

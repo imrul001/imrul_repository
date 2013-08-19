@@ -20,6 +20,12 @@
     if(document.getElementById("student_id").value==""){
       error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
     }
+    else if(document.getElementById("session").value==""){
+      error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+    }
+    else if(document.getElementById("al_dept").value==""){
+      error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+    }
     else if(document.getElementById("ad_test_roll_no").value==""){
       error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
     }

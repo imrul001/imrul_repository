@@ -71,7 +71,7 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Student Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Department</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Emergency Contact</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Blood Group</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
             </tr>";
@@ -86,7 +86,7 @@ $type = $_POST['type'];
           echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
           echo "<td class='table_data'>" . $row['dept'] . "</td>";
           echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
-          echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+          echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
           echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
           echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
           echo "</tr>";
@@ -115,7 +115,7 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Student Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Department</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Emergency Contact</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Blood Group</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
             </tr>";
@@ -129,7 +129,7 @@ $type = $_POST['type'];
             echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
             echo "<td class='table_data'>" . $row['dept'] . "</td>";
             echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
-            echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+            echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
             echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
             echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
             echo "</tr>";
@@ -143,7 +143,7 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Student Name</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Department</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Contact No.</th>
-                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>HSC Year</th>
+                <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Emergency Contact</th>
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
             </tr>";
           $i = 1;
@@ -157,7 +157,7 @@ $type = $_POST['type'];
               echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
               echo "<td class='table_data'>" . $row['dept'] . "</td>";
               echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
-              echo "<td class='table_data'>" . $row['hsc_year'] . "</td>";
+              echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
               echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
               echo "</tr>";
               $i = $i + 1;

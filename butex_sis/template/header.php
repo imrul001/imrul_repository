@@ -41,6 +41,11 @@
         </script>-->
     <script type="text/javascript">
       $(document).ready(function(){
+        $('.subButton').hover(function(){
+          $(this).addClass("hoverButtonClass")
+        },function(){
+          $(this).removeClass("hoverButtonClass")
+        });
         $("#photoDeleter").click(function(){
           var url = "./index.php?p=photo_delete";
           var std_id= $('input[name=std_id]').val();
@@ -59,9 +64,17 @@
     </script>
     <script language="javascript">
       function UserValidate(){
+        
         var error="";
         if(document.getElementById("student_id").value==""){
           error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+        }
+        else if(document.getElementById("session").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+          alert(0);
+        }
+        else if(document.getElementById("al_dept").value==""){
+          error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
         }
         else if(document.getElementById("ad_test_roll_no").value==""){
           error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
@@ -169,6 +182,9 @@
       }    
     </script>
     <style>
+      .hoverButtonClass{
+        border: 1px solid blue;
+      }
       .logoutlink {
         text-decoration: none;
         color: white;
