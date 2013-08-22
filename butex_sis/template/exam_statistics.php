@@ -23,6 +23,16 @@
     text-decoration: none;
     padding: 4px;
   }
+  .L1T1blog{
+  }
+  .clear{
+    color:green;
+    font-size: 13px;
+  }
+  .backLog{
+    color:red;
+    font-size: 13px;
+  }
 </style>
 
 
@@ -47,39 +57,39 @@
 
           <dl>
             <dt><label for="student Id"><b>Student ID:</b></label></dt>
-            <dd><input type="text" class="text" name="student_id" id="std_id" size="30" value="" /></dd>
+            <dd><input type="text" class="text" name="student_id" id="std_id" size="30" value="" /></dd>          
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L1 T1:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL1T1" id="gpaL1T1" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL1T1" id="gpaL1T1" size="30" value="" /><input type="button"  class="blButton" id="L1T1blog" size="30" value="BackLog L1T1" /><span class="status L1T1blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L1 T2:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL1T2" id="gpaL1T2" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL1T2" id="gpaL1T2" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L1T2blog" size="30" value="BackLog L1T2" /><span class="status L1T2blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L2 T1:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL2T1" id="gpaL2T1" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL2T1" id="gpaL2T1" size="30" value="" /><input type="button" class="blButton"  name="student_id" id="L2T1blog" size="30" value="BackLog L2T1" /><span class="status L2T1blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L2 T2:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL2T2" id="gpaL2T2" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL2T2" id="gpaL2T2" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L2T2blog" size="30" value="BackLog L2T2" /><span class="status L2T2blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L3 T1:</b></label></dt>
-            <dd><input type="float" class="gpa" name="gpaL3T1" id="gpaL3T1" size="30" value="" /></dd>
+            <dd><input type="float" class="gpa" name="gpaL3T1" id="gpaL3T1" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L3T1blog" size="30" value="BackLog L3T1" /><span class="status L3T1blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L3 T2:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL3T2" id="gpaL3T2" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL3T2" id="gpaL3T2" size="30" value="" /><input type="button" class="blButton"  name="student_id" id="L3T2blog" column="" size="30" value="BackLog L3T2" /><span class="status L3T2blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L4 T1:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL4T1" id="gpaL4T1" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL4T1" id="gpaL4T1" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L4T1blog" size="30" value="BackLog L4T1" /><span class="status L4T1blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L4 T2:</b></label></dt>
-            <dd><input type="text" class="gpa" name="gpaL4T2" id="gpaL4T2" size="30" value="" /></dd>
+            <dd><input type="text" class="gpa" name="gpaL4T2" id="gpaL4T2" size="30" value="" /><input type="button" class="blButton"  name="student_id" id="L4T2blog" size="30" value="BackLog L4T2" /><span class="status L4T2blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>CGPA:</b></label></dt>

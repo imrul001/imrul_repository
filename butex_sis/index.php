@@ -104,6 +104,21 @@ $sql = "CREATE TABLE IF NOT EXISTS `exam` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS `backlog` (
+  `std_id` varchar(100) NOT NULL,
+  `L1T1blog` varchar(1000) NOT NULL,
+  `L1T2blog` varchar(1000) NOT NULL,
+  `L2T1blog` varchar(1000) NOT NULL,
+  `L2T2blog` varchar(1000) NOT NULL,
+  `L3T1blog` varchar(1000) NOT NULL,
+  `L3T2blog` varchar(1000) NOT NULL,
+  `L4T1blog` varchar(1000) NOT NULL,
+  `L4T2blog` varchar(1000) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  PRIMARY KEY (`std_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
+mysql_query($sql);
+
 /**
  * Establish Classes
  */

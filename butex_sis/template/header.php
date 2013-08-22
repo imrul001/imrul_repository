@@ -3,6 +3,8 @@
     <link rel="stylesheet" type="text/css" href="/min/?f=template/css/style.css" />
     <script type="text/javascript" src="/min/?f=template/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/min/?f=template/js/jquery.form.js"></script>
+    <link rel="stylesheet" type="text/css" href="/min/?f=template/css/msgBoxLight.css" />
+    <script type="text/javascript" src="/min/?f=template/js/jquery.msgBox.js"></script>
     <link rel="stylesheet" href="/min/?f=template/css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="/min/?f=template/css/jquery.calendar.css"/>
     <script type="text/javascript" src="/min/?f=template/js/jquery-ui.js" ></script>
@@ -254,7 +256,7 @@
         -webkit-border-radius: 3px;
       }
       .myOverlay{
-        background-color: #33404D;
+        background-color: #f2f2f2;
         position: absolute;
         top: -286px;
         left: 0;
@@ -551,7 +553,70 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        $('.blButton').click(function(){
+          var value = $(this).val();
+          var column = $(this).attr("id");
+          var std_id =$('#std_id').val();
+          var url = "index.php?p=retrieve_blog_data&std_id="+std_id+"&LT="+column; // the script where you handle the form input.
+          $.ajax({
+            type: "POST",
+            url: url, // serializes the form's elements.
+            dataType: 'json',
+            success: function(result)
+            {
+              $.msgBox({ type: "prompt",
+                title: "Entry for"+value,
+                inputs: [
+                  { header: "Course(s)", type: "text", name: "bCourse", value: result[0]}],
+                buttons: [
+                  { value: "Submit" }, {value:"Cancel"}],
+                success: function (result, values) {
+                  if(result == 'Submit'){
+                    var course=$('input[name=bCourse]').val();
+                    var url = "index.php?p=backlog_data_entry&std_id="+std_id+"&LT="+column+"&course="+course; // the script where you handle the form input.
+                    $.ajax({
+                      type: "POST",
+                      url: url, // serializes the form's elements.
+                      success: function(data)
+                      {
+                        $("#std_id").change();
+                      }
+                    });
+                    return false;
+                  }
+                  else{
+                    
+                  }
+                }
+              });
+            }
+          });
+          return false;          
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.blButton').each(function(){
+          $(this).attr("disabled","true");
+        });
+        var columnName = Array("L1T1blog", "L1T2blog", "L2T1blog","L2T2blog","L3T1blog","L3T2blog","L4T1blog","L4T2blog");
         $("#std_id").change(function(){
+          if($(this).val()!=""){
+            $('.blButton').each(function(){
+              $(this).removeAttr("disabled");
+            });
+          }
+          else{
+            $('.blButton').each(function(){
+              $(this).attr("disabled","true");
+            });
+          }
+          $('span.status').each(function(){
+            $(this).html("")
+            $(this).removeClass("clear");
+            $(this).removeClass("backLog");
+          });
           var std_id=$(this).val().trim();
           var url = "index.php?p=fetch_results&std_id="+std_id;
           $.ajax({
@@ -573,9 +638,36 @@
               $('#record').val(result[9]);
               $('#note').val(result[10]);
               $('.gpa').change();
+              var url = "index.php?p=retrieve_true&std_id="+std_id;
+              $.ajax({
+                type: "POST",
+                url: url,
+                data : $("#examDataForm").serialize(),
+                dataType: 'json',
+                success:function(res)
+                {
+                  for(var i=0; i<=7;i++){
+                    var column = columnName[i];
+                    if(res[i]!="" && result[i]!="" && res[i]!=null && result[i]!=null){
+                      $('span.'+column).removeClass("clear");
+                      $('span.'+column).addClass("backLog");
+                      $('span.'+column).html("Back Log");
+                      
+                    }
+                    if(res[i]=="" && result[i]!=""){
+                      $('span.'+column).removeClass("backLog");
+                      $('span.'+column).addClass("clear");
+                      $('span.'+column).html("Clear");
+                    }
+                  }
+                }
+              });
+            },
+            error:function(){
+              alert("error")
             }
           });
-          return false;
+          //          return false;
         });
       });
     </script>
@@ -584,7 +676,7 @@
     <div class="myLoadingImage">
       <div class="myOverlay" style="height: 1519px"></div>
       <div class="imageForLoading">
-        <img src="/template/images/LoadingWheel.gif" alt="Loading" height="60" />
+        <img src="/template/images/ajax-loader.gif" alt="Loading" height="60" />
       </div>
     </div>
     <div id="mainDiv">
