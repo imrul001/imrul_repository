@@ -93,7 +93,7 @@
           </dl>
           <dl>
             <dt><label for="student Id"><b>CGPA:</b></label></dt>
-            <dd><input type="text" class="cgpa" name="cgpa" id="cgpa" size="30" value="" /></dd>
+            <dd><input type="text" class="cgpa" name="cgpa" id="cgpa" size="30" value="" /><span class="status cgpaBlog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>Record</b></label></dt>

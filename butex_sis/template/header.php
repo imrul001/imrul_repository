@@ -659,6 +659,23 @@
                       $('span.'+column).addClass("clear");
                       $('span.'+column).html("Clear");
                     }
+                    if((res[8]==null || res[8]=="") && result[i]!="" && result[i]!= null){
+                      $('span.cgpaBlog').addClass("clear");
+                      $('span.cgpaBlog').removeClass("backLog");
+                      $('span.cgpaBlog').html("Clear");
+                    }
+                  }
+                  if(res[8]!=null && res[8]!=""){
+                    if(res[8]=="Back Log"){
+                      $('span.cgpaBlog').removeClass("clear");
+                      $('span.cgpaBlog').addClass("backLog");
+                      $('span.cgpaBlog').html(res[8]);
+                    }
+                    if(res[8]=="Clear"){
+                      $('span.cgpaBlog').addClass("clear");
+                      $('span.cgpaBlog').removeClass("backLog");
+                      $('span.cgpaBlog').html(res[8]);
+                    }
                   }
                 }
               });

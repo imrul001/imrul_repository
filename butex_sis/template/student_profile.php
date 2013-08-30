@@ -313,23 +313,20 @@
         <?php
         $sql = "SELECT * FROM backlog WHERE std_id=$std_id";
         $result = mysql_query($sql);
-        if (!$result) {
-          echo die(mysql_error());
-        } else {
-          while ($row = mysql_fetch_array($result)) {
-            $l1t1 = $row["L1T1blog"];
-            $l1t2 = $row["L1T2blog"];
-            $l2t1 = $row["L2T1blog"];
-            $l2t2 = $row["L2T2blog"];
-            $l3t1 = $row["L3T1blog"];
-            $l3t2 = $row["L3T2blog"];
-            $l4t1 = $row["L4T1blog"];
-            $l4t2 = $row["L4T2blog"];
-          }
+        if($result!=null)
+        while ($row = mysql_fetch_array($result)) {
+          $l1t1 = $row["L1T1blog"];
+          $l1t2 = $row["L1T2blog"];
+          $l2t1 = $row["L2T1blog"];
+          $l2t2 = $row["L2T2blog"];
+          $l3t1 = $row["L3T1blog"];
+          $l3t2 = $row["L3T2blog"];
+          $l4t1 = $row["L4T1blog"];
+          $l4t2 = $row["L4T2blog"];
         }
         ?>
         <div style="clear:both;">
-          <h3 class="h3header">Higher Secondary Certificate:</h3>
+          <h3 class="h3header">Back Log Detail:</h3>
           <div class="labels Container2">
             <p>Back Log Course L1 T1</p>
             <p>Back Log Course L1 T2</p>
@@ -352,16 +349,14 @@
           </div>
         </div>
       </div>
-
-
-  <?php
-  $sql = "SELECT * FROM norm WHERE std_id=$m";
-  $result = mysql_query($sql);
-  $num_row = mysql_num_rows($result);
-  if ($num_row >= 1) {
-    echo '<div class="basic_information">
+      <?php
+      $sql = "SELECT * FROM norm WHERE std_id=$m";
+      $result = mysql_query($sql);
+      $num_row = mysql_num_rows($result);
+      if ($num_row >= 1) {
+        echo '<div class="basic_information">
         <h2 class="h2header">Record Of Punishment</h2>';
-    echo "<table class='punishmentTable' style='margin: 0 auto;' border='1px solid black' cellpadding=4 cellspacing=5>
+        echo "<table class='punishmentTable' style='margin: 0 auto;' border='1px solid black' cellpadding=4 cellspacing=5>
           <tr>
             <th class='table_header'>Date Time</th>
             <th class='table_header'>Student ID</th>
@@ -369,18 +364,18 @@
             <th class='table_header'>Warning</th>
           </tr>";
 
-    while ($row = mysql_fetch_array($result)) {
-      echo "<tr>";
-      echo "<td class='table_data'>" . $row['date_time'] . "</td>";
-      echo "<td class='table_data'>" . $row['std_id'] . "</td>";
-      echo "<td class='table_data'>" . $row['punishment'] . "</td>";
-      echo "<td class='table_data'>" . $row['warning'] . "</td>";
-      echo "</tr>";
-    }
-    echo "</table>";
-    echo '</div>';
-  }
-  ?>
+        while ($row = mysql_fetch_array($result)) {
+          echo "<tr>";
+          echo "<td class='table_data'>" . $row['date_time'] . "</td>";
+          echo "<td class='table_data'>" . $row['std_id'] . "</td>";
+          echo "<td class='table_data'>" . $row['punishment'] . "</td>";
+          echo "<td class='table_data'>" . $row['warning'] . "</td>";
+          echo "</tr>";
+        }
+        echo "</table>";
+        echo '</div>';
+      }
+      ?>
 
       <div class="basic_information">
         <h2 class="h2header"></h2>
@@ -390,7 +385,7 @@
         </div>
       </div>
     </div>
-<?php endif; ?>
+  <?php endif; ?>
 </div>
 <!-- END Content -->
 <?php get_footer(); ?>
