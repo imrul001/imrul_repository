@@ -37,9 +37,10 @@
           </div>
           <?php
           $std_id = $_GET['std'];
+          $track = isset($_GET['track'])? $_GET['track']: '';
           ?>
           <dl style="text-align: center;">
-            <label>Current Photo</label>
+            <label>Current Photo<?php echo $track;?></label>
             <div class="photo_container">
               <img width="80" src="/template/uploaded_student_images/<?php echo $std_id . ".jpg"; ?>" />
             </div>

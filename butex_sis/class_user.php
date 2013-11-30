@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Asia/Dacca');
+
 /**
  * File Name:  class_user.php  v1.0  09/22/2009  13:28  Imrul Hasan
  */
@@ -16,7 +18,7 @@ class user {
    * @return bool
    */
   function user() {
-    if ($_COOKIE['user_name'] && $_COOKIE['password']) {
+    if (isset($_COOKIE['user_name']) && isset($_COOKIE['password'])) {
       setcookie("user_name", $_COOKIE['user_name'], time() + (60 * 60 * 24 * 7));
       setcookie("password", $_COOKIE['userword'], time() + (60 * 60 * 24 * 7));
 
@@ -120,16 +122,23 @@ class user {
    * @param str $user_cpass Verification of the password.
    * @return bool
    */
-  function update($student_id, $al_dept, $mi_dept, $s_ship, $session, $ad_roll, $merit_position, $dept, $stud_name, $gender, $religion, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular) {
-    $sql ="UPDATE input SET al_dept='$al_dept', mi_dept='$mi_dept', s_ship='$s_ship', session='$session', admission_test_roll_no='$ad_roll', merit_position='$merit_position', dept='$dept', stud_name='$stud_name', gender='$gender', religion='$religion', father_name='$father_name', mother_name='$mother_name', dob='$dob', p_address='$p_address', c_address='$c_address', stud_contact_no='$stud_contact_no', grd_contact_no='$grd_contact_no', nationality='$nationality', emergency_contact_no='$emergency_contact_no', emergency_contact_address='$emergency_contact_address', blood_grp='$blood_grp', ssc_board='$ssc_board', ssc_academic_institute='$ssc_ac', ssc_year='$ssc_year', ssc_roll='$ssc_roll', ssc_gpa='$ssc_gpa', hsc_board='$hsc_board', hsc_academic_institute='$hsc_ac', hsc_year='$hsc_year', hsc_roll='$hsc_roll', hsc_gpa='$hsc_gpa', grd_income='$grd_income', extra_curricular='$extraCurricular' WHERE std_id=".$student_id."";
+  function update($old_id, $student_id, $al_dept, $mi_dept, $s_ship, $session, $ad_roll, $merit_position, $dept, $stud_name, $gender, $religion, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular) {
+    $sql = "UPDATE input SET std_id='$student_id',al_dept='$al_dept', mi_dept='$mi_dept', s_ship='$s_ship', session='$session', admission_test_roll_no='$ad_roll', merit_position='$merit_position', dept='$dept', stud_name='$stud_name', gender='$gender', religion='$religion', father_name='$father_name', mother_name='$mother_name', dob='$dob', p_address='$p_address', c_address='$c_address', stud_contact_no='$stud_contact_no', grd_contact_no='$grd_contact_no', nationality='$nationality', emergency_contact_no='$emergency_contact_no', emergency_contact_address='$emergency_contact_address', blood_grp='$blood_grp', ssc_board='$ssc_board', ssc_academic_institute='$ssc_ac', ssc_year='$ssc_year', ssc_roll='$ssc_roll', ssc_gpa='$ssc_gpa', hsc_board='$hsc_board', hsc_academic_institute='$hsc_ac', hsc_year='$hsc_year', hsc_roll='$hsc_roll', hsc_gpa='$hsc_gpa', grd_income='$grd_income', extra_curricular='$extraCurricular' WHERE std_id=" . $old_id . "";
     if (!@mysql_query($sql)) {
       die(mysql_error());
+    } else {
+      if ($old_id != $student_id) {
+        if (file_exists("./template/uploaded_student_images/" . $old_id . ".jpg")) {
+          rename("./template/uploaded_student_images/" . $old_id . ".jpg", "./template/uploaded_student_images/" . $student_id . ".jpg");
+        }
+      }
     }
     header("Location: ./index.php?p=update_photo&std=$student_id");
     return;
   }
 
-  function register($student_id, $al_dept, $mi_dept, $s_ship, $session, $ad_roll, $merit_position, $dept, $stud_name, $gender, $religion, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular, $image) {
+  function register(
+  $student_id, $al_dept, $mi_dept, $s_ship, $session, $ad_roll, $merit_position, $dept, $stud_name, $gender, $religion, $father_name, $mother_name, $dob, $p_address, $c_address, $stud_contact_no, $grd_contact_no, $nationality, $emergency_contact_no, $emergency_contact_address, $blood_grp, $ssc_board, $ssc_ac, $ssc_year, $ssc_roll, $ssc_gpa, $hsc_board, $hsc_ac, $hsc_year, $hsc_roll, $hsc_gpa, $grd_income, $extraCurricular, $image) {
     global $error, $error_msg;
     $error = false;
 
@@ -159,18 +168,18 @@ class user {
       $_SESSION['reg_complete']['student_id'] = $student_id;
 
       /* Build E-Mail Output */
-//			$msg = "Dear ".$user_name.",\n\n";
-//			$msg .= "Thank you for registering at XHTML/CSS! Below is your login information:\n\n";
+//			$msg = "Dear ".$user_name.", \n\n";
+//			$msg .= "Thank you for registering at XHTML/CSS!Below is your login information:\n\n";
 //			$msg .= "Username: ".$user_name."\n";
 //			$msg .= "Password: ".$mail_pass."\n\n";
-//			$msg .= "Best regards,\n";
+//			$msg .= "Best regards, \n";
 //			$msg .= "XHTML/CSS Staff\n\n";
 //			$msg .= "PS: This was a randomly generated message, please do not respond to this e-mail.";
 //			
 //			/* E-Mail Confirmation Letter */
 //			mail($user_email, "XHTML/CSS Website - Registration Complete!", $msg, "From: admin@dreamlinestudio.com");
 
-      header("Location: ./index.php?p=reg_complete&std_id=".$student_id);
+      header("Location: ./index.php?p = reg_complete&std_id = " . $student_id);
     }
 
     return;
@@ -179,13 +188,15 @@ class user {
   /**
    * Validate username to make sure it is not in use, and only contains allowed characters.
    *
-   * @param str $check Username to be checked.
+   * @param str $check
+
+    Username to be checked.
    * @return bool
    */
   function validate_username($check) {
     global $result, $error, $error_msg;
 
-    $sql = "SELECT user_name FROM users WHERE user_name='" . $check . "' LIMIT 1";
+    $sql = "SELECT user_name FROM users WHERE user_name = '" . $check . "' LIMIT 1";
     $result = @mysql_query($sql);
 
     if ($result) {
@@ -209,7 +220,9 @@ class user {
    * Validate password to make sure it only contains allowed characters.
    *
    * @param str $pass Password to be checked.
-   * @param str $cpass Second password to be compaired with.
+   * @param str $cpass
+
+    Second password to be compaired with.
    * @return bool
    */
   function validate_password($pass, $cpass) {
@@ -229,13 +242,15 @@ class user {
    * Validate e-mail to make sure it is not in use, and that it is formatted correctly.
    *
    * @param str $email E-mail to be validated.
-   * @param str $cemail Second e-mail to be compaired with.
+   * @param str $cemail
+
+    Second e-mail to be compaired with.
    * @return bool
    */
   function validate_email($email, $cemail) {
     global $error, $error_msg;
 
-    $sql = "SELECT user_email FROM users WHERE user_email='" . $email . "' LIMIT 1";
+    $sql = "SELECT user_email FROM users WHERE user_email = '" . $email . "' LIMIT 1";
     $result = @mysql_query($sql);
 
     if ($result) {
@@ -245,7 +260,7 @@ class user {
       }
       @mysql_free_result($result);
     }
-    if (!eregi("^([_a-z0-9-]+)(\\.[_a-z0-9-]+)*@([a-z0-9-]+)(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$", $email)) {
+    if (!eregi("^([_a-z0-9-]+)(\\.[_a-z0-9-]+)*@([a-z0-9-]+)(\\.[a-z0-9-]+)*(\\.[a-z]{2, 4})$", $email)) {
       $error = true;
       $error_msg[4] = "E-mail address entered is invalid.";
     }

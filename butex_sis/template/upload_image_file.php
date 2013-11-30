@@ -2,9 +2,10 @@
 
 $allowedExts = array("jpg", "jpeg", "gif", "png");
 
+$_FILES["file"]["name"] = isset($_FILES["file"]["name"])? $_FILES["file"]["name"]:'';
 $extension = end(explode(".", $_FILES["file"]["name"]));
 
-$std_id = $_POST['student_id'];
+$std_id = isset($_POST['student_id'])? $_POST['student_id']:'';
 $file_name = $_FILES["file"]["name"];
 $new_name = $std_id.".jpg";
 

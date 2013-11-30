@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <div id="container">
   <div id="login_modal_body">
-    <form method="post" action="./index.php?p=login" enctype="multipart/form-data" onsubmit="return isLogInValid()">
+    <form method="post" action="./index.php?p=login" enctype="multipart/form-data">
       <!--            <h2>User Login<span class="arrow"></span></h2>-->
       <div id="login-box" class="login-popup loginContainer">
         <div id="error_box">
@@ -21,12 +21,12 @@
 
         <dl>
           <dt><label for="user_id">User ID:</label></dt>
-          <dd><input type="text" class="text" name="user_name" id="user" size="30" value="<?php echo ($_POST['user_name']) ? $_POST['user_name'] : ''; ?>" /></dd>
+          <dd><input type="text" class="text" name="user_name" id="user" size="30" value="<?php echo (isset($_POST['user_name'])) ? $_POST['user_name'] : ''; ?>" /></dd>
         </dl>
 
         <dl>
           <dt><label for="password">Password:</label></dt>
-          <dd><input type="password" class="text" name="password" id="p" size="30" value="<?php echo ($_POST['password']) ? $_POST['password'] : ''; ?>" /></dd>
+          <dd><input type="password" class="text" name="password" id="p" size="30" value="<?php echo (isset($_POST['password'])) ? $_POST['password'] : ''; ?>" /></dd>
         </dl>
 
         <dl>

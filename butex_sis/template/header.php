@@ -324,6 +324,7 @@
                 $('#searchParamLabel').html($(this).attr('nameVal'));
               }
             });
+            $('#batchInputField').hide();
           }
           else{
             if(val == 'dept'){
@@ -331,13 +332,14 @@
               $("#dept_list").show();
               $("#paramField").hide();
               $('#method').attr("value", $('#paramSelector').val());
-              $("#submitDiv").hide()
+              $("#submitDiv").show();
               $(this).children('option').each(function(){
                 if($(this).val() == val){
                   $('#searchParamLabel').html($(this).attr('nameVal'));
-                  $('method').attr("value", val);
+                  $('#method').attr("value", val);
                 }
               });
+              $('#batchInputField').show();
             }else{
               $("#dept_list").hide();
               $("#blood_grp_list").show();
@@ -350,12 +352,15 @@
                   $('method').attr("value", val);
                 }
               });
+              $('#batchInputField').hide();
             }
           }
           $('#type').val("dynamic_search");
         });
         $('#submitBTn').live("click",(function(){
           var value = $('#paramField').val();
+          var batch_year = $('#batchYearInputField').val();
+          $('#batch_year').attr("value", batch_year);
           $('#method_value').attr("value", value);
           var url ="index.php?p=list_of_student";
           $.ajax({
@@ -386,18 +391,17 @@
       );
         
         $('#dept_list').live("change",(function(){
-          $('#method_value').val($(this).val());
-          var url ="index.php?p=list_of_student";
-          $.ajax({
-            type: "POST",
-            url: url,            
-            data: $('#summeryForm').serialize(),
-            success:function(data){
-              //              $("#content").html(data);
-              $('#listOfStudent', 'body').html(data);
-            }
-          });
-          return false;
+          $('#paramField').attr('value', $(this).val());
+//          $.ajax({
+//            type: "POST",
+//            url: url,            
+//            data: $('#summeryForm').serialize(),
+//            success:function(data){
+//              //              $("#content").html(data);
+//              $('#listOfStudent', 'body').html(data);
+//            }
+//          });
+//          return false;
         })
       );
         
@@ -539,10 +543,10 @@
           });
           $("#cgpa").val(cgpa);
         });
-        if($('.table_data').size()<1){
-          $('.student_list_table').remove();
-          $('#listHeader').html("Nothing Found");
-        }
+//        if($('.table_data').size()<1){
+//          $('.student_list_table').remove();
+//          $('#listHeader').html("Nothing Found");
+//        }
         $(document).ajaxStart(function(){
           $(".myLoadingImage").show();
         });

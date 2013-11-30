@@ -91,9 +91,10 @@
               <span id="ers"></span>
             </fieldset>
           </div>
+          <input type='hidden' name="hidden_student_id" value="<?php echo $std_id; ?> "/>
           <dl>
             <dt><label for="student_id"><b>*Student ID:</b></label></dt>
-            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="<?php echo $std_id; ?> " readonly /></dd>                                                                         
+            <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="<?php echo $std_id; ?> " /></dd>                                                                         
           </dl>
 
           <dl>

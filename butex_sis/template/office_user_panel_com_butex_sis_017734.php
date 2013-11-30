@@ -6,7 +6,6 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $( "#tabs" ).tabs();
-    
     $('.subButton').hover(function(){
       $(this).addClass("hoverButtonClass")
     },function(){
@@ -207,9 +206,16 @@
     padding: 10px
   }
   #dynamic_filtering_tab{
-    right: 60px;
+    /*    right: 60px;*/
+    padding-left: 33%;
     overflow: hidden;
     position: relative;
+  }
+  #batchInputField{
+    padding-left: 10px;
+  }
+  #submitDiv{
+    padding-left: 10px;
   }
 </style>
 <div id="container">
@@ -250,7 +256,17 @@
           <p id="student_summary">
           <div id="dynamic_filtering_tab">
             <div class="filteringParamSelection">
-              <span id="searchParamLabel" style="float: left;">Student ID</span>
+              <select id="paramSelector">
+                <option value="std_id" nameVal="Student ID">Student ID</option>
+                <option value="stud_contact_no" nameVal="Contact Number">Contact Number</option>
+                <option value="blood_grp" nameVal="Blood Group">Blood Group</option>
+                <option value="dept" nameVal="Department">Department</option>
+                <option value="batch" nameVal="Batch">Batch</option>
+                <option value="grd_contact_no" nameVal="Guardian Number">Guardian Number</option>
+              </select>
+            </div>
+            <div class="filteringParamSelection">
+              <span id="searchParamLabel" style="float: left;">Student ID:</span>
               <div id="inputField" style="float: left;">
                 <input style="float: left;" type="text" id="paramField" name="" value="" />
                 <select id="blood_grp_list" style="display:none">
@@ -274,25 +290,20 @@
                 </select>
               </div>
 
-              
+              <div id="batchInputField" style="display: none; float: left;">
+                <div style="float:left;">Batch :</div>
+                <div style="float:left;"><input type="text" name="batchInput" maxlength="4" id="batchYearInputField" /></div>
+              </div>
 
               <div id="submitDiv" style="float:left;">
                 <input type="submit" id="submitBTn" value="submit" />
               </div>
             </div>
-            <div class="filteringParamSelection">
-              <select id="paramSelector">
-                <option value="std_id" nameVal="Student ID">Student ID</option>
-                <option value="stud_contact_no" nameVal="Contact Number">Contact Number</option>
-                <option value="blood_grp" nameVal="Blood Group">Blood Group</option>
-                <option value="dept" nameVal="Department">Department</option>
-                <option value="batch" nameVal="Batch">Batch</option>
-                <option value="grd_contact_no" nameVal="Guardian Number">Guardian Number</option>
-              </select>
-            </div>
+
             <form id="summeryForm" method="POST" action="#">
               <input type="hidden" class="hiddenFld" name="method" id="method" value="" />
               <input type="hidden" class="hiddenFld" name="methodValue" id="method_value" value="" />
+              <input type="hidden" class="hiddenFld" name="batch_year" id="batch_year" value="" />
               <input type="hidden" class="hiddenFld" name="type" id="type" value="dynamic_search" />
             </form>
           </div>

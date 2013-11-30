@@ -223,7 +223,7 @@ function newsletter($post) {
 /**
  * Pages
  */
-$p = addslashes($_GET['p']);
+$p = addslashes(isset($_GET['p'])? $_GET['p']:'');
 
 /* Define Template */
 $tpl = (file_exists("template/" . $p . ".php")) ? $p : "index";
@@ -235,17 +235,22 @@ if ($p == "register" || $p == "login" || $p = "update") {
 //  if ($user->logged_in()) {
 //    header("Location: ./index.php");
 //  }
-
-  if ($_POST['login']) {
+  if (isset($_POST['login'])) {
+    $_POST['password']=isset($_POST['password'])? $_POST['password']: '';
+    $_POST['user_name']=isset($_POST['user_name'])? $_POST['user_name']: '';
+    $_POST['remember']=isset($_POST['remember'])? $_POST['remember']: '';
     $user->login($_POST['user_name'], $_POST['password'], $_POST['remember']);
   }
 
-  if ($_POST['register']) {
+  if (isset($_POST['register'])) {
     $image = 'no';
+    $_POST['student_id'] = trim($_POST['student_id']);
     $user->register($_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $image);
   }
-  if ($_POST['update']) {
-    $user->update($_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular']);
+  if (isset($_POST['update'])) {
+    $_POST['student_id'] = trim($_POST['student_id']);
+    $_POST['hidden_student_id'] =trim($_POST['hidden_student_id']);
+    $user->update($_POST['hidden_student_id'], $_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular']);
   }
 }
 
@@ -264,7 +269,7 @@ if ($p == "logout") {
 /**
  * Newsletter
  */
-if ($_POST['nlsubscribe']) {
+if (isset($_POST['nlsubscribe'])) {
   newsletter($_POST);
 }
 

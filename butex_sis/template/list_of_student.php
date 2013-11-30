@@ -13,7 +13,7 @@
     color: green;
   }
   .filteringParamSelection{
-    float: right;
+    float: left;
     font-size: 12px;
     margin-left: 10px;
     font-family: times news roman;
@@ -23,15 +23,15 @@
   }
 </style>
 <script type="text/javascript">
-  $(document).ready(function(){
-    if($('.table_data').size()<1){
-      $(".stTable").remove();
-      $('#listOfStudent').html("<h3>No Result</h3>");
-    }
-  });
+//  $(document).ready(function(){
+//    if($('.table_data').size()<1){
+//      $(".stTable").remove();
+//      $('#listOfStudent').html("<h3>No Result</h3>");
+//    }
+//  });
 </script>
 <?php
-$type = $_POST['type'];
+$type = isset($_POST['type']) ? $_POST['type'] : '';
 ?>
 <div id="content">
 <!--  <script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Printer Friendly and PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/pf-button.gif" alt="Print Friendly and PDF"/></a>-->
@@ -41,7 +41,7 @@ $type = $_POST['type'];
     if (empty($type)) {
       $sql = "SELECT * FROM input";
       $result = mysql_query($sql);
-      $search = $_GET['searchParam'];
+      $search = isset($_GET['searchParam']) ? $_GET['searchParam'] : '';
 
       if ($search == 'contact') {
         echo "<table class='student_list_table' style='margin: 0 auto;' border='1px solid black' cellpadding=4 cellspacing=5>
@@ -98,6 +98,7 @@ $type = $_POST['type'];
     if ($type == "dynamic_search") {
       $method = $_POST['method'];
       $method_value = $_POST['methodValue'];
+      $batch = $_POST['batch_year'];
       if ($method == 'batch') {
         $sql = "SELECT * FROM input";
       } else {
@@ -120,20 +121,39 @@ $type = $_POST['type'];
                 <th class='table_header' style='padding-left: 0px; padding-bottom: 10px; text-decoration: underline'>Photo</th>
             </tr>";
           $i = 1;
-          while ($row = mysql_fetch_array($result)) {
-            $student_id = $row['std_id'];
-            $std_id[$i] = $row['std_id'];
-            $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
-            echo "<tr>";
-            echo "<td class='table_data'>" . $link_to_profile . "</td>";
-            echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
-            echo "<td class='table_data'>" . $row['dept'] . "</td>";
-            echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
-            echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
-            echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
-            echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
-            echo "</tr>";
-            $i = $i + 1;
+          if ($method == 'dept' && !empty($batch)) {
+            while ($row = mysql_fetch_array($result)) {
+              $student_id = $row['std_id'];
+              $std_id[$i] = $row['std_id'];
+              $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
+              if (isCorrectBatch($batch, $student_id)) {
+                echo "<tr>";
+                echo "<td class='table_data'>" . $link_to_profile . "</td>";
+                echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
+                echo "<td class='table_data'>" . $row['dept'] . "</td>";
+                echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
+                echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
+                echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
+                echo "</tr>";
+                $i = $i + 1;
+              }
+            }
+          } else {
+            while ($row = mysql_fetch_array($result)) {
+              $student_id = $row['std_id'];
+              $std_id[$i] = $row['std_id'];
+              $link_to_profile = "<a class='profile_link' style='color:green;' href='./index.php?p=student_profile&std=$student_id'>$student_id</a>";
+              echo "<tr>";
+              echo "<td class='table_data'>" . $link_to_profile . "</td>";
+              echo "<td class='table_data'>" . $row['stud_name'] . "</td>";
+              echo "<td class='table_data'>" . $row['dept'] . "</td>";
+              echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
+              echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
+              echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
+              echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
+              echo "</tr>";
+              $i = $i + 1;
+            }
           }
           echo "</table>";
         } elseif ($method == 'batch') {
