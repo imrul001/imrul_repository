@@ -66,6 +66,20 @@ $sql = "CREATE TABLE IF NOT EXISTS `input` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
+
+$sql ="CREATE TABLE IF NOT EXISTS `result_status` (
+`index` INT( 100 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`student` VARCHAR( 100 ) NOT NULL ,
+`level_term` VARCHAR( 100 ) NOT NULL ,
+`exam_year` VARCHAR( 100 ) NOT NULL ,
+`gpa` VARCHAR( 100 ) NOT NULL ,
+`cgpa` VARCHAR( 100 ) NOT NULL ,
+`backlog_subject` VARCHAR( 1000 ) NOT NULL ,
+`remarks` VARCHAR( 1000 ) NOT NULL
+) ENGINE = MYISAM ";
+mysql_query($sql);
+
+
 $sql = "CREATE TABLE IF NOT EXISTS `codeIg_table` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) NOT NULL,

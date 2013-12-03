@@ -11,9 +11,10 @@
     padding: 4px;
   }
 </style>
-<?php $std_id=$_GET['std_id']; ?>
+<?php $std_id=trim($_GET['std_id']); ?>
 <?php get_header(); ?>
 <div id="container">
+    <?php echo $std_id; ?>
   <?php if (!logged_in()) : ?>
     <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=login" title="Login">Login</a></p>
   <?php else : ?>

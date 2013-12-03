@@ -109,6 +109,7 @@
   <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
     <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
     <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile</a>
+    <a class="subButton" href="./index.php?p=menual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
     <a class="subButton deleteClass" href="" student_ID="<?php echo $m; ?>">Delete Profile</a>
     <?php
     $sql = "SELECT * FROM input WHERE std_id=$m";
@@ -157,7 +158,7 @@
           <div class="contact email">Address :<?php echo $c_address; ?></div>
         </div>
         <div class="basic imageContainer" style="float: right">
-          <img width="170" src="./template/uploaded_student_images/<?php echo $link; ?>" />
+          <img width="170" src="./template/uploaded_student_images/<?php echo $m.".jpg"; ?>" />
         </div>
       </div>
       <div class="basic_information">

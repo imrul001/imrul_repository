@@ -130,7 +130,7 @@
 
     <dl>
       <dt><label for="full_name"><b>*Date Of Birth:</b></label></dt>
-      <dd><input type="text" class="text" name="dob" id="dob_1" size="30" value="" /></dd>                                                                         
+      <dd><input type="text" class="text" name="dob" id="dob_1" size="30" value="" autocomplete="off" /></dd>                                                                         
     </dl>
 
     <dl>

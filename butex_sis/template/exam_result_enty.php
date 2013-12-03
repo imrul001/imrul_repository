@@ -1,16 +1,16 @@
 <?php
-$std_id = $_POST['student_id'];
-$l1t1 = $_POST['gpaL1T1'];
-$l1t2 = $_POST['gpaL1T2'];
-$l2t1 = $_POST['gpaL2T1'];
-$l2t2 = $_POST['gpaL2T2'];
-$l3t1 = $_POST['gpaL3T1'];
-$l3t2 = $_POST['gpaL3T2'];
-$l4t1 = $_POST['gpaL4T1'];
-$l4t2 = $_POST['gpaL4T2'];
-$cgpa = $_POST['cgpa'];
-$record = $_POST['record'];
-$note = $_POST['note'];
+$std_id = isset($_POST['student_id'])? $_POST['student_id']:'';
+$l1t1 = isset($_POST['gpaL1T1'])? $_POST['gpaL1T1']:'';
+$l1t2 = isset($_POST['gpaL1T2']) ? $_POST['gpaL1T2']:'';
+$l2t1 = isset($_POST['gpaL2T1']) ? $_POST['gpaL2T1']:'';
+$l2t2 = isset($_POST['gpaL2T2']) ? $_POST['gpaL2T2']:'';
+$l3t1 = isset($_POST['gpaL3T1']) ? $_POST['gpaL3T1']:'';
+$l3t2 = isset($_POST['gpaL3T2']) ? $_POST['gpaL3T2']:'';
+$l4t1 = isset($_POST['gpaL4T1']) ? $_POST['gpaL4T1'] :'';
+$l4t2 = isset($_POST['gpaL4T2']) ? $_POST['gpaL4T2'] :'';
+$cgpa = isset($_POST['cgpa']) ? $_POST['cgpa']:'';
+$record = isset($_POST['record']) ?$_POST['record']:'';
+$note = isset($_POST['note']) ? $_POST['note'] : '';
 if (!empty($std_id)) {
   $sql = "SELECT std_id FROM input WHERE std_id=$std_id";
   $result = mysql_query($sql);

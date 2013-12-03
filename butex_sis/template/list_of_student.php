@@ -88,7 +88,7 @@ $type = isset($_POST['type']) ? $_POST['type'] : '';
           echo "<td class='table_data'>" . $row['stud_contact_no'] . "</td>";
           echo "<td class='table_data'>" . $row['emergency_contact_no'] . "</td>";
           echo "<td class='table_data'>" . $row['blood_grp'] . "</td>";
-          echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/" . $row['link'] . "'</td>";
+          echo "<td class='table_data'><img width='60' src='/template/uploaded_student_images/$student_id'.jpg</td>";
           echo "</tr>";
           $i = $i + 1;
         }
