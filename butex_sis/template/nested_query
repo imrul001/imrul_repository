@@ -1,0 +1,1 @@
+SELECT gpa FROM `result_status` WHERE student_Id='2011001' AND level_term='L1T1' AND entry_date_time= (SELECT MAX(entry_date_time) FROM result_status WHERE student_id=2011001 AND level_term='L1T1');
