@@ -65,6 +65,13 @@
     $(document).ready(function(){
         //      javascript for result_status table
         /*******************data entry for first row of result_status_table****************/
+        /**method for create and upate 
+         *
+         *method to create and update exam table
+         *method to create and update backlog table
+         *method to create result_table table but not to update
+         *
+         **/
         $('#createFirstResultRow').live('click', function(){
             var student_id = $(this).attr('stud-id').trim();
             var LevelTerm = $(this).attr('LevelTerm').trim();
@@ -91,21 +98,43 @@
                         var remarks=$('input[name=remarks]').val();
                         if(levelterm!='' && examYear!=''){
                             var url = "index.php?p=result_status_table_entry&std_id="+student_id+"&levelTerm="+levelterm+"&examYear="+examYear+"&gpa="+gpa+"&cgpa="+cgpa+"&failSubjects="+failSubjects+"&remarks="+remarks; 
-                        
+                            var lt = 'gpa'+levelterm;
+                            var examTableUrl = "index.php?p=exam_result_enty&student_id="+student_id+"&"+lt+"="+gpa+"&cgpa="+cgpa;
                             $.ajax({
                                 type: "POST",
                                 url: url, 
                                 success: function(data)
                                 {
-                                    $.msgBox({
-                                        title: "Confirmation",
-                                        content: "Data Entry Successfully Completed",
-                                        type: "info",
-                                        buttons: [{ value: "Ok" }],
-                                        success: function (result) {
-                                        
+                                    $.ajax({
+                                        url: examTableUrl,
+                                        type: 'POST',
+                                        success: function(examEntrydata){
+                                            var column = levelterm+"blog";
+                                            var backlogTableurl = "index.php?p=backlog_data_entry&std_id="+student_id+"&LT="+column+"&course="+failSubjects; // the script where you handle the form input.
+                                            $.ajax({
+                                                type: "POST",
+                                                url: backlogTableurl, // serializes the form's elements.
+                                                success: function(data)
+                                                {
+                                                    $.msgBox({
+                                                        title: "Confirmation",
+                                                        content: "Data Entry Successfully Completed",
+                                                        type: "info",
+                                                        buttons: [{ value: "Ok" }],
+                                                        success: function (result) {
+                                                                            
+                                                        }
+                                                    });
+                                                },
+                                                error: function(){
+                                                    alert("data entry error");
+                                                }
+                                            });
+                                        },
+                                        error: function(){
+                                            alert("exam data entry error");
                                         }
-                                    });
+                                    })
                                 },
                                 error:function(){
                                     showDialogue("Information","<div class='information'>Got an error</div>");
@@ -145,37 +174,43 @@
       <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
         <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
         <div id="login_modal_body" style="min-height: 300px;">
+
             <?php
             $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
             $sql = "SELECT * FROM exam WHERE std_id='" . $student_id . "'";
             $result = mysql_query($sql);
             $num_row = mysql_num_rows($result);
             ?>
-            <?php if ($num_row > 0) : ?>
-                <table class='result_table' style='margin: 0 auto;'>
-                    <th>Level,Term<?php echo $student_id; ?></th>
-                    <th>Exam Year</th>
-                    <th>Term/Subject GPA</th>
-                    <th>CGPA</th>
-                    <th>Fail/Retake Subject(s)</th>
-                    <th>Remarks</th>
-                    <th>Edit Result</th>
-                    <tr>
-                        <td>level-1, Term-2</td>
-                        <td>2012</td>
-                        <td>3.12</td>
-                        <td>3.10</td>
-                        <td>CSE-12</td>
-                        <td>Good</td>
-                        <td><input type="button" value="Edit Row"/></td>
-                    </tr>
-                </table>
-            <?php else : ?>
-                <div style="width: 50%; margin: 0 auto;">
-                    <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
-                        <input type="button" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
-                    </div>
+            <div style="width: 50%; margin: 0 auto;">
+                <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
+                    <input type="button" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
                 </div>
+            </div>
+            <?php if ($num_row > 0) : ?>
+                    <!--                <table class='result_table' style='margin: 0 auto;'>
+                                    <th>Level,Term<?php echo $student_id; ?></th>
+                                    <th>Exam Year</th>
+                                    <th>Term/Subject GPA</th>
+                                    <th>CGPA</th>
+                                    <th>Fail/Retake Subject(s)</th>
+                                    <th>Remarks</th>
+                                    <th>Edit Result</th>
+                                    <tr>
+                                        <td>level-1, Term-2</td>
+                                        <td>2012</td>
+                                        <td>3.12</td>
+                                        <td>3.10</td>
+                                        <td>CSE-12</td>
+                                        <td>Good</td>
+                                        <td><input type="button" value="Edit Row"/></td>
+                                    </tr>
+                                </table>-->
+            <?php else : ?>
+                <!--                <div style="width: 50%; margin: 0 auto;">
+                                    <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
+                                        <input type="button" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
+                                    </div>
+                                </div>-->
 
             <?php endif; ?>
 

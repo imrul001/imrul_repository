@@ -8,7 +8,7 @@ $cgpa = isset($_GET['cgpa']) ? $_GET['cgpa'] : '';
 $failSubjects = isset($_GET['failSubjects']) ? $_GET['failSubjects'] : '';
 $remarks = isset($_GET['remarks']) ? $_GET['remarks'] : '';
 $date_time = date("jS-F-Y h:i:s a", time());
-$id = createRandom_number();
+$id = md5(createRandom_number());
 
 //$examData = isset($_GET['examData'])? $_GET['examData']:'';
 $sql = "INSERT INTO `result_status` (`id`, `student_id`, `level_term`, `exam_year`, `gpa`, `cgpa`, `backlog_subject`, `remarks`, `entry_date_time`) 

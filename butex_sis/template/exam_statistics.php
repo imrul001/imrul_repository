@@ -37,6 +37,14 @@
 
 
 <?php get_header(); ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $("input[type='text']", '#formToExamResultEntry').css("width","200px");
+       $(".gpa", '#formToExamResultEntry').attr("readonly", "readonly");
+       $(".result_note", '#formToExamResultEntry').attr("readonly", "readonly");
+       $(".record", '#formToExamResultEntry').attr("readonly", "readonly");
+    });
+</script>
 <div id="container">
   <?php if (!logged_in()) : ?>
     <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=login" title="Login">Login</a></p>
@@ -77,7 +85,7 @@
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L3 T1:</b></label></dt>
-            <dd><input type="float" class="gpa" name="gpaL3T1" id="gpaL3T1" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L3T1blog" size="30" value="BackLog L3T1" /><span class="status L3T1blog"></span></dd>
+            <dd><input type="text" class="gpa" name="gpaL3T1" id="gpaL3T1" size="30" value="" /><input type="button" class="blButton" name="student_id" id="L3T1blog" size="30" value="BackLog L3T1" /><span class="status L3T1blog"></span></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>GPA L3 T2:</b></label></dt>
@@ -97,11 +105,11 @@
           </dl>
           <dl>
             <dt><label for="student Id"><b>Record</b></label></dt>
-            <dd><input type="text" class="text" name="record" id="record" size="30" value="" /></dd>
+            <dd><input type="text" class="text record" name="record" id="record" size="30" value="" /></dd>
           </dl>
           <dl>
             <dt><label for="student Id"><b>Note:</b></label></dt>
-            <dd><input type="text" class="text" name="note" id="note" size="30" value="" /></dd>
+            <dd><input type="text" class="text result_note" name="note" id="note" size="30" value="" /></dd>
           </dl>
 
           <input type="submit" class="submitLogIn" id="exam_result_submit_id" value="Submit" />

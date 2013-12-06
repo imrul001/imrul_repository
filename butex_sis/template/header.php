@@ -557,10 +557,11 @@
         </script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('.blButton').click(function(){
+                $('.blButton').live('click',(function(){
                     var value = $(this).val();
                     var column = $(this).attr("id");
                     var std_id =$('#std_id').val();
+                    
                     var url = "index.php?p=retrieve_blog_data&std_id="+std_id+"&LT="+column; // the script where you handle the form input.
                     $.ajax({
                         type: "POST",
@@ -573,30 +574,31 @@
                                 inputs: [
                                     { header: "Course(s)", type: "text", name: "bCourse", value: result[0]}],
                                 buttons: [
-                                    { value: "Submit" }, {value:"Cancel"}],
+                                     {value:"Cancel"}],
                                 success: function (result, values) {
-                                    if(result == 'Submit'){
-                                        var course=$('input[name=bCourse]').val();
-                                        var url = "index.php?p=backlog_data_entry&std_id="+std_id+"&LT="+column+"&course="+course; // the script where you handle the form input.
-                                        $.ajax({
-                                            type: "POST",
-                                            url: url, // serializes the form's elements.
-                                            success: function(data)
-                                            {
-                                                $("#std_id").change();
-                                            }
-                                        });
-                                        return false;
-                                    }
-                                    else{
-                    
-                                    }
+//   
+//                                    if(result == 'Submit'){
+//                                        var course=$('input[name=bCourse]').val();
+//                                        var url = "index.php?p=backlog_data_entry&std_id="+std_id+"&LT="+column+"&course="+course; // the script where you handle the form input.
+//                                        $.ajax({
+//                                            type: "POST",
+//                                            url: url, // serializes the form's elements.
+//                                            success: function(data)
+//                                            {
+//                                                $("#std_id").change();
+//                                            }
+//                                        });
+//                                        return false;
+//                                    }
+//                                    else{
+//                    
+//                                    }
                                 }
                             });
                         }
                     });
                     return false;          
-                });
+                }));
             });
         </script>
         <script type="text/javascript">
