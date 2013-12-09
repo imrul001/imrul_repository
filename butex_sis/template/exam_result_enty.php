@@ -32,11 +32,36 @@ if (!empty($std_id)) {
           echo 'Exam Result Inserted Successfully';
         }
       } else {
+          while ($row1 = mysql_fetch_array($result)) {
+              $lv1t1 = $row1['L1T1GPA'];
+              $lv1t2 = $row1['L1T2GPA'];
+              $lv2t1 = $row1['L2T1GPA'];
+              $lv2t2 = $row1['L2T2GPA'];
+              $lv3t1 = $row1['L3T1GPA'];
+              $lv3t2 = $row1['L3T2GPA'];
+              $lv4t1 = $row1['L4T1GPA'];
+              $lv4t2 = $row1['L4T2GPA'];
+              $lvCGPA = $row1['CGPA'];
+              $lvRecord = $row1['RECORD'];
+              $lvnote = $row1['note'];
+          }
+          !empty($l1t1)? $l1t1: $l1t1=$lv1t1; 
+          !empty($l1t2)? $l1t2: $l1t2=$lv1t2;
+          !empty($l2t1)? $l2t1: $l2t1=$lv2t1; 
+          !empty($l2t2)? $l2t2: $l2t2=$lv2t2;
+          !empty($l3t1)? $l3t1: $l3t1=$lv3t1; 
+          !empty($l3t2)? $l3t2: $l3t2=$lv3t2; 
+          !empty($l4t1)? $l4t1: $l4t1=$lv4t1; 
+          !empty($l4t2)? $l4t2: $l4t2=$lv4t2; 
+          !empty($cgpa)? $cgpa: $cgpa=$lvCGPA;
+          !empty($record)? $record: $record=$lvRecord;
+          !empty($note)? $note: $note=$lvnote; 
+          
         $sql = "UPDATE exam SET L1T1GPA='$l1t1', L1T2GPA='$l1t2', L2T1GPA='$l2t1', L2T2GPA='$l2t2', L3T1GPA='$l3t1', L3T2GPA='$l3t2', L4T1GPA='$l4t1', L4T2GPA='$l4t2', CGPA='$cgpa', RECORD='$record', note='$note' WHERE std_id=$std_id";
         if (!@mysql_query($sql)) {
           die(mysql_error());
         } else {
-          echo 'Exam Result Edited Successfully';
+//          echo 'Exam Result Edited Successfully';
         }
       }
     } else {

@@ -1,5 +1,4 @@
 <?php
-
 $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
 $levelTerm = isset($_GET['levelTerm']) ? $_GET['levelTerm'] : '';
 $examYear = isset($_GET['examYear']) ? $_GET['examYear'] : '';
@@ -10,14 +9,39 @@ $remarks = isset($_GET['remarks']) ? $_GET['remarks'] : '';
 $date_time = date("jS-F-Y h:i:s a", time());
 $id = md5(createRandom_number());
 
-//$examData = isset($_GET['examData'])? $_GET['examData']:'';
-$sql = "INSERT INTO `result_status` (`id`, `student_id`, `level_term`, `exam_year`, `gpa`, `cgpa`, `backlog_subject`, `remarks`, `entry_date_time`) 
+$randomIdFromTable = isset($_GET['rowRand_ID']) ? $_GET['rowRand_ID'] : '';
+if ($randomIdFromTable != '' && !empty($randomIdFromTable) && $randomIdFromTable !=null) {
+    $sql_q = "SELECT * FROM result_status WHERE student_id='$student_id' AND id='$randomIdFromTable'";
+    $result1=mysql_query($sql_q);
+    while ($row = mysql_fetch_array($result1)) {
+        $lvtr = $row['level_term'];
+        $exyr = $row['exam_year'];
+        $gp = $row['gpa'];
+        $cg = $row['cgpa'];
+        $blogSub = $row['backlog_subject'];
+        $rmk = $row['remarks'];
+    }
+    !empty($levelTerm) ? $levelTerm : $levelTerm=$lvtr;
+    !empty($examYear) ? $examYear : $examYear=$exyr;
+    !empty($gpa) ? $gpa : $gpa=$gp;
+    !empty($cgpa) ? $cgpa : $cgpa=$cg;
+    !empty($failSubjects) ? $blogSub : $failSubjects=$failSubjects;
+    !empty($remarks) ? $rmk : $remarks=$remarks;
+    $sql = "UPDATE result_status SET level_term='$levelTerm', exam_year='$examYear', gpa='$gpa', cgpa='$cgpa', backlog_subject='$failSubjects', remarks='$remarks', entry_date_time='$date_time' WHERE student_id='$student_id' AND id='$randomIdFromTable'";
+    if (!@mysql_query($sql)) {
+        die(mysql_error());
+    } else {
+//        echo 'Exam Result Edited Successfully';
+    }
+} else {
+    $sql = "INSERT INTO `result_status` (`id`, `student_id`, `level_term`, `exam_year`, `gpa`, `cgpa`, `backlog_subject`, `remarks`, `entry_date_time`) 
 VALUES('$id', '$student_id', '$levelTerm', '$examYear', '$gpa', '$cgpa', '$failSubjects', '$remarks', '$date_time')";
-$result = mysql_query($sql);
-if(!$result){
-    return die(mysql_error());
-}else{
-    return "Data Entry Completed Successfully";
+    $result = mysql_query($sql);
+    if (!$result) {
+        return die(mysql_error());
+    } else {
+//        return "Data Entry Completed Successfully";
+    }
 }
 function createRandom_number() {
     $chars = "abcdefghijkmnopqrstuvwxyz023456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -32,4 +56,5 @@ function createRandom_number() {
     }
     return $pass;
 }
+
 ?>

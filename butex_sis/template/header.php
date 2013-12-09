@@ -10,37 +10,6 @@
         <script type="text/javascript" src="/min/?f=template/js/jquery-ui.js" ></script>
         <script type="text/javascript" src="/min/?f=template/js/jquery.calendar.js"></script>
         <link rel="icon" type="image/png" href="/template/images/favicon.ico" />
-        <!--    <script type="text/javascript">
-              function isLogInValid(){
-                var error="";
-                if(document.getElementById("user").value=="" || document.getElementById("p").value==""){
-                  error+="<li><lable for='fullname' style='cursor:hand;cursor:pointer'>Wrong User ID Or Password.</label></li>\n";
-                }
-                error = error? "<ul style='color:#f00;font-weight:bold'>" + error +"</ul>":'';
-                if(error!=''){
-                  document.getElementById("ersb_login").style.display="block";
-                  document.getElementById("ers_login").innerHTML=error;
-                  location.href="#errr_login";
-                  return false;
-                }
-                else{
-                  document.getElementById("ersb_login").display="none";
-                }
-              }
-            </script>-->
-        <!--    <script type="text/javascript">
-              $(document).ready(function(){
-                $('#dob_1').calendar();
-                for (i = new Date().getFullYear(); i > 1900; i--)
-                {
-                  $('#sscYear').append($('<option />').val(i).html(i));
-                }
-                for (i = new Date().getFullYear(); i > 1900; i--)
-                {
-                  $('#hscYear').append($('<option />').val(i).html(i));
-                }
-              });
-            </script>-->
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.subButton').hover(function(){
@@ -213,7 +182,7 @@
             }
             .submitLogIn{
                 font-size: 19px;
-                margin-left: 162px;
+                margin-left: 201px;
                 height: 35px;
                 font-family: times new roman;
                 cursor: pointer;
@@ -225,8 +194,9 @@
             }
             dt {
                 float: left;
-                width: 161px;
-                font-size: 13px;
+                width: 150px;
+                font-size: 10px;
+                
             }
             .logOutButton{
                 background-color: cornflowerBlue;

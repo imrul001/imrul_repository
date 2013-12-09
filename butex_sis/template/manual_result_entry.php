@@ -47,16 +47,40 @@
     }
     .result_table th
     {
-        height:30px;
+        height:22px;
         background-color:#30769E;
         color:white;
+        font-size: 11px;
     }
     .result_table td
     {
         text-align:center;
-        height:50px;
+        height:18px;
         vertical-align:bottom;
-        padding:15px;
+        padding:1px;
+        font-size: 11px;
+    }
+    .addRowButtonClass{
+        cursor: pointer;
+        top: 10px;
+        left: 790px;
+        position: relative;
+        font-weight: bold;
+        text-align: center;
+        width: 70px;
+        color: white;
+        background-color: #30769E;
+        border: 1px solid black;
+    }
+    .levelTermDropdownClass{
+        border: 0 !important;  /*Removes border*/
+        -webkit-appearance: none;  /*Removes default chrome and safari style*/
+        -moz-appearance: none; /* Removes Default Firefox style*/
+        background-position: 82px 7px;  /*Position of the background-image*/
+        width: 180px; /*Width of select dropdown to give space for arrow image*/
+        text-indent: 0.01px; /* Removes default arrow from firefox*/
+        text-overflow: "";  /*Removes default arrow from firefox*/
+        color: black;
     }
 </style>
 
@@ -72,12 +96,126 @@
          *method to create result_table table but not to update
          *
          **/
-        $('#createFirstResultRow').live('click', function(){
+        $('.editResultTableButtonClass').live('click',function(){
+            var buttonRandomId=($(this).attr('rand_id'));
+            var buttonStudent_id=$(this).attr('update_row_student_id');
+            var fetchResultStatusTableData = 'index.php?p=fetch_result_status_table_data&std_id='+buttonStudent_id+'&rand_id='+buttonRandomId;
+            $.ajax({
+                url: fetchResultStatusTableData,
+                type: 'POST',
+                dataType: 'json',
+                success: function(result){
+                    var title = "Result Entry "+result[0]+"("+buttonStudent_id+")";
+                    $.msgBox({ type: "prompt",
+                        title: title,
+                        inputs: [
+                            { header: "Level-Term", type: "text", name: "levelTerm", value: result[0]},
+                            { header: "Exam. Year", type: "text", name: "examYear", value: result[1]},
+                            { header: "GPA", type: "text", name: "gpa", value: result[2]},
+                            { header: "CGPA", type: "text", name: "cgpa", value: result[3]},
+                            { header: "Fail/Retake Subject(s)", type: "text", name: "failSubjects", value: result[4]},
+                            { header: "Remarks", type: "text", name: "remarks", value: result[5]}
+                        ],
+                        buttons: [
+                            { value: "Submit" }, {value:"Cancel"}],
+                        beforeShow: function(){
+                            $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<select id="levelTermDropBox" name="levelTerm" class="levelTermDropdownClass"><option value="L1T2">Level-1,Term-2</option><option value="L1T1">Level-1,Term-1</option><option value="L2T1">Level-2,Term-1</option><option value="L2T2">Level-2,Term-2</option><option value="L3T1">Level-3,Term-1</option><option value="L3T2">Level-3,Term-2</option><option value="L4T1">Level-4,Term-1</option><option value="L4T2">Level-4,Term-2</option></select>');
+                            $('#levelTermDropBox').val(result[0]).attr("selected", true);
+                        },
+                        success: function (result, values) {
+                            dataBasedQuery(buttonStudent_id, buttonRandomId, result);
+                        }
+                    });
+                },
+                error: function(){
+                    alert("got an error");
+                }
+            });
+           
+        });
+        function dataBasedQuery(student_id, randRowId, result){
+            if(result == 'Submit'){
+                var levelterm=$('#levelTermDropBox').val();
+                var examYear=$('input[name=examYear]').val();
+                var gpa=$('input[name=gpa]').val();
+                var cgpa=$('input[name=cgpa]').val();
+                var failSubjects=$('input[name=failSubjects]').val();
+                var remarks=$('input[name=remarks]').val();
+                if(levelterm!='' && examYear!=''){
+                    var url = "index.php?p=result_status_table_entry&std_id="+student_id+"&levelTerm="+levelterm+"&examYear="+examYear+"&gpa="+gpa+"&cgpa="+cgpa+"&failSubjects="+failSubjects+"&remarks="+remarks+"&rowRand_ID="+randRowId; 
+                    var lt = 'gpa'+levelterm;
+                    var examTableUrl = "index.php?p=exam_result_enty&student_id="+student_id+"&"+lt+"="+gpa+"&cgpa="+cgpa;
+                    $.ajax({
+                        type: "POST",
+                        url: url, 
+                        success: function(data)
+                        {
+                            $.ajax({
+                                url: examTableUrl,
+                                type: 'POST',
+                                success: function(examEntrydata){
+                                    var column = levelterm+"blog";
+                                    var backlogTableurl = "index.php?p=backlog_data_entry&std_id="+student_id+"&LT="+column+"&course="+failSubjects; // the script where you handle the form input.
+                                    $.ajax({
+                                        type: "POST",
+                                        url: backlogTableurl, // serializes the form's elements.
+                                        success: function(data)
+                                        {
+//                                            alert(data);
+                                            $.msgBox({
+                                                title: "Confirmation",
+                                                content: "Data Entry Successfully Completed",
+                                                type: "info",
+                                                buttons: [{ value: "Ok" }],
+                                                success: function (result) {
+                                                    window.location.href=$(location).attr('href');
+                                                }
+                                            });
+                                        },
+                                        error: function(){
+                                            alert("data entry error");
+                                        }
+                                    });
+                                },
+                                error: function(){
+                                    alert("exam data entry error");
+                                }
+                            })
+                        },
+                        error:function(){
+                            $.msgBox({
+                                title: "Error",
+                                content: "Got an Error",
+                                type: "error",
+                                buttons: [{ value: "Ok" }],
+                                success: function (result) {
+                                                        
+                                }
+                            });
+                        }
+                    });
+                    return false;
+                }else{
+                    alert("Level-Term & Exam Year Should not be blank");
+                }
+            }
+            else{
+                    
+            }
+        }
+        
+        $('.createRow').live('click', function(){
             var student_id = $(this).attr('stud-id').trim();
-            var LevelTerm = $(this).attr('LevelTerm').trim();
+            if($(this).attr("id")=='createFirstResultRow'){
+                var LevelTerm = $(this).attr('LevelTerm').trim();
+            }
+            var title = "Result Entry "+LevelTerm+"("+student_id+")";
+            if(LevelTerm=='' || LevelTerm==undefined){
+                var title = "Result Entry("+student_id+")";
+            }
             var result =[];
             $.msgBox({ type: "prompt",
-                title: "Result "+LevelTerm+"("+student_id+")",
+                title: title,
                 inputs: [
                     { header: "Level-Term", type: "text", name: "levelTerm", value: result[0]},
                     { header: "Exam. Year", type: "text", name: "examYear", value: result[1]},
@@ -88,75 +226,12 @@
                 ],
                 buttons: [
                     { value: "Submit" }, {value:"Cancel"}],
-                success: function (result, values) {
-                    if(result == 'Submit'){
-                        var levelterm=$('input[name=levelTerm]').val();
-                        var examYear=$('input[name=examYear]').val();
-                        var gpa=$('input[name=gpa]').val();
-                        var cgpa=$('input[name=cgpa]').val();
-                        var failSubjects=$('input[name=failSubjects]').val();
-                        var remarks=$('input[name=remarks]').val();
-                        if(levelterm!='' && examYear!=''){
-                            var url = "index.php?p=result_status_table_entry&std_id="+student_id+"&levelTerm="+levelterm+"&examYear="+examYear+"&gpa="+gpa+"&cgpa="+cgpa+"&failSubjects="+failSubjects+"&remarks="+remarks; 
-                            var lt = 'gpa'+levelterm;
-                            var examTableUrl = "index.php?p=exam_result_enty&student_id="+student_id+"&"+lt+"="+gpa+"&cgpa="+cgpa;
-                            $.ajax({
-                                type: "POST",
-                                url: url, 
-                                success: function(data)
-                                {
-                                    $.ajax({
-                                        url: examTableUrl,
-                                        type: 'POST',
-                                        success: function(examEntrydata){
-                                            var column = levelterm+"blog";
-                                            var backlogTableurl = "index.php?p=backlog_data_entry&std_id="+student_id+"&LT="+column+"&course="+failSubjects; // the script where you handle the form input.
-                                            $.ajax({
-                                                type: "POST",
-                                                url: backlogTableurl, // serializes the form's elements.
-                                                success: function(data)
-                                                {
-                                                    $.msgBox({
-                                                        title: "Confirmation",
-                                                        content: "Data Entry Successfully Completed",
-                                                        type: "info",
-                                                        buttons: [{ value: "Ok" }],
-                                                        success: function (result) {
-                                                                            
-                                                        }
-                                                    });
-                                                },
-                                                error: function(){
-                                                    alert("data entry error");
-                                                }
-                                            });
-                                        },
-                                        error: function(){
-                                            alert("exam data entry error");
-                                        }
-                                    })
-                                },
-                                error:function(){
-                                    showDialogue("Information","<div class='information'>Got an error</div>");
-                                    $.msgBox({
-                                        title: "Error",
-                                        content: "Got an Error",
-                                        type: "error",
-                                        buttons: [{ value: "Ok" }],
-                                        success: function (result) {
-                                        
-                                        }
-                                    });
-                                }
-                            });
-                            return false;
-                        }else{
-                            alert("Level-Term & Exam Year Should not be blank");
-                        }
-                    }
-                    else{
-                    
-                    }
+                beforeShow: function(){
+                    $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<select id="levelTermDropBox" name="levelTerm" class="levelTermDropdownClass"><option value="L1T1">Level-1,Term-1</option><option value="L1T2">Level-1,Term-2</option><option value="L2T1">Level-2,Term-1</option><option value="L2T2">Level-2,Term-2</option><option value="L3T1">Level-3,Term-1</option><option value="L3T2">Level-3,Term-2</option><option value="L4T1">Level-4,Term-1</option><option value="L4T2">Level-4,Term-2</option></select>');
+                },
+                success: function (result, values) {   
+                    var rowRandId ='';
+                    dataBasedQuery(student_id, rowRandId, result)
                 }
             });
             /*******************data entry for first row of result_status_table****************/
@@ -170,56 +245,67 @@
         <div class="logOutButton">
             <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
         </div>
-      <!--    <h2 style="width: 31%">Registration Continues<span class="arrow"></span></h2>-->
-      <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
         <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
         <div id="login_modal_body" style="min-height: 300px;">
-
             <?php
             $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
-            $sql = "SELECT * FROM exam WHERE std_id='" . $student_id . "'";
+            $sql = "SELECT * FROM result_status WHERE student_id='" . $student_id . "'";
             $result = mysql_query($sql);
             $num_row = mysql_num_rows($result);
             ?>
-            <div style="width: 50%; margin: 0 auto;">
-                <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
-                    <input type="button" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
-                </div>
-            </div>
             <?php if ($num_row > 0) : ?>
-                    <!--                <table class='result_table' style='margin: 0 auto;'>
-                                    <th>Level,Term<?php echo $student_id; ?></th>
-                                    <th>Exam Year</th>
-                                    <th>Term/Subject GPA</th>
-                                    <th>CGPA</th>
-                                    <th>Fail/Retake Subject(s)</th>
-                                    <th>Remarks</th>
-                                    <th>Edit Result</th>
-                                    <tr>
-                                        <td>level-1, Term-2</td>
-                                        <td>2012</td>
-                                        <td>3.12</td>
-                                        <td>3.10</td>
-                                        <td>CSE-12</td>
-                                        <td>Good</td>
-                                        <td><input type="button" value="Edit Row"/></td>
-                                    </tr>
-                                </table>-->
-            <?php else : ?>
-                <!--                <div style="width: 50%; margin: 0 auto;">
-                                    <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
-                                        <input type="button" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
-                                    </div>
-                                </div>-->
+                <div id="tableContainer">
+                    <table class='result_table' style='margin: 0 auto;'>
+                        <th>Level,Term</th>
+                        <th>Exam Year</th>
+                        <th>Term/Subject GPA</th>
+                        <th>CGPA</th>
+                        <th>Fail/Retake Subject(s)</th>
+                        <th>Remarks</th>
+                        <th>Edit Result</th>
+                        <?php
 
-            <?php endif; ?>
+                        function getLevelTerm($lt) {
+                            $level = $lt[1];
+                            $term = $lt[3];
+                            $levelTermText = 'Level-' . $level . ',Term-' . $term . '';
+                            return $levelTermText;
+                        }
+
+                        $i = 0;
+                        while ($row = mysql_fetch_array($result)) {
+                            echo '<tr>
+                                <td>' . getLevelTerm($row['level_term']) . '</td>
+                                <td>' . $row['exam_year'] . '</td>
+                                <td>' . $row['gpa'] . '</td>
+                                <td>' . $row['cgpa'] . '</td>
+                                <td>' . $row['backlog_subject'] . '</td>
+                                <td>' . $row['remarks'] . '</td>
+                                <td>
+                                 <input type = "hidden" value = "' . $row['id'] . '"/>
+                                 <input type = "button" class="editResultTableButtonClass" id="editResultRow_' . $i . '" rand_id="' . $row['id'] . '" update_row_student_id="' . $student_id . '" value="Edit"/>
+                                </td>
+                            </tr>';
+                            $i++;
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div id="addRowButton" class="addRowButtonClass createRow" stud-id="<?php echo $student_id; ?>">Add Row</div>
+    <?php else : ?>
+                <div style="width: 50%; margin: 0 auto;">
+                    <div id="information">No Result table is create for Student ID <B><?php echo $student_id; ?></B>
+                        <input type="button" class="createRow" id="createFirstResultRow" LevelTerm="Level-1,Term-1" stud-id="<?php echo $student_id; ?>" value="Create Result Table" />
+                    </div>
+                </div>
+    <?php endif; ?>
 
             <!--            <div id="login_modal_body">
                             <form id="formToExamResultEntry" action="" method="POST" enctype="multipart/form-data">
                                 <div id="manage_download_box" class="registerPopup">
                                     <h3 style="text-align: center;">Exam Results</h3>
                                     <div class="current_time">
-            <?php echo "<p style='font-family:times new roman';><b>Current date:</b> " . date("jS-F-Y h:i:s a", time()) . "</p>"; ?>
+    <?php echo "<p style='font-family:times new roman';><b>Current date:</b> " . date("jS-F-Y h:i:s a", time()) . "</p>"; ?>
                                     </div>
             
                                     <dl>
@@ -280,7 +366,7 @@
                                 <input type="hidden" class="text" name="stdent_id" id="stud_id" size="30" value="" /></dd>
                             </form>
                         </div>-->
-        <?php endif; ?>
+<?php endif; ?>
     </div>
     <div>
         <form id="dynamicTable">
@@ -288,4 +374,4 @@
         </form>
     </div>
     <!-- END Content -->
-    <?php get_footer(); ?>
+<?php get_footer(); ?>
