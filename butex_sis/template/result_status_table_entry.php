@@ -10,7 +10,7 @@ $date_time = date("jS-F-Y h:i:s a", time());
 $id = md5(createRandom_number());
 
 $randomIdFromTable = isset($_GET['rowRand_ID']) ? $_GET['rowRand_ID'] : '';
-if ($randomIdFromTable != '' && !empty($randomIdFromTable) && $randomIdFromTable !=null) {
+if ($randomIdFromTable != '' && $randomIdFromTable !=null) {
     $sql_q = "SELECT * FROM result_status WHERE student_id='$student_id' AND id='$randomIdFromTable'";
     $result1=mysql_query($sql_q);
     while ($row = mysql_fetch_array($result1)) {
@@ -27,9 +27,9 @@ if ($randomIdFromTable != '' && !empty($randomIdFromTable) && $randomIdFromTable
     !empty($cgpa) ? $cgpa : $cgpa=$cg;
     !empty($failSubjects) ? $blogSub : $failSubjects=$failSubjects;
     !empty($remarks) ? $rmk : $remarks=$remarks;
-    $sql = "UPDATE result_status SET level_term='$levelTerm', exam_year='$examYear', gpa='$gpa', cgpa='$cgpa', backlog_subject='$failSubjects', remarks='$remarks', entry_date_time='$date_time' WHERE student_id='$student_id' AND id='$randomIdFromTable'";
+    $sql = "UPDATE result_status SET level_term='$levelTerm', exam_year='$examYear', gpa='$gpa', cgpa='$cgpa', backlog_subject='$failSubjects', remarks='$remarks' WHERE student_id='$student_id' AND id='$randomIdFromTable'";
     if (!@mysql_query($sql)) {
-        die(mysql_error());
+        die("mysql_error ".mysql_error());
     } else {
 //        echo 'Exam Result Edited Successfully';
     }
@@ -38,7 +38,7 @@ if ($randomIdFromTable != '' && !empty($randomIdFromTable) && $randomIdFromTable
 VALUES('$id', '$student_id', '$levelTerm', '$examYear', '$gpa', '$cgpa', '$failSubjects', '$remarks', '$date_time')";
     $result = mysql_query($sql);
     if (!$result) {
-        return die(mysql_error());
+        return die("mysql_error ".mysql_error());
     } else {
 //        return "Data Entry Completed Successfully";
     }

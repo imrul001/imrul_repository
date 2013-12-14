@@ -35,7 +35,7 @@
     </div>
   <!--    <h2 style="width: 31%">Registration Continues<span class="arrow"></span></h2>-->
   <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
-    <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
+    <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
     <div id="login_modal_body">
       <form id="formToPunishmentEntry" action="" method="POST" enctype="multipart/form-data">
         <div id="manage_download_box" class="registerPopup">

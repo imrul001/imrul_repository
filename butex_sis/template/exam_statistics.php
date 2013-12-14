@@ -54,7 +54,7 @@
     </div>
   <!--    <h2 style="width: 31%">Registration Continues<span class="arrow"></span></h2>-->
   <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
-    <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
+    <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
     <div id="login_modal_body">
       <form id="formToExamResultEntry" action="" method="POST" enctype="multipart/form-data">
         <div id="manage_download_box" class="registerPopup">
@@ -112,7 +112,7 @@
             <dd><input type="text" class="text result_note" name="note" id="note" size="30" value="" /></dd>
           </dl>
 
-          <input type="submit" class="submitLogIn" id="exam_result_submit_id" value="Submit" />
+          <input type="submit" style="display:none;" class="submitLogIn" id="exam_result_submit_id" value="Submit" />
           <div id="uploader" style="">
           </div>
         </div>

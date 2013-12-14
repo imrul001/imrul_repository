@@ -10,22 +10,22 @@
             $('#hscYear').append($('<option />').val(i).html(i));
         }
         $('#student_id').change(function(){
-           var std_id=$(this).val();
-           var url = "./index.php?p=ajax_student_id&std_id="+std_id;
-           $.ajax({
-               url: url,
-               type: 'POST',
-               success: function(data){
-                   if(data>0){
-                       $('span#sign').html('<img src="./template/images/cross1.png" style="left: 10px;position: relative;top: 5px;width: 17px;"/>');
-                   }else{
-                       $('span#sign').html('<img src="./template/images/tick.png" style="left: 10px;position: relative;top: 5px;width: 22px;"/>');
-                   }
-               },
-               error: function(){
-                   alert('got an error');
-               }
-           })
+            var std_id=$(this).val();
+            var url = "./index.php?p=ajax_student_id&std_id="+std_id;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function(data){
+                    if(data>0){
+                        $('span#sign').html('<img src="./template/images/cross1.png" style="left: 10px;position: relative;top: 5px;width: 17px;"/>');
+                    }else{
+                        $('span#sign').html('<img src="./template/images/tick.png" style="left: 10px;position: relative;top: 5px;width: 22px;"/>');
+                    }
+                },
+                error: function(){
+                    alert('got an error');
+                }
+            })
         });
     });
 </script>
@@ -49,6 +49,10 @@
                 <span id="ers"></span>
             </fieldset>
         </div>
+        <dl>
+            <dt><label for="student_status"><b>*Student Status:</b></label></dt>
+            <dd><input type="text" class="text" name="student_status" id="student_status" size="30" value="Enrolled" autocomplete="off" readonly/></dd>
+        </dl>
         <dl>
             <dt><label for="student_id"><b>*Student ID:</b></label></dt>
             <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" autocomplete="off" /><span id="sign"></span></dd>
@@ -296,6 +300,11 @@
               <dt><label for="student photo"><b>File Name:</b></label></dt>
               <dd><input type="file" name="file" id="file1" /></dd>
             </dl>-->
-        <input type="submit" class="submitLogIn" id="submitButtonId" name="register" value="Register"/>
+        <div style="display: none;">
+            <input type="submit" class="submitLogIn" id="submitButtonId" name="register" value="Register"/>
+        </div>
+        <div>
+            <div><input type="button" id="registrationFormSubmitButton" class="submitLogIn" value="Register"/></div> 
+        </div>
     </div>
 </form>

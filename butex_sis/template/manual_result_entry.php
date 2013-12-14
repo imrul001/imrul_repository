@@ -59,6 +59,7 @@
         vertical-align:bottom;
         padding:1px;
         font-size: 11px;
+        font-weight: bold;
     }
     .addRowButtonClass{
         cursor: pointer;
@@ -105,7 +106,7 @@
                 type: 'POST',
                 dataType: 'json',
                 success: function(result){
-                    var title = "Result Entry "+result[0]+"("+buttonStudent_id+")";
+                    var title = "Edit Result "+result[0]+"("+buttonStudent_id+")";
                     $.msgBox({ type: "prompt",
                         title: title,
                         inputs: [
@@ -245,11 +246,11 @@
         <div class="logOutButton">
             <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
         </div>
-        <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2">Back TO Admin</a>
+        <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
         <div id="login_modal_body" style="min-height: 300px;">
             <?php
             $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
-            $sql = "SELECT * FROM result_status WHERE student_id='" . $student_id . "'";
+            $sql = "SELECT * FROM result_status WHERE student_id='" . $student_id . "'ORDER BY entry_date_time ASC";
             $result = mysql_query($sql);
             $num_row = mysql_num_rows($result);
             ?>

@@ -196,7 +196,7 @@
                 float: left;
                 width: 150px;
                 font-size: 10px;
-                
+
             }
             .logOutButton{
                 background-color: cornflowerBlue;
@@ -455,46 +455,6 @@
                 $('#continueButton').click(function(){
                     window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";
                 });  
-        
-                $('.deleteClass').live("click",(function(){
-                    var std_id = $( this ).attr("student_ID");
-                    var url = "./index.php?p=delete_student&std_id="+std_id;
-                    // the script where you handle the form input.
-                    //
-                    $('#dialog-confirm').attr('title',"Delete "+std_id+" permanently");
-                    $('#dialog-confirm').css("display","block");
-                    $('.ui-dialog-title').html("Delete "+std_id+" permanently");
-                    //          $('#dialog-confirm').dialog('option', 'position', 'center');
-                    $( "#dialog-confirm" ).dialog({
-                        resizable: true,
-                        height:220,
-                        width: 420,
-                        modal: true,
-                        buttons: {
-                            "Delete": function() {
-                                $.ajax({
-                                    type: "POST",
-                                    url: url,
-                                    data: $("#approval_form").serialize(), // serializes the form's elements.
-                                    success: function(data)
-                                    {
-                                        alert("The Student information of "+ data +" is deleted successfully");
-                                        window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734";       
-                                        // show response from the php script.
-                                    }
-                                });
-                                $('.ui-dialog-title').html('');
-                                $( this ).dialog( "close" );
-                            },
-                            Cancel: function() {
-                                $('.ui-dialog-title').html('');
-                                $( this ).dialog( "close" );
-                            }
-                        }
-                    });
-                    return false;
-                })
-            );
             });
         </script>
         <script type="text/javascript">
@@ -544,25 +504,25 @@
                                 inputs: [
                                     { header: "Course(s)", type: "text", name: "bCourse", value: result[0]}],
                                 buttons: [
-                                     {value:"Cancel"}],
+                                    {value:"Cancel"}],
                                 success: function (result, values) {
-//   
-//                                    if(result == 'Submit'){
-//                                        var course=$('input[name=bCourse]').val();
-//                                        var url = "index.php?p=backlog_data_entry&std_id="+std_id+"&LT="+column+"&course="+course; // the script where you handle the form input.
-//                                        $.ajax({
-//                                            type: "POST",
-//                                            url: url, // serializes the form's elements.
-//                                            success: function(data)
-//                                            {
-//                                                $("#std_id").change();
-//                                            }
-//                                        });
-//                                        return false;
-//                                    }
-//                                    else{
-//                    
-//                                    }
+                                    //   
+                                    //                                    if(result == 'Submit'){
+                                    //                                        var course=$('input[name=bCourse]').val();
+                                    //                                        var url = "index.php?p=backlog_data_entry&std_id="+std_id+"&LT="+column+"&course="+course; // the script where you handle the form input.
+                                    //                                        $.ajax({
+                                    //                                            type: "POST",
+                                    //                                            url: url, // serializes the form's elements.
+                                    //                                            success: function(data)
+                                    //                                            {
+                                    //                                                $("#std_id").change();
+                                    //                                            }
+                                    //                                        });
+                                    //                                        return false;
+                                    //                                    }
+                                    //                                    else{
+                                    //                    
+                                    //                                    }
                                 }
                             });
                         }
@@ -578,7 +538,6 @@
                 });
                 var columnName = Array("L1T1blog", "L1T2blog", "L2T1blog","L2T2blog","L3T1blog","L3T2blog","L4T1blog","L4T2blog");
                 $("#std_id").change(function(){
-                    alert("got the change");
                     if($(this).val()!=""){
                         $('.blButton').each(function(){
                             $(this).removeAttr("disabled");
@@ -682,9 +641,5 @@
                     <h1>Bangladesh University of Textiles</h1>
                     <h2>Student Information System</h2>
                 </div>
-            </div>
-            <div id="dialog-confirm" title="Delete This Student Information." style="display:none;">
-                <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-                    Information will be permanently deleted and cannot be recovered. Are you sure?</p>
             </div>
 
