@@ -244,6 +244,13 @@ function newsletter($post) {
  */
 $p = addslashes(isset($_GET['p'])? $_GET['p']:'');
 
+/**
+ * Logout.
+ */
+if ($p == "logout") {
+  $user->logout();
+}
+
 /* Define Template */
 $tpl = (file_exists("template/" . $p . ".php")) ? $p : "index";
 
@@ -276,13 +283,6 @@ if ($p == "register" || $p == "login" || $p = "update") {
 /* Contact */
 if ($p == "contact") {
   require('mail.php');
-}
-
-/**
- * Logout.
- */
-if ($p == "logout") {
-  $user->logout();
 }
 
 /**
