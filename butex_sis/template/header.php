@@ -40,9 +40,11 @@
                 if(document.getElementById("student_id").value==""){
                     error+="<li><lable for='full_name' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
                 }
+                else if(document.getElementById("reg_no").value==""){
+                    error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
+                }
                 else if(document.getElementById("session").value==""){
                     error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";
-                    alert(0);
                 }
                 else if(document.getElementById("al_dept").value==""){
                     error+="<li><lable for='contactno' style='cursor:hand;cursor:pointer'>All Fields are required.</label></li>\n";

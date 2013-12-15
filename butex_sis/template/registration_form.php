@@ -57,6 +57,11 @@
             <dt><label for="student_id"><b>*Student ID:</b></label></dt>
             <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="" autocomplete="off" /><span id="sign"></span></dd>
         </dl>
+        
+        <dl>
+            <dt><label for="student_id"><b>*Registration No.:</b></label></dt>
+           <dd><input type="text" class="text" name="reg_no" id="reg_no" size="30" value="" autocomplete="off" /></dd>
+        </dl>
 
         <dl>
             <dt><label for="session"><b>*Session:</b></label></dt>

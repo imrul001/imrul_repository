@@ -160,6 +160,7 @@
         <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
         <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile</a>
         <a class="subButton" href="./index.php?p=manual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
+<!--        <a class="subButton" target="_blank" href="./index.php?p=profilePdf&std_id=<?php echo $m; ?>">Export To PDF</a>-->
         <a class="subButton deleteClass" id="deleteButtonId" href="#" student_ID="<?php echo $m; ?>">Delete Profile</a>
         <?php
 
@@ -220,6 +221,8 @@
             if ($link == 'no') {
                 $link = 'No_Image.jpg';
             }
+            $reg_no = $row['reg_no'];
+            $over_rec = $row['over_rec'];
 
             function chooseProgram($m) {
                 $BSC = "B.Sc in Textile Engineering";
@@ -310,7 +313,7 @@
                             Registration No.<span class="colon">:</span>
                         </div>
                         <div class="Infovalue">
-                            <?php echo $admission_roll; ?>
+                            <?php echo $reg_no; ?>
                         </div>
                     </div>
                     <div class="dataField">
@@ -630,12 +633,20 @@
                         Warning<span class="colon">:</span>
                     </div>
                     <div class="Infovalue"> 
-                        <?php echo ""; ?> 
+                        <?php // echo ""; ?> 
                     </div>
                 </div>
                 <div class="dataField">
                     <div class="label">
                         OverAll Record<span class="colon">:</span>
+                    </div>
+                    <div class="Infovalue"> 
+                        <?php echo $over_rec;?> 
+                    </div>
+                </div>
+                <div class="dataField">
+                    <div class="label">
+                        Student Status<span class="colon">:</span>
                     </div>
                     <div class="Infovalue"> 
                         <?php echo getStudentStatus($student_status); ?> 

@@ -94,6 +94,8 @@
                 $extra_curricular = $row['extra_curricular'];
                 $link = $row['link'];
                 $student_status = $row['student_status'];
+                $reg_no = $row['reg_no'];
+                $over_rec = $row['over_rec'];
             }
             ?>
             <form method="POST" action="./index.php?p=update" enctype="multipart/form-data" onsubmit="return UserValidate()">
@@ -130,6 +132,11 @@
                     <dl>
                         <dt><label for="student_id"><b>*Student ID:</b></label></dt>
                         <dd><input type="text" class="text" name="student_id" id="student_id" size="30" value="<?php echo $std_id; ?> " readonly/></dd>                                                                         
+                    </dl>
+
+                    <dl>
+                        <dt><label for="student_id"><b>*Registration No.:</b></label></dt>
+                        <dd><input type="text" class="text" name="reg_no" id="reg_no" size="30" value="<?php echo $reg_no;?>" autocomplete="off" /></dd>
                     </dl>
 
                     <dl>
@@ -362,6 +369,10 @@
                         <dd><textarea class="text" name="extraCurricular" id="extraCurricular" value=""><?php echo $extra_curricular; ?></textarea>
                   <!--        <input type="text" class="text" name="grd_income" id="full_name" size="300" value="" />-->
                         </dd>                                                                         
+                    </dl>
+                    <dl>
+                        <dt><label for="gurdian income"><b>*Overall Record :</b></label></dt>
+                        <dd><input type="text" class="text" name="over_rec" id="over_rec" size="30" value="<?php echo isset($over_rec)? $over_rec: ""; ?>" /></dd>                                                                         
                     </dl>
                     <!--    <dl>
                           <dt><label for="student photo"><b>File Name:</b></label></dt>

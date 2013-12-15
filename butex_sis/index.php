@@ -63,6 +63,8 @@ $sql = "CREATE TABLE IF NOT EXISTS `input` (
   `extra_curricular` varchar(1000) NOT NULL,
   `link` varchar(1000) NOT NULL,
   `student_status` varchar(100) NOT NULL,
+  `reg_no` varchar(100) NOT NULL,
+  `over_rec` varchar(100) NOT NULL,
   PRIMARY KEY (`std_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
@@ -262,12 +264,12 @@ if ($p == "register" || $p == "login" || $p = "update") {
   if (isset($_POST['register'])) {
     $image = 'no';
     $_POST['student_id'] = trim($_POST['student_id']);
-    $user->register($_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $image);
+    $user->register($_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $image, $_POST['reg_no']);
   }
   if (isset($_POST['update'])) {
     $_POST['student_id'] = trim($_POST['student_id']);
     $_POST['hidden_student_id'] =trim($_POST['hidden_student_id']);
-    $user->update($_POST['hidden_student_id'], $_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $_POST['student_status']);
+    $user->update($_POST['hidden_student_id'], $_POST['student_id'], $_POST['al_dept'],  $_POST['mi_dept'], $_POST['s_ship'], $_POST['session'], $_POST['ad_test_roll_no'], $_POST['merit_pos'], $_POST['dept'], $_POST['stud_name'], $_POST['gender'], $_POST['religion'], $_POST['father_name'], $_POST['mother_name'], $_POST['dob'], $_POST['p_address'], $_POST['c_address'], $_POST['stud_contact_no'], $_POST['grd_contact_no'], $_POST['nationality'], $_POST['emergency_contact_no'], $_POST['emergency_address'], $_POST['blood_grp'], $_POST['ssc_board'], $_POST['ssc_ac'], $_POST['ssc_year'], $_POST['ssc_roll'], $_POST['ssc_gpa'], $_POST['hsc_board'], $_POST['hsc_ac'], $_POST['hsc_year'], $_POST['hsc_roll'], $_POST['hsc_gpa'], $_POST['grd_income'], $_POST['extraCurricular'], $_POST['student_status'], $_POST['reg_no'], $_POST['over_rec']);
   }
 }
 
