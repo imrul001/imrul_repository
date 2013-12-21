@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="google-site-verification" content="Ojcfkx36HO_r185NY0CGN7pVGLQ6XABN4r9_O1NSxTM" />
         <link rel="stylesheet" type="text/css" href="/min/?f=template/css/style.css" />
         <script type="text/javascript" src="/min/?f=template/js/jquery-1.8.0.min.js"></script>
         <script type="text/javascript" src="/min/?f=template/js/jquery.form.js"></script>
