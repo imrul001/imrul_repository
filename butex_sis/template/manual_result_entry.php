@@ -250,7 +250,7 @@
         <div id="login_modal_body" style="min-height: 300px;">
             <?php
             $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
-            $sql = "SELECT * FROM result_status WHERE student_id='" . $student_id . "'ORDER BY entry_date_time ASC";
+            $sql = "SELECT * FROM result_status WHERE student_id='" . $student_id . "'ORDER BY `index` ASC";
             $result = mysql_query($sql);
             $num_row = mysql_num_rows($result);
             ?>
