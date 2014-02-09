@@ -241,16 +241,22 @@
         <p style="color: red;">First You Need To Log In Properly..    <a href="./index.php?p=login" title="Login">Login</a></p>
     <?php else : ?>
         <div class="logOutButton">
-            <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
+            <a class="logoutLink" id="logoutLink" href="./index.php?p=logout">Logout</a>
         </div>
         <h2 class="welcomeMsg">Welcome <?php user_data('user_name'); ?>! Successfully Logged In.</h2>
         <div id="userOptionsContainer">
             <div id="tabs">
                 <ul>
+                    <?php if (isSuperAdmin()) : ?>
                     <li><a href="#tabs-1">Search</a></li>
                     <li><a href="#tabs-2">Add Student</a></li>
+                    <?php endif; ?>
                     <li><a href="#tabs-3">Summery</a></li>
+                    <?php if (isSuperAdmin()) : ?>
+                    <li><a href="#tabs-4">Superadmin</a></li>
+                    <?php endif; ?>
                 </ul>
+                <?php if (isSuperAdmin()) : ?>
                 <div id="tabs-1" style="padding-bottom: 165px; padding-top: 30px;">
                     <form id="searchForm" class="searchFormClass" method="POST" action="./index.php?p=search_result" enctype="multipart/form-data">
                         <h3 class="studentIdLabel" style="float:left;">Student Id:</h3>
@@ -270,6 +276,7 @@
                         <?php include 'registration_form.php'; ?>
                     </p>
                 </div>
+                <?php endif; ?>
                 <div id="tabs-3">
                     <p id="student_summary">
                     <div id="dynamic_filtering_tab">
@@ -329,6 +336,11 @@
                     <?php include 'list_of_student.php'; ?>
                     </p>
                 </div>
+                <?php if (isSuperAdmin()) : ?>
+                <div id="tabs-4">
+                    <?php include 'superadmin_page.php'; ?>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -89,11 +89,14 @@ $sql = "CREATE TABLE IF NOT EXISTS `codeIg_table` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL,
+  `role` varchar(20) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `readable_password` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 mysql_query($sql);
 
-$sql = "INSERT INTO `codeIg_table` (`id`, `user_name`, `password`) VALUES(1, 'codeAdmin', 'e10adc3949ba59abbe56e057f20f883e')";
+$sql = "INSERT INTO `codeIg_table` (`id`, `user_name`, `password`, `role`, `status`) VALUES(1, 'codeAdmin', 'e10adc3949ba59abbe56e057f20f883e', 'SUPER_ADMIN', 'Active')";
 mysql_query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS `norm` (
@@ -185,6 +188,11 @@ function error_msg() {
 function logged_in() {
   global $user;
   return ($user->user_data['user_name']) ? true : false;
+}
+
+function isSuperAdmin(){
+    global $user;
+    return ($user->user_data['role'] == "SUPER_ADMIN") ? true : false;
 }
 
 function user_data($request) {

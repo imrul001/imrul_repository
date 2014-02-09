@@ -31,11 +31,11 @@ class user {
             $result = @mysql_query($sql);
             if ($result) {
                 $data = @mysql_fetch_assoc($result);
-
-                foreach ($data as $k => $v) {
-                    $this->user_data[$k] = $v;
+                if (is_array($data)) {
+                    foreach ($data as $k => $v) {
+                        $this->user_data[$k] = $v;
+                    }
                 }
-
                 @mysql_free_result($result);
             }
         }
@@ -69,7 +69,7 @@ class user {
         /* Hash the password. */
         $user_pass = md5($user_pass);
 
-        $sql = "SELECT * FROM codeIg_table WHERE user_name='$user_name' AND password='$user_pass' LIMIT 1";
+        $sql = "SELECT * FROM codeIg_table WHERE user_name='$user_name' AND password='$user_pass' AND status='Active' LIMIT 1";
         $result = @mysql_query($sql);
 
         if ($result) {
@@ -131,7 +131,7 @@ class user {
                 $sql1 = "UPDATE exam SET std_id='$student_id' WHERE std_id=$old_id";
                 $sql2 = "UPDATE  backlog SET std_id='$student_id' WHERE std_id=$old_id";
                 $sql3 = "UPDATE  norm SET std_id='$student_id' WHERE std_id=$old_id";
-                if (!mysql_query($sql1) || !mysql_query($sql2) || !mysql_query($sql3) ) {
+                if (!mysql_query($sql1) || !mysql_query($sql2) || !mysql_query($sql3)) {
                     die(mysql_error());
                 }
                 if (file_exists("./template/uploaded_student_images/" . $old_id . ".jpg")) {
@@ -172,7 +172,7 @@ class user {
                 die(mysql_error());
             }
             $_SESSION['reg_complete']['student_id'] = $student_id;
-            header("Location: ./index.php?p=reg_complete&std_id=". $student_id);
+            header("Location: ./index.php?p=reg_complete&std_id=" . $student_id);
         }
 
         return;

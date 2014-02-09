@@ -95,6 +95,35 @@
         border: 1px solid #ddd;
         padding: 0px;
     }
+    img.backButtonImage{
+        overflow: hidden;
+        height: auto;
+        top: 10;
+        position: relative;
+        width: 31;
+    }
+    img.editButtonImage{
+        overflow: hidden;
+        height: auto;
+        top: 5;
+        position: relative;
+        width: 25;
+    }
+    img.deleteButtonImage{
+        overflow: hidden;
+        height: auto;
+        top: 7;
+        position: relative;
+        width: 25.3;
+    }
+    img.printButtonImage{
+        overflow: hidden;
+        height: auto;
+        top: 7;
+        position: relative;
+        width: 24;
+    }
+
 </style>
 <?php get_header(); ?>
 <script type="text/javascript">
@@ -157,11 +186,14 @@
             <input type='hidden' name='std_id'  value='<?php echo $m; ?>'/>
         </form>
       <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
-        <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
-        <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile</a>
-        <a class="subButton" href="./index.php?p=manual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
-<!--        <a class="subButton" target="_blank" href="./index.php?p=profilePdf&std_id=<?php echo $m; ?>">Export To PDF</a>-->
-        <a class="subButton deleteClass" id="deleteButtonId" href="#" student_ID="<?php echo $m; ?>">Delete Profile</a>
+           <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin <img class="backButtonImage" src="template/images/back.png"/></a>
+        <?php if (isSuperAdmin()) : ?>
+            <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile <img class="editButtonImage" src="template/images/edit.png"/></a>
+            <a class="subButton" href="./index.php?p=manual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
+            <a class="subButton" target="_blank" href="./index.php?p=profilePdf&std_id=<?php echo $m; ?>">Print <img class="printButtonImage" src="template/images/print.jpg"/></a>
+            <a class="subButton deleteClass" id="deleteButtonId" href="#" student_ID="<?php echo $m; ?>">Delete Profile <img class="deleteButtonImage" src="template/images/delete.jpg"/></a>
+        <?php endif; ?>
+            
         <?php
 
         function getStudentStatus($rowData) {
@@ -641,7 +673,7 @@
                         OverAll Record<span class="colon">:</span>
                     </div>
                     <div class="Infovalue"> 
-                        <?php echo $over_rec;?> 
+                        <?php echo $over_rec; ?> 
                     </div>
                 </div>
                 <div class="dataField">
