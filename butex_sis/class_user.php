@@ -163,6 +163,8 @@ class user {
             $image = 'no';
             $student_id = trim($student_id);
             $studnet_status = 'enrolled';
+            $ssc_ac = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $ssc_ac);
+            $hsc_ac = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $hsc_ac);
             /* Hash the password */
 //			$mail_pass = $user_pass;
 //			$user_pass = md5($user_pass);
