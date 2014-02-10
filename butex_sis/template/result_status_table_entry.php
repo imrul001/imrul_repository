@@ -11,22 +11,27 @@ $id = md5(createRandom_number());
 
 $randomIdFromTable = isset($_GET['rowRand_ID']) ? $_GET['rowRand_ID'] : '';
 if ($randomIdFromTable != '' && $randomIdFromTable !=null) {
-    $sql_q = "SELECT * FROM result_status WHERE student_id='$student_id' AND id='$randomIdFromTable'";
-    $result1=mysql_query($sql_q);
-    while ($row = mysql_fetch_array($result1)) {
-        $lvtr = $row['level_term'];
-        $exyr = $row['exam_year'];
-        $gp = $row['gpa'];
-        $cg = $row['cgpa'];
-        $blogSub = $row['backlog_subject'];
-        $rmk = $row['remarks'];
-    }
-    !empty($levelTerm) ? $levelTerm : $levelTerm=$lvtr;
-    !empty($examYear) ? $examYear : $examYear=$exyr;
-    !empty($gpa) ? $gpa : $gpa=$gp;
-    !empty($cgpa) ? $cgpa : $cgpa=$cg;
-    !empty($failSubjects) ? $blogSub : $failSubjects=$failSubjects;
-    !empty($remarks) ? $rmk : $remarks=$remarks;
+//    $sql_q = "SELECT * FROM result_status WHERE student_id='$student_id' AND id='$randomIdFromTable'";
+//    $result1=mysql_query($sql_q);
+//    while ($row = mysql_fetch_array($result1)) {
+//        $lvtr = $row['level_term'];
+//        $exyr = $row['exam_year'];
+//        $gp = $row['gpa'];
+//        $cg = $row['cgpa'];
+//        $blogSub = $row['backlog_subject'];
+//        $rmk = $row['remarks'];
+//    }
+    /***
+     * $gpa comes from form
+     * $gp comes from database
+     * 
+     */
+//    !empty($levelTerm) ? $levelTerm : $levelTerm=$lvtr;
+//    !empty($examYear) ? $examYear : $examYear=$exyr;
+//    !empty($gpa) ? $gpa : $gpa=$gp;
+//    !empty($cgpa) ? $cgpa : $cgpa=$cg;
+//    !empty($failSubjects) ? $blogSub : $failSubjects=$failSubjects;
+//    !empty($remarks) ? $rmk : $remarks=$remarks;
     $sql = "UPDATE result_status SET level_term='$levelTerm', exam_year='$examYear', gpa='$gpa', cgpa='$cgpa', backlog_subject='$failSubjects', remarks='$remarks' WHERE student_id='$student_id' AND id='$randomIdFromTable'";
     if (!@mysql_query($sql)) {
         die("mysql_error ".mysql_error());
