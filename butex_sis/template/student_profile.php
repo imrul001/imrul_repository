@@ -187,10 +187,10 @@
         </form>
       <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
            <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin <img class="backButtonImage" src="template/images/back.png"/></a>
+           <a class="subButton" target="_blank" href="./index.php?p=profilePdf&std_id=<?php echo $m; ?>">Print <img class="printButtonImage" src="template/images/print.jpg"/></a>
         <?php if (isSuperAdmin()) : ?>
             <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile <img class="editButtonImage" src="template/images/edit.png"/></a>
             <a class="subButton" href="./index.php?p=manual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
-            <a class="subButton" target="_blank" href="./index.php?p=profilePdf&std_id=<?php echo $m; ?>">Print <img class="printButtonImage" src="template/images/print.jpg"/></a>
             <a class="subButton deleteClass" id="deleteButtonId" href="#" student_ID="<?php echo $m; ?>">Delete Profile <img class="deleteButtonImage" src="template/images/delete.jpg"/></a>
         <?php endif; ?>
             

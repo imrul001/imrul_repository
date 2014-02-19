@@ -165,6 +165,9 @@ class user {
             $studnet_status = 'enrolled';
             $ssc_ac = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $ssc_ac);
             $hsc_ac = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $hsc_ac);
+            $c_address = str_replace("'", '', $c_address);
+            $p_address = str_replace("'", '', $p_address);
+            $emergency_contact_address = str_replace("'", '', $emergency_contact_address);
             /* Hash the password */
 //			$mail_pass = $user_pass;
 //			$user_pass = md5($user_pass);

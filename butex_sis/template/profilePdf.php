@@ -1,6 +1,6 @@
 <?php
 
-if (isSuperAdmin() && logged_in()) {
+if (logged_in()) {
     $std_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';
     $sql = "SELECT * FROM input WHERE std_id=$std_id";
     $result = mysql_query($sql);
@@ -64,7 +64,7 @@ if (isSuperAdmin() && logged_in()) {
     $pdf = new FPDF();
     $pdf->AddPage();
 //Header
-    $pdf->Image('./template/images/logo.gif', 13, 3, 19.5, 26.5, 'GIF');
+    $pdf->Image('./template/images/logo.gif', 13, 3, 19.5, 25.5, 'GIF');
 
     $pdf->AddFont('CopperplateGothic-Bold', '', 'a0c4220635c427abeb67a4e7e263494b_coprgtb.php');
     $pdf->SetFont('CopperplateGothic-Bold', '', 20);
@@ -80,7 +80,7 @@ if (isSuperAdmin() && logged_in()) {
 
 //
     $pdf->Image('./template/uploaded_student_images/' . $link, 153, 51, 42, 53, 'JPG');
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', 'B', 9);
 
     $pdf->Cell(125, 0, '', 0, 1, L);
     $pdf->Cell(50, 10, 'Student ID                        :', 0, 0, L);
@@ -92,7 +92,7 @@ if (isSuperAdmin() && logged_in()) {
     $pdf->Cell(80, 10, $student_name, 0, 0, L);
 
 
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 9);
     $pdf->Cell(125, 10, '', 0, 1, L);
     $pdf->Cell(50, 10, 'Registration No.                :', 0, 0, L);
     $pdf->Cell(80, 10, $reg_no, 0, 0, L);
@@ -125,7 +125,7 @@ if (isSuperAdmin() && logged_in()) {
     $pdf->Cell(0, 15, 'Basic Information', 0, 1, C);
 
 
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(125, 3, '', 0, 1, L);
     $pdf->Cell(50, 10, "Father's Name                   :", 0, 0, L);
@@ -165,7 +165,7 @@ if (isSuperAdmin() && logged_in()) {
     $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 7, 'Emargency Information', 0, 1, C);
 
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(125, 5, '', 0, 1, L);
     $pdf->Cell(50, 10, "Guardian Contact No.        :", 0, 0, L);
@@ -179,12 +179,12 @@ if (isSuperAdmin() && logged_in()) {
     $pdf->Cell(50, 10, 'Emergency Address           :', 0, 0, L);
     $pdf->Cell(90, 10, $emr_contact_address, 0, 0, L);
 
-    $pdf->Cell(0, 20, '', 0, 1, C);
+    $pdf->Cell(0, 10, '', 0, 1, C);
 //subheader
     $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 5, 'Admission Information', 0, 1, C);
 
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(125, 4, '', 0, 1, L);
     $pdf->Cell(50, 10, "Admissoin Roll No.              :", 0, 0, L);
@@ -206,29 +206,29 @@ if (isSuperAdmin() && logged_in()) {
 //subheader
     $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 15, 'Academic Information', 0, 1, C);
-    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->SetFont('Arial', 'B', 9);
     $pdf->Cell(31, 10, "Examination", LT, 0, C);
-    $pdf->Cell(50, 10, "Institution", LT, 0, C);
+    $pdf->Cell(62, 10, "Institution", LT, 0, C);
     $pdf->Cell(31, 10, "Board", LT, 0, C);
-    $pdf->Cell(31, 10, "Exam. Year", LT, 0, C);
-    $pdf->Cell(31, 10, "Exam. Roll", LT, 0, C);
+    $pdf->Cell(25, 10, "Exam. Year", LT, 0, C);
+    $pdf->Cell(25, 10, "Exam. Roll", LT, 0, C);
     $pdf->Cell(18, 10, "GPA", LTR, 0, C);
-    $pdf->SetFont('Arial', '', 11);
+    $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(31, 10, "", 0, 1, C);
     $pdf->Cell(31, 10, "SSC", LTR, 0, C);
-    $pdf->Cell(50, 10, $ssc_ac, TR, 0, C);
+    $pdf->Cell(62, 10, $ssc_ac, TR, 0, C);
     $pdf->Cell(31, 10, $ssc_board, TR, 0, C);
-    $pdf->Cell(31, 10, $ssc_year, TR, 0, C);
-    $pdf->Cell(31, 10, $ssc_roll, TR, 0, C);
+    $pdf->Cell(25, 10, $ssc_year, TR, 0, C);
+    $pdf->Cell(25, 10, $ssc_roll, TR, 0, C);
     $pdf->Cell(18, 10, $ssc_gpa, TR, 0, C);
 
     $pdf->Cell(31, 10, "", 0, 1, C);
     $pdf->Cell(31, 10, "HSC", LTRB, 0, C);
-    $pdf->Cell(50, 10, $hsc_ac, LTB, 0, C);
+    $pdf->Cell(62, 10, $hsc_ac, LTB, 0, C);
     $pdf->Cell(31, 10, $hsc_board, LTB, 0, C);
-    $pdf->Cell(31, 10, $hsc_year, LTB, 0, C);
-    $pdf->Cell(31, 10, $hsc_roll, LTB, 0, C);
+    $pdf->Cell(25, 10, $hsc_year, LTB, 0, C);
+    $pdf->Cell(25, 10, $hsc_roll, LTB, 0, C);
     $pdf->Cell(18, 10, $hsc_gpa, LTBR, 0, C);
 
     $pdf->Cell(31, 10, "", 0, 1, C);
@@ -241,7 +241,7 @@ if (isSuperAdmin() && logged_in()) {
 
     $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 10, 'Results', 0, 1, C);
-    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->SetFont('Arial', 'B', 9);
 
     if ($num_row > 0) {
         $pdf->Cell(32, 10, "Level-Term", LT, 0, C);
@@ -251,7 +251,7 @@ if (isSuperAdmin() && logged_in()) {
         $pdf->Cell(45, 10, "Fail/Retake Subjects", LT, 0, C);
         $pdf->Cell(40, 10, "Remarks", LTR, 0, C);
 
-        $pdf->SetFont('Arial', '', 11);
+        $pdf->SetFont('Arial', '', 9);
         $pdf->Cell(31, 10, "", 0, 1, C);
     }
 
@@ -284,7 +284,7 @@ if (isSuperAdmin() && logged_in()) {
     $pdf->Cell(0, 10, 'Other Information', 0, 1, C);
 
 
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(125, 2, '', 0, 1, L);
     $pdf->Cell(50, 10, "Guardian .                               :", 0, 0, L);
