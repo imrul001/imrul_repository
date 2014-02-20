@@ -1,5 +1,5 @@
 <?php
-
+include '../../connection.php';
 $user_name = isset($_GET['user_name']) ? $_GET['user_name'] : '';
 $password = isset($_GET['password']) ? $_GET['password'] : '';
 $method = isset($_GET['method']) ? $_GET['method'] : '';

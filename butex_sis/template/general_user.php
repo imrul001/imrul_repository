@@ -67,7 +67,7 @@
                         if(user_name!= '' && password !='' && checkFlugvalue!= ''){
                             
                             var postData = "user_name="+user_name+"&password="+password+"&method="+checkFlugvalue;
-                            var url = "./index.php?p=resource_createORedit_general_user"; 
+                            var url = "./template/resource_createORedit_general_user.php"; 
                             $.ajax({
                                 url: url,
                                 type : "GET",
@@ -143,7 +143,7 @@
                 },
                 success: function (result, value){
                     if(result == 'Submit'){
-                        var url = "./index.php?p=resource_createORedit_general_user"; 
+                        var url = "./template/resource_createORedit_general_user.php"; 
                         var statusToBeSubmitted = $('input[name=status]:radio:checked').val();
                         var postData = "user_name="+thisUser_name+"&method="+method+"&status="+statusToBeSubmitted;
                         $.ajax({
