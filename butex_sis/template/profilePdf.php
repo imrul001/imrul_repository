@@ -279,6 +279,74 @@ if (logged_in()) {
         }
     }
     $pdf->Cell(31, 10, "", 0, 1, C);
+
+//subheader
+
+    $sql = "SELECT * FROM norm WHERE std_id=$std_id ORDER BY date_time ASC";
+    $result = mysql_query($sql);
+    $num_row = mysql_num_rows($result);
+
+    $pdf->SetFont('Arial', 'B', 13);
+    $pdf->Cell(0, 10, 'Punishment Record', 0, 1, C);
+    $pdf->SetFont('Arial', 'B', 9);
+
+    if ($num_row > 0) {
+        $pdf->Cell(50, 5, "Date/Time", LT, 0, C);
+//        $pdf->Cell(81, 10, "Warning", LT, 0, C);
+        $pdf->Cell(142, 5, "Punishment/Warning", LTR, 0, C);
+
+        $pdf->SetFont('Arial', '', 9);
+        $pdf->Cell(31, 5, "", 0, 1, C);
+    }
+
+    if (!empty($result)) {
+        $i = 1;
+        while ($row = mysql_fetch_array($result)) {
+            $totalLength = strlen($row['punishment']) + strlen($row['warning']) + 22;
+            if ($totalLength < 130) {
+                $heightForDate = 20;
+            } else {
+                $punishmentCharacter = $totalLength / 130;
+                $lineForPunishment = ceil($punishmentCharacter);
+                $heightForDate = ($lineForPunishment * 10);
+            }
+            if ($i == $num_row) {
+                $current_y = $pdf->GetY();
+                $current_x = $pdf->GetX();
+                $pdf->MultiCell(50, $heightForDate, $row['date_time'], 1, L);
+
+                $pdf->SetXY($current_x + 50, $current_y);
+                $current_x = $pdf->GetX();
+
+//                $pdf->MultiCell(81, 10, $row['warning'], 1, L);
+//                
+//                $pdf->SetXY($current_x + 81, $current_y);
+//                $current_x = $pdf->GetX();
+
+                $pdf->MultiCell(142, 10, "PUNISHMENT : ".$row['punishment'].". \nWARNING : ".$row['warning'], 1, L);
+//                $pdf->Cell(31, 10, '', 0, 1, C);
+            } else {
+                $current_y = $pdf->GetY();
+                $current_x = $pdf->GetX();
+
+                $pdf->MultiCell(50, $heightForDate, $row['date_time'], 1, L);
+
+                $pdf->SetXY($current_x + 50, $current_y);
+                $current_x = $pdf->GetX();
+
+//                $pdf->MultiCell(81, 10, $row['warning'], 1, L);
+//                $pdf->SetXY($current_x + 81, $current_y);
+//                $current_x = $pdf->GetX();
+
+                $pdf->MultiCell(142, 10, "PUNISHMENT:".$row['punishment'].". \nWARNING:".$row['warning'], 1, L);
+
+//                $pdf->Cell(31, 10, '', 0, 1, C);
+            }
+            $i++;
+        }
+    }
+
+    $pdf->Cell(31, 10, "", 0, 1, C);
 //subheader
     $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 10, 'Other Information', 0, 1, C);
@@ -294,13 +362,13 @@ if (logged_in()) {
     $pdf->Cell(50, 10, "Extra Curricular Activities        :", 0, 0, L);
     $pdf->Cell(90, 10, $extra_curricular, 0, 0, L);
 
-    $pdf->Cell(125, 10, '', 0, 1, L);
-    $pdf->Cell(50, 10, 'Punishment                             :', 0, 0, L);
-    $pdf->Cell(90, 10, '', 0, 0, L);
-
-    $pdf->Cell(125, 10, '', 0, 1, L);
-    $pdf->Cell(50, 10, 'Warning                                   :', 0, 0, L);
-    $pdf->Cell(90, 10, '', 0, 0, L);
+//    $pdf->Cell(125, 10, '', 0, 1, L);
+//    $pdf->Cell(50, 10, 'Punishment                             :', 0, 0, L);
+//    $pdf->Cell(90, 10, '', 0, 0, L);
+//
+//    $pdf->Cell(125, 10, '', 0, 1, L);
+//    $pdf->Cell(50, 10, 'Warning                                   :', 0, 0, L);
+//    $pdf->Cell(90, 10, '', 0, 0, L);
 
     $pdf->Cell(125, 10, '', 0, 1, L);
     $pdf->Cell(50, 10, 'Overall Record                        :', 0, 0, L);
@@ -320,7 +388,7 @@ if (logged_in()) {
 
 
     $pdf->Output();
-}else{
+} else {
     echo 'Invalid Access';
 }
 ?>
@@ -332,4 +400,5 @@ function getLevelTerm($lt) {
     $levelTermText = 'Level-' . $level . ',Term-' . $term . '';
     return $levelTermText;
 }
+
 ?>

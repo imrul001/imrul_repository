@@ -191,6 +191,7 @@
         <?php if (isSuperAdmin()) : ?>
             <a class="subButton" href="./index.php?p=update_form&std=<?php echo $m; ?>">Edit Profile <img class="editButtonImage" src="template/images/edit.png"/></a>
             <a class="subButton" href="./index.php?p=manual_result_entry&std_id=<?php echo $m; ?>">Result Entry</a>
+            <a class="subButton" href="./index.php?p=norm_entry&std_id=<?php echo $m; ?>">punishment record</a>
             <a class="subButton deleteClass" id="deleteButtonId" href="#" student_ID="<?php echo $m; ?>">Delete Profile <img class="deleteButtonImage" src="template/images/delete.jpg"/></a>
         <?php endif; ?>
             
@@ -634,6 +635,33 @@
 //        }
 //        
             ?>
+            
+            <!--  Punishment -->
+            <div class="basic_information" style="width: 840; margin: 0 auto; font-size: 15px;">
+                <h1 class="sectionHeader" style="text-transform: none;">Punishment Record</h1>
+                <table class='academic_info' style='margin: 0 auto;'>
+                    <th>Date/Time</th>
+                    <th>Warning</th>
+                    <th>Punishment</th>
+                    <?php
+                    $sql = "SELECT * FROM norm WHERE std_id=$m ORDER BY date_time ASC";
+                    $result = mysql_query($sql);
+                    if (!empty($result)) {
+                        $i = 0;
+                        while ($row = mysql_fetch_array($result)) {
+                            echo '<tr>
+                                <td>' . $row['date_time'] . '</td>
+                                <td>' . $row['warning'] . '</td>
+                                <td>' . $row['punishment'] . '</td>
+                            </tr>';
+                            $i++;
+                        }
+                    }
+                    ?>
+                </table>
+            </div>
+            
+            
             <div class="basic_information" style="width: 800; margin: 0 auto; font-size: 15px;">
                 <h1 class="sectionHeader" style="text-transform: none;">Other Information</h1>
                 <div class="dataField">
@@ -652,12 +680,12 @@
                         <?php echo $extra_curricular; ?> 
                     </div>
                 </div>
-                <div class="dataField">
+<!--                <div class="dataField">
                     <div class="label">
                         Punishment<span class="colon">:</span>
                     </div>
                     <div class="Infovalue"> 
-                        <?php echo ""; ?> 
+                        <?php //echo ""; ?> 
                     </div>
                 </div>
                 <div class="dataField">
@@ -667,7 +695,7 @@
                     <div class="Infovalue"> 
                         <?php // echo ""; ?> 
                     </div>
-                </div>
+                </div>-->
                 <div class="dataField">
                     <div class="label">
                         OverAll Record<span class="colon">:</span>

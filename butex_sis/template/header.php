@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="/min/?f=template/css/jquery.calendar.css"/>
         <script type="text/javascript" src="/min/?f=template/js/jquery-ui.js" ></script>
         <script type="text/javascript" src="/min/?f=template/js/jquery.calendar.js"></script>
+<!--        <link rel="stylesheet" type="text/css" media="screen" href="/min/?f=template/css/responsive.css" />-->
         <link rel="icon" type="image/png" href="/template/images/favicon.ico" />
 
         <!--Google analytics-->
@@ -434,21 +435,6 @@
                     return false; // avoid to execute the actual submit of the form.
                 });
               
-        
-                $('#punishment_submit_id').click(function(){
-                    var url = "index.php?p=punishment_data_entry"; // the script where you handle the form input.
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: $("#formToPunishmentEntry").serialize(), // serializes the form's elements.
-                        success: function(data)
-                        {
-                            alert(data); // show response from the php script.
-                            //              window.location.href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-2";
-                        }
-                    });
-                    return false; // avoid to execute the actual submit of the form.
-                });
         
                 //        $('.editClass').live("click",(function(){
                 //          var idvalue=$(this).attr("id");
