@@ -120,7 +120,7 @@
                 <dt><label for="password">Confirm New Password:</label></dt>
                 <dd><input type="password" class="textpsd" name="confirm_new_password" id="cnf_pass" size="30" value="" /></dd>
             </dl>
-            <input type="submit" class="submitlogin" id="changePasswordSubmitBtn" disabled="disabled" name="changePasswordSubmit" value="Submit" /> 
+            <input type="submit" class="submitlogin" id="changePasswordSubmitBtn"  name="changePasswordSubmit" value="Submit" /> 
         </div>
     </form>
 </div>

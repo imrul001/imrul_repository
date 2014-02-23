@@ -244,12 +244,12 @@ if (logged_in()) {
     $pdf->SetFont('Arial', 'B', 9);
 
     if ($num_row > 0) {
-        $pdf->Cell(32, 10, "Level-Term", LT, 0, C);
-        $pdf->Cell(23, 10, "Exam. Year", LT, 0, C);
-        $pdf->Cell(38, 10, "Term/Subject GPA", LT, 0, C);
-        $pdf->Cell(14, 10, "CGPA", LT, 0, C);
-        $pdf->Cell(45, 10, "Fail/Retake Subjects", LT, 0, C);
-        $pdf->Cell(40, 10, "Remarks", LTR, 0, C);
+        $pdf->Cell(26, 10, "Level-Term", LT, 0, C);
+        $pdf->Cell(20, 10, "Exam. Year", LT, 0, C);
+        $pdf->Cell(30, 10, "Term/Subject GPA", LT, 0, C);
+        $pdf->Cell(13, 10, "CGPA", LT, 0, C);
+        $pdf->Cell(54, 10, "Fail/Retake Subjects", LT, 0, C);
+        $pdf->Cell(49, 10, "Remarks", LTR, 0, C);
 
         $pdf->SetFont('Arial', '', 9);
         $pdf->Cell(31, 10, "", 0, 1, C);
@@ -259,20 +259,20 @@ if (logged_in()) {
         $i = 1;
         while ($row = mysql_fetch_array($result)) {
             if ($i == $num_row) {
-                $pdf->Cell(32, 10, getLevelTerm($row['level_term']), LTB, 0, C);
-                $pdf->Cell(23, 10, $row['exam_year'], LTB, 0, C);
-                $pdf->Cell(38, 10, $row['gpa'], LTB, 0, C);
-                $pdf->Cell(14, 10, $row['cgpa'], LTB, 0, C);
-                $pdf->Cell(45, 10, $row['backlog_subject'], LTB, 0, C);
-                $pdf->Cell(40, 10, $row['remarks'], LTRB, 0, C);
+                $pdf->Cell(26, 10, getLevelTerm($row['level_term']), LTB, 0, C);
+                $pdf->Cell(20, 10, $row['exam_year'], LTB, 0, C);
+                $pdf->Cell(30, 10, $row['gpa'], LTB, 0, C);
+                $pdf->Cell(13, 10, $row['cgpa'], LTB, 0, C);
+                $pdf->Cell(54, 10, $row['backlog_subject'], LTB, 0, C);
+                $pdf->Cell(49, 10, $row['remarks'], LTRB, 0, C);
                 $pdf->Cell(31, 10, '', 0, 1, C);
             } else {
-                $pdf->Cell(32, 10, getLevelTerm($row['level_term']), LT, 0, C);
-                $pdf->Cell(23, 10, $row['exam_year'], LT, 0, C);
-                $pdf->Cell(38, 10, $row['gpa'], LT, 0, C);
-                $pdf->Cell(14, 10, $row['cgpa'], LT, 0, C);
-                $pdf->Cell(45, 10, $row['backlog_subject'], LT, 0, C);
-                $pdf->Cell(40, 10, $row['remarks'], LTR, 0, C);
+                $pdf->Cell(26, 10, getLevelTerm($row['level_term']), LT, 0, C);
+                $pdf->Cell(20, 10, $row['exam_year'], LT, 0, C);
+                $pdf->Cell(30, 10, $row['gpa'], LT, 0, C);
+                $pdf->Cell(13, 10, $row['cgpa'], LT, 0, C);
+                $pdf->Cell(54, 10, $row['backlog_subject'], LT, 0, C);
+                $pdf->Cell(49, 10, $row['remarks'], LTR, 0, C);
                 $pdf->Cell(31, 10, '', 0, 1, C);
             }
             $i++;
@@ -304,11 +304,11 @@ if (logged_in()) {
         while ($row = mysql_fetch_array($result)) {
             $totalLength = strlen($row['punishment']) + strlen($row['warning']) + 22;
             if ($totalLength < 130) {
-                $heightForDate = 20;
+                $heightForDate = 10;
             } else {
                 $punishmentCharacter = $totalLength / 130;
                 $lineForPunishment = ceil($punishmentCharacter);
-                $heightForDate = ($lineForPunishment * 10);
+                $heightForDate = ($lineForPunishment * 5);
             }
             if ($i == $num_row) {
                 $current_y = $pdf->GetY();
@@ -323,7 +323,7 @@ if (logged_in()) {
 //                $pdf->SetXY($current_x + 81, $current_y);
 //                $current_x = $pdf->GetX();
 
-                $pdf->MultiCell(142, 10, "PUNISHMENT : ".$row['punishment'].". \nWARNING : ".$row['warning'], 1, L);
+                $pdf->MultiCell(142, 5, "PUNISHMENT : ".$row['punishment'].". \nWARNING : ".$row['warning'], 1, L);
 //                $pdf->Cell(31, 10, '', 0, 1, C);
             } else {
                 $current_y = $pdf->GetY();
@@ -338,7 +338,7 @@ if (logged_in()) {
 //                $pdf->SetXY($current_x + 81, $current_y);
 //                $current_x = $pdf->GetX();
 
-                $pdf->MultiCell(142, 10, "PUNISHMENT:".$row['punishment'].". \nWARNING:".$row['warning'], 1, L);
+                $pdf->MultiCell(142, 5, "PUNISHMENT:".$row['punishment'].". \nWARNING:".$row['warning'], 1, L);
 
 //                $pdf->Cell(31, 10, '', 0, 1, C);
             }
@@ -355,7 +355,7 @@ if (logged_in()) {
     $pdf->SetFont('Arial', '', 9);
 
     $pdf->Cell(125, 2, '', 0, 1, L);
-    $pdf->Cell(50, 10, "Guardian .                               :", 0, 0, L);
+    $pdf->Cell(50, 10, "Guardian Income                     :", 0, 0, L);
     $pdf->Cell(90, 10, $grd_income, 0, 0, L);
 
     $pdf->Cell(125, 10, '', 0, 1, L);
