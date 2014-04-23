@@ -14,7 +14,7 @@ $result = mysql_query($sql);
 
                 <dl>
                     <dt><label for="Date & Time"><b>Date & Time</b></label></dt>
-                    <dd><input type="text" class="text" name="date_time" id="date_time" size="30" value="<?php echo date("jS-F-Y h:i:s a", time()); ?>" readonly/></dd>
+                    <dd><input type="text" class="text" name="date_time" id="date_time" size="30" autocomplete="off" value=""/></dd>
                 </dl>
                 <dl>
                     <dt><label for="student Id"><b>Student ID:</b></label></dt>

@@ -650,7 +650,7 @@
                         $i = 0;
                         while ($row = mysql_fetch_array($result)) {
                             echo '<tr>
-                                <td>' . $row['date_time'] . '</td>
+                                <td>' .date("jS-F-Y", strtotime($row['date_time']))  . '</td>
                                 <td>' . $row['warning'] . '</td>
                                 <td>' . $row['punishment'] . '</td>
                             </tr>';

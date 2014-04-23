@@ -237,6 +237,64 @@
             });
             /*******************data entry for first row of result_status_table****************/
         })
+        
+        /***
+        *
+        * Delete Result Status row
+        *
+        *
+        **/
+        
+        $('.deleteResultTableButtonClass').live('click', function(){
+        var idRow = $(this).attr("id").trim();
+        var index = idRow.split("_");
+        var rand_id = $(this).attr("rand_id");
+        var std_id = $(this).attr("delete_row_student_id");
+        $.msgBox({
+                title: "Delete Row",
+                content: "Information will be permanently deleted. Are you sure?",
+                type: "confirm",
+                buttons: [{ value: "Ok" },{value: 'Cancel'}],
+                success: function (result) {
+                    if(result == 'Ok'){
+                        var url = "index.php?p=result_status_table_entry";
+                        var method = "DELETE_ROW";
+                        var postData = "method="+method+"&std_id="+std_id+"&rowRand_ID="+rand_id;
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            data: postData, // serializes the form's elements.
+                            success: function(data)
+                            {
+                                $.msgBox({
+                                    title: "Information",
+                                    content: data,
+                                    type: "info",
+                                    buttons: [{ value: "Ok" }],
+                                    success: function (result) {
+                                        window.location.href=$(location).attr('href');
+                                    }
+                                });
+                                
+                                // show response from the php script.
+                            },
+                            error: function(){
+                                $.msgBox({
+                                    title: "Error",
+                                    content: "Got an Error",
+                                    type: "error",
+                                    buttons: [{ value: "Ok" }],
+                                    success: function (result) {
+                                                        
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });   
+        
+        })
     });
 </script>
 <div id="container">
@@ -285,6 +343,7 @@
                                 <td>
                                  <input type = "hidden" value = "' . $row['id'] . '"/>
                                  <input type = "button" class="editResultTableButtonClass" id="editResultRow_' . $i . '" rand_id="' . $row['id'] . '" update_row_student_id="' . $student_id . '" value="Edit"/>
+                                 <input type = "button" class="deleteResultTableButtonClass" id="deleteResultRow_' . $i . '" rand_id="' . $row['id'] . '" delete_row_student_id="' . $student_id . '" value="Delete"/>
                                 </td>
                             </tr>';
                             $i++;

@@ -8,9 +8,10 @@ $failSubjects = isset($_GET['failSubjects']) ? $_GET['failSubjects'] : '';
 $remarks = isset($_GET['remarks']) ? $_GET['remarks'] : '';
 $date_time = date("jS-F-Y h:i:s a", time());
 $id = md5(createRandom_number());
+$method = isset($_GET['method']) ? $_GET['method'] : '';
 
 $randomIdFromTable = isset($_GET['rowRand_ID']) ? $_GET['rowRand_ID'] : '';
-if ($randomIdFromTable != '' && $randomIdFromTable !=null) {
+if ($randomIdFromTable != '' && $randomIdFromTable !=null && empty($method)) {
 //    $sql_q = "SELECT * FROM result_status WHERE student_id='$student_id' AND id='$randomIdFromTable'";
 //    $result1=mysql_query($sql_q);
 //    while ($row = mysql_fetch_array($result1)) {
@@ -38,7 +39,16 @@ if ($randomIdFromTable != '' && $randomIdFromTable !=null) {
     } else {
 //        echo 'Exam Result Edited Successfully';
     }
-} else {
+}elseif(!empty ($method) && $method =="DELETE_ROW"){
+    $sql1 = "DELETE FROM `result_status` WHERE student_id='$student_id' AND id='$randomIdFromTable'";
+    $result = mysql_query($sql1);
+    if(!$result){
+        return die(mysql_error());
+    }else{
+        echo "Row Deleted Successfully.";
+    }
+}
+else {
     $sql = "INSERT INTO `result_status` (`id`, `student_id`, `level_term`, `exam_year`, `gpa`, `cgpa`, `backlog_subject`, `remarks`, `entry_date_time`) 
 VALUES('$id', '$student_id', '$levelTerm', '$examYear', '$gpa', '$cgpa', '$failSubjects', '$remarks', '$date_time')";
     $result = mysql_query($sql);

@@ -72,6 +72,14 @@
 <?php get_header(); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+        
+        /***
+         *
+         * Editable date time
+         *
+         **/
+        
+        $('#date_time').calendar();
         $('#punishment_submit_id').live('click',function(){
             var url = "index.php?p=punishment_data_entry";
             var student_id=$('input[name="student_id"]').val();
@@ -87,7 +95,7 @@
                         type: "info",
                         buttons: [{ value: "Ok" }],
                         success: function (result) {
-                            $('#listofpunishment').load("./index/php?p=norm_table&std_id="+student_id)
+                            $('#listofpunishment').load("./index.php?p=norm_table&std_id="+student_id)
                         }
                     });
                 }
@@ -109,7 +117,7 @@
                 buttons: [
                     { value: "Submit" }, {value:"Cancel"}],
                 beforeShow: function(){
-                    $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<input type="text" name="student_id" readonly value="'+date_time+'"/>');
+                    $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<input type="text" name="edit_date_time" id ="add_date_time_id" value="'+date_time+'"/>');
                 },
                 success: function (result, values) {   
                     if(result == 'Submit'){
@@ -117,7 +125,8 @@
                             var warning = $("input[name='warning']").val();
                             var punishment = $("input[name='punishment']").val();
                             var url = "index.php?p=punishment_data_entry";
-                            var postData = "method="+method+"&date_time="+date_time+"&student_id="+std_id+"&punishment="+punishment+"&warning="+warning;
+                            var data_time_edit = $('input[name=edit_date_time]').val();
+                            var postData = "method="+method+"&date_time="+data_time_edit+"&student_id="+std_id+"&punishment="+punishment+"&warning="+warning;
                             $.ajax({
                                 url: url,
                                 type: "GET",
@@ -129,7 +138,7 @@
                                         type: "info",
                                         buttons: [{ value: "Ok" }],
                                         success: function (result) {
-                                            $('#listofpunishment').load("./index/php?p=norm_table&std_id="+std_id)
+                                            $('#listofpunishment').load("./index.php?p=norm_table&std_id="+std_id)
                                         }
                                     });
                                 
@@ -187,16 +196,16 @@
                 buttons: [
                     { value: "Submit" }, {value:"Cancel"}],
                 beforeShow: function(){
-                    $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<input type="text" name="dateTime" readonly value="'+dateTime+'"/>');
+                    $('div:first span.msgInputHeader span','div.msgBoxInputs').html('<input type="text" name="edit_dateTime" id="edit_date_time_id" value="'+dateTime+'"/>');
                 },
                 success: function (result, values) {   
                     if(result == 'Submit'){
                         if($("input[name='warning']").val()!='' ||  $("input[name='punishment']").val()!=''){
                             var warning = $("input[name='warning']").val();
                             var punishment = $("input[name='punishment']").val();
-                            var date_time = $("input[name='date_time']").val();
+                            var date_time_edit = $("input[name='edit_dateTime']").val();
                             var url = "index.php?p=punishment_data_entry";
-                            var postData = "method="+method+"&date_time="+date_time+"&student_id="+std_id+"&punishment="+punishment+"&warning="+warning+"&rand-id="+rand_id;
+                            var postData = "method="+method+"&date_time="+date_time_edit+"&student_id="+std_id+"&punishment="+punishment+"&warning="+warning+"&rand-id="+rand_id;
                             $.ajax({
                                 url: url,
                                 type: "GET",
@@ -208,7 +217,7 @@
                                         type: "info",
                                         buttons: [{ value: "Ok" }],
                                         success: function (result) {
-                                            $('#listofpunishment').load("./index/php?p=norm_table&std_id="+std_id)
+                                            $('#listofpunishment').load("./index.php?p=norm_table&std_id="+std_id)
                                         }
                                     });
                                 
@@ -274,7 +283,7 @@
                                     type: "info",
                                     buttons: [{ value: "Ok" }],
                                     success: function (result) {
-                                        $('#listofpunishment').load("./index/php?p=norm_table&std_id="+std_id);
+                                        $('#listofpunishment').load("./index.php?p=norm_table&std_id="+std_id);
                                     }
                                 });
                                 
