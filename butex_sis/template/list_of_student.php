@@ -59,15 +59,16 @@
 $type = isset($_POST['type']) ? $_POST['type'] : '';
 ?>
 <div id="content">
-<!--  <script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Printer Friendly and PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/pf-button.gif" alt="Print Friendly and PDF"/></a>-->
     <div id="listOfStudent">
         <div id="searchResultSummery" class="resultSummery"></div>
         <?php
         /* $data1=user_data('user_id'); */
         if (empty($type)) {
-            $sql = "SELECT * FROM input LIMIT 50";
+            $randomStarter = rand(1, numberOfRowsAvailableForRandomSearch()- 50);
+            $sql = "SELECT * FROM input LIMIT $randomStarter,50";
             $result = mysql_query($sql);
             $num_rows = mysql_num_rows($result);
+            
             $search = isset($_GET['searchParam']) ? $_GET['searchParam'] : '';
 
             if ($search == 'contact') {
@@ -241,5 +242,11 @@ function isCorrectBatch($batch, $std_d) {
     } else {
         return false;
     }
+}
+function numberOfRowsAvailableForRandomSearch(){
+    $sql ="SELECT * FROM input";
+    $result = @mysql_query($sql);
+    $num_rows = mysql_num_rows($result);
+    return $num_rows;
 }
 ?>
