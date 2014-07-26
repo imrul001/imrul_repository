@@ -304,7 +304,8 @@
         <div class="logOutButton">
             <a class="logoutLink"<a href="./index.php?p=logout">Logout</a>
         </div>
-        <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
+        <?php $std_back = isset($_GET['std_id']) ? $_GET['std_id'] : ''; ?>
+        <a class="subButton" href="./index.php?p=student_profile&std=<?php echo $std_back; ?>">Back TO Admin</a>
         <div id="login_modal_body" style="min-height: 300px;">
             <?php
             $student_id = isset($_GET['std_id']) ? $_GET['std_id'] : '';

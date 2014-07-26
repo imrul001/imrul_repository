@@ -52,7 +52,8 @@
         </div>
         <h2 style="width: 31%">Update Information<span class="arrow"></span></h2>
       <!--    <P>After that you will be able to login with the user id <strong><?php reg_info('student_id'); ?></strong>.</p>-->
-        <a class="subButton" href="./index.php?p=office_user_panel_com_butex_sis_017734#tabs-1">Back TO Admin</a>
+        <?php $std_back = $_GET['std']; ?>
+        <a class="subButton" href="./index.php?p=student_profile&std=<?php echo $std_back; ?>">Back TO Admin</a>
         <div id="login_modal_body">
             <?php
             $std_id = $_GET['std'];
